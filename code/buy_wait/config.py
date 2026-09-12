@@ -17,7 +17,13 @@ CACHE_DIR = PROJECT_ROOT / "code" / "cache"
 EVIDENCE_OUTPUT = PROJECT_ROOT / "code" / "evaluation" / "evidence_report.json"
 LEDGER_OUTPUT = PROJECT_ROOT / "code" / "evaluation" / "ledger_report.json"
 FORECAST_OUTPUT = PROJECT_ROOT / "code" / "evaluation" / "forecast_report.json"
-PROMPT_VERSION = "phase-1.v1"
+CAPACITY_OUTPUT = PROJECT_ROOT / "code" / "evaluation" / "capacity_report.json"
+PLANNER_OUTPUT = PROJECT_ROOT / "code" / "evaluation" / "candidate_report.json"
+OUTPUT_PATH = PROJECT_ROOT / "output.csv"
+USAGE_REPORT = PROJECT_ROOT / "code" / "evaluation" / "usage_report.md"
+SAMPLE_SCORE_OUTPUT = PROJECT_ROOT / "code" / "evaluation" / "sample_score_report.json"
+PHASE7_OUTPUT = PROJECT_ROOT / "code" / "evaluation" / "phase7_report.json"
+PROMPT_VERSION = "phase-7.v3"
 
 OUTPUT_COLUMNS = (
     "request_id",
@@ -107,7 +113,7 @@ class Assumptions:
     fx_date: str = "exact_settlement_date"
     fx_direction: str = "from_event_currency_to_home_currency"
     amount_sign: str = "direction_controls_sign"
-    same_day_order: str = "required_debits_then_proposed_payments_then_confirmed_credits"
+    same_day_order: str = "required_debits_then_confirmed_credits_then_proposed_payments"
     recurrence_inference: str = "explicit_metadata_then_validated_evidence_then_stable_cadence"
     unresolved_blank_amount: str = "block_dependent_cash_flow_never_zero"
 

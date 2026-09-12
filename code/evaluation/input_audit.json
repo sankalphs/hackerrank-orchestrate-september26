@@ -8,7 +8,7 @@
     "fx_date": "exact_settlement_date",
     "fx_direction": "from_event_currency_to_home_currency",
     "recurrence_inference": "explicit_metadata_then_validated_evidence_then_stable_cadence",
-    "same_day_order": "required_debits_then_proposed_payments_then_confirmed_credits",
+    "same_day_order": "required_debits_then_confirmed_credits_then_proposed_payments",
     "unresolved_blank_amount": "block_dependent_cash_flow_never_zero"
   },
   "audit_version": "phase-0.v1",
@@ -148,7 +148,7 @@
       "row_count": 25
     }
   },
-  "generated_at_utc": "2026-09-12T16:15:47Z",
+  "generated_at_utc": "2026-09-12T18:24:49Z",
   "issues": {
     "blank_amount_events": [
       {

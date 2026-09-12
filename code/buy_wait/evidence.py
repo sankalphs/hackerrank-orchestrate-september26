@@ -25,6 +25,7 @@ from .config import (
     PROMPT_VERSION,
     SUPPORTED_CURRENCIES,
 )
+from .usage import UsageRecord, UsageTracker
 
 
 CLAIM_TYPES = frozenset({
@@ -35,7 +36,7 @@ STATUSES = frozenset({
     "confirmed", "pending", "failed", "cancelled", "scheduled", "settled",
     "unrealized", "not_credited", "ended", "unknown",
 })
-IMAGE_STATUSES = STATUSES | frozenset({"extracted", "unresolved"})
+IMAGE_STATUSES = STATUSES | frozenset({"extracted", "unresolved", "paid", "unpaid", "received", "overdue", "due"})
 PROMPT_OVERRIDE_RE = re.compile(
     r"(?:ignore|disregard|override|bypass|forget)\s+(?:the\s+)?(?:rules?|instructions?|policy|schema)|"
     r"(?:decide|approve|recommend|pay|transfer)\s+(?:this|the|it)",
@@ -378,12 +379,16 @@ class EvidencePipeline:
         cache_only: bool = False,
         message_extractor: Callable[[dict[str, str]], list[dict[str, Any]]] | None = None,
         image_extractor: Callable[[Path, dict[str, str]], dict[str, Any] | None] | None = None,
+        usage_tracker: UsageTracker | None = None,
+        extractor_model: str = "deterministic",
     ):
         self.dataset_dir = Path(dataset_dir).resolve()
         self.cache = EvidenceCache(cache_path or CACHE_DIR / "evidence_cache.json")
         self.cache_only = cache_only
         self.message_extractor = message_extractor
         self.image_extractor = image_extractor
+        self.usage_tracker = usage_tracker or UsageTracker()
+        self.extractor_model = extractor_model
         self.events = _read_csv(self.dataset_dir / "financial_events.csv")
         self.messages = _read_csv(self.dataset_dir / "messages.csv")
         self.images = _read_csv(self.dataset_dir / "images.csv")
@@ -391,16 +396,22 @@ class EvidencePipeline:
 
     def _message_facts(self, row: dict[str, str]) -> tuple[list[dict[str, Any]], list[dict[str, Any]], str]:
         digest = source_hash("message", row)
-        key = cache_key("message", row.get("message_id", ""), digest)
+        key = cache_key("message", row.get("message_id", ""), digest, f"{PROMPT_VERSION}:{self.extractor_model}")
         cached = self.cache.get(key)
         if cached is not None:
             facts, errors = validate_message_facts(
                 cached.get("facts", []), event_ids=self.event_ids,
                 prompt_override=bool(cached.get("prompt_override")),
             )
+            self.usage_tracker.record(UsageRecord(
+                provider="zenmux.ai" if self.extractor_model != "deterministic" else "none",
+                model=self.extractor_model, purpose="message_evidence", source_id=row.get("message_id", ""),
+                cache_hit=True, input_tokens=0, output_tokens=0,
+            ))
             return facts, errors, "cache"
         prompt_override = bool(PROMPT_OVERRIDE_RE.search(row.get("message_text", "")))
         raw_facts = deterministic_message_facts(row)
+        source = "deterministic"
         if (
             not prompt_override
             and not self.cache_only
@@ -414,6 +425,7 @@ class EvidencePipeline:
                         {"source_id": row.get("message_id", ""), **fact}
                         for fact in model_facts if isinstance(fact, dict)
                     ] or raw_facts
+                    source = "model"
             except Exception as exc:  # extractor failures become diagnostics, not trusted facts
                 raw_facts = [{**fact, "extractor_error": str(exc)} for fact in raw_facts]
         facts, errors = validate_message_facts(
@@ -421,15 +433,15 @@ class EvidencePipeline:
         )
         self.cache.put(key, {
             "kind": "message", "source_id": row.get("message_id"), "content_hash": digest,
-            "prompt_version": PROMPT_VERSION, "prompt_override": prompt_override,
+            "prompt_version": f"{PROMPT_VERSION}:{self.extractor_model}", "prompt_override": prompt_override,
             "facts": raw_facts,
         })
-        return facts, errors, "deterministic"
+        return facts, errors, source
 
     def _image_fact(self, row: dict[str, str]) -> tuple[dict[str, Any] | None, list[dict[str, Any]], str]:
         image_path = self.dataset_dir / "media" / "images" / f"{row.get('image_id')}.png"
         digest = source_hash("image", row, image_path)
-        key = cache_key("image", row.get("image_id", ""), digest)
+        key = cache_key("image", row.get("image_id", ""), digest, f"{PROMPT_VERSION}:{self.extractor_model}")
         cached = self.cache.get(key)
         if cached is None:
             raw = None
@@ -445,11 +457,17 @@ class EvidencePipeline:
             raw = raw or unresolved_image_fact(row.get("image_id", ""))
             self.cache.put(key, {
                 "kind": "image", "source_id": row.get("image_id"), "content_hash": digest,
-                "prompt_version": PROMPT_VERSION, "facts": raw,
+                "prompt_version": f"{PROMPT_VERSION}:{self.extractor_model}", "facts": raw,
             })
             cached = {"facts": raw}
         else:
             source = "cache"
+        if source == "cache":
+            self.usage_tracker.record(UsageRecord(
+                provider="zenmux.ai" if self.extractor_model != "deterministic" else "none",
+                model=self.extractor_model, purpose="image_evidence", source_id=row.get("image_id", ""),
+                cache_hit=True, input_tokens=0, output_tokens=0,
+            ))
         fact, errors = validate_image_fact(
             cached.get("facts", {}), source_id=row.get("image_id", ""),
             related_event_id=row.get("related_event_id") or None, event_ids=self.event_ids,
@@ -506,7 +524,7 @@ class EvidencePipeline:
             "generated_at_utc": datetime.utcnow().replace(microsecond=0).isoformat() + "Z",
             "dataset_dir": str(self.dataset_dir),
             "cache_path": str(self.cache.path.resolve()),
-            "mode": "cache-only" if self.cache_only else "deterministic-offline",
+            "mode": "cache-only" if self.cache_only else ("zenmux" if self.extractor_model != "deterministic" else "deterministic-offline"),
             "request_count": len(records),
             "records": records,
             "summary": {
@@ -521,11 +539,44 @@ class EvidencePipeline:
 def run_evidence(
     dataset_dir: Path = DATASET_DIR, cache_path: Path | None = None, *,
     cache_only: bool = False, request_id: str | None = None, user_id: str | None = None,
+    use_zenmux: bool = False, max_model_calls: int | None = None,
+    use_zenmux_messages: bool = False,
 ) -> dict[str, Any]:
     requests = _read_csv(Path(dataset_dir) / "requests.csv")
-    return EvidencePipeline(dataset_dir, cache_path, cache_only=cache_only).run(
+    tracker = UsageTracker()
+    message_extractor = None
+    image_extractor = None
+    extractor_model = "deterministic"
+    if use_zenmux and not cache_only:
+        from .zenmux import ZenMuxClient, ZenMuxSettings
+        client = ZenMuxClient(
+            ZenMuxSettings.from_env(max_model_calls=max_model_calls),
+            tracker=tracker,
+        )
+        message_extractor = client.extract_message if use_zenmux_messages else None
+        image_extractor = client.extract_image
+        extractor_model = client.settings.model
+    report = EvidencePipeline(
+        dataset_dir, cache_path, cache_only=cache_only,
+        message_extractor=message_extractor, image_extractor=image_extractor,
+        usage_tracker=tracker, extractor_model=extractor_model,
+    ).run(
         requests, request_id=request_id, user_id=user_id,
     )
+    report["usage"] = {
+        "records": [
+            {
+                "provider": row.provider, "model": row.model, "purpose": row.purpose,
+                "source_id": row.source_id, "cache_hit": row.cache_hit,
+                "input_tokens": row.input_tokens, "output_tokens": row.output_tokens,
+                "estimated_cost": format(row.estimated_cost, "f"),
+            }
+            for row in tracker.records
+        ],
+        "model_calls": tracker.model_call_count,
+        "cache_hits": tracker.cache_hit_count,
+    }
+    return report
 
 
 def write_report(report: dict[str, Any], output_path: Path = EVIDENCE_OUTPUT) -> None:
@@ -541,10 +592,15 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--request-id")
     parser.add_argument("--user-id")
     parser.add_argument("--cache-only", action="store_true")
+    parser.add_argument("--use-zenmux", action="store_true", help="use the configured ZenMux model only for evidence misses")
+    parser.add_argument("--max-model-calls", type=int, default=None)
+    parser.add_argument("--use-zenmux-messages", action="store_true")
     args = parser.parse_args(argv)
     report = run_evidence(
         args.dataset, args.cache, cache_only=args.cache_only,
         request_id=args.request_id, user_id=args.user_id,
+        use_zenmux=args.use_zenmux, max_model_calls=args.max_model_calls,
+        use_zenmux_messages=args.use_zenmux_messages,
     )
     write_report(report, args.output)
     print(json.dumps({"output": str(args.output.resolve()), **report["summary"]}, sort_keys=True))

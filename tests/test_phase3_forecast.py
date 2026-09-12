@@ -102,6 +102,17 @@ class Phase3ForecastTests(unittest.TestCase):
         result = simulate(context, horizon_end=date(2025, 8, 16))
         self.assertEqual(result.credits[date(2025, 8, 15)], Decimal("30780000"))
 
+    def test_targeted_confirmation_is_not_added_as_a_second_credit(self) -> None:
+        ledger = _synthetic_ledger(balance="100", minimum="50")
+        evidence = {"records": [{"user_id": "user_test", "message_facts": [{
+            "source_id": "message_targeted", "claim_type": "confirm", "target_event_id": "event_recurring",
+            "status": "confirmed", "amount": "40", "currency": "USD", "effective_date": "2025-01-08",
+        }]}]}
+        from buy_wait.forecast import build_forecast_context
+
+        rebuilt = build_forecast_context(ledger, user_id="user_test", request_date=date(2025, 1, 2), evidence_report=evidence)
+        self.assertEqual(rebuilt.confirmed_credits, ())
+
 
 if __name__ == "__main__":
     unittest.main()

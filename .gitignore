@@ -1,6 +1,9 @@
 log.txt
 .env
+.env.*
+!.env.example
 __pycache__/
 *.pyc
 code/cache/
 output.csv.tmp
+code.zip

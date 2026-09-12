@@ -86,6 +86,12 @@ def build_forecast_context(
             for fact in record.get("message_facts", []):
                 if not isinstance(fact, dict) or fact.get("claim_type") != "confirm" or fact.get("status") != "confirmed":
                     continue
+                # A targeted confirmation amends an existing ledger row.  The
+                # ledger already contains that amended effect; only an
+                # explicitly unscoped confirmation may create a one-off cash
+                # inflow here.
+                if fact.get("target_event_id") or fact.get("related_event_id"):
+                    continue
                 if fact.get("amount") is None or fact.get("effective_date") is None or fact.get("currency") is None:
                     continue
                 try:
@@ -292,9 +298,9 @@ def simulate(
     for when in dates:
         balance -= debits[when]
         observe(balance, when)
-        balance -= payments[when]
-        observe(balance, when)
         balance += credits[when]
+        observe(balance, when)
+        balance -= payments[when]
         observe(balance, when)
         balances[when] = balance
     return ForecastResult(
@@ -381,7 +387,7 @@ def forecast_report(
         "forecast_version": "phase-3.v1",
         "forecast_days": horizon_days,
         "endpoint": "inclusive_request_date_plus_n_minus_1",
-        "same_day_order": "required_debits_then_proposed_payments_then_confirmed_credits",
+        "same_day_order": "required_debits_then_confirmed_credits_then_proposed_payments",
         "record_count": len(records),
         "records": _json_value(records),
     }

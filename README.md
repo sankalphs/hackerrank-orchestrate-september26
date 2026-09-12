@@ -10,6 +10,51 @@ A user may ask: **"Can I afford this laptop?"**
 
 Answering well takes more than the current balance. The agent must account for recurring expenses, pending payments, essential spending, confirmed income, available payment options, and relevant details buried in messages and images.
 
+### Current implementation
+
+Phases 0–5 provide audited loading, evidence-aware ledger construction, recurrence forecasting, baseline capacity metrics, and deterministic candidate generation. Phase 6 adds deterministic explanations, independent output validation, and atomic publication:
+
+```powershell
+python code/main.py plan
+```
+
+This writes `code/evaluation/candidate_report.json`. It evaluates accepted full, partial, supplied installment, and wait schedules, searches legal recurring-spending changes up to three actions, and records the ranked candidates. The production path is:
+
+```powershell
+python code/main.py run --offline
+```
+
+or simply `python code/main.py`. It loads cached evidence, builds plans, renders deterministic explanations, independently re-simulates every emitted plan, atomically writes the root `output.csv`, and records the zero-call offline usage report at `code/evaluation/usage_report.md`. Validate an existing submission with:
+
+```powershell
+python code/main.py validate output.csv
+```
+
+### Phase 7 completion
+
+Phase 7 adds public-sample calibration, release gates, cache-aware optional
+ZenMux evidence extraction, usage accounting, and packaging:
+
+```powershell
+python code/main.py score-samples
+python code/main.py check
+python code/main.py package
+```
+
+The paid evidence path is opt-in. Copy `.env.example` to `.env` and set
+`ZENMUX_API_KEY`; the checked-in defaults select
+`meta/muse-spark-1.3-contributor` through ZenMux. Use:
+
+```powershell
+python code/main.py run --use-zenmux --max-model-calls 16
+```
+
+Only unresolved evidence misses are sent to the model. Results are keyed by
+source content hash, prompt version, and model, so a repeat run reuses the
+cache and reports zero new model calls. `--offline` never calls the API.
+The model extracts facts from messages/images only; affordability, ranking,
+and validation decisions remain deterministic Python logic.
+
 For every request, the agent decides whether the user should pay in full, pay partially, use installments, wait, or not proceed. The recommendation must be personalized: two users with the same balance can deserve different answers based on their commitments, priorities, payment preferences, and willingness to adjust flexible expenses.
 
 A recommendation is safe only if the user can complete the full payment plan, cover essential expenses, and stay above their preferred minimum balance throughout the forecast period.
@@ -196,7 +241,7 @@ dining drain. `code/buy_wait/forecast.py` is the single simulation authority:
 it starts from the profile balance anchor, includes only Phase 2 cash effects,
 projects recurring occurrences, converts generated foreign amounts with the
 exact directed settlement-date FX rate, and applies required debits before
-proposed payments before confirmed credits. Same-day intermediate balances are
+confirmed credits before proposed payments. Same-day intermediate balances are
 checked against the user's minimum, not just end-of-day balances.
 
 The report is written to `code/evaluation/forecast_report.json` and contains
@@ -206,7 +251,33 @@ the first violation date. Use `--request-id`, `--user-id`, or
 `build_forecast_context(...)` followed by `simulate(...)`; spending changes
 accept `stop:<event_id>` and `reduce_to:<event_id>:<amount>` forms.
 
+### Phase 4: baseline capacity
+
+Build the capacity report with:
+
+```bash
+python code/main.py capacity
+```
+
+`code/buy_wait/capacity.py` computes `amount_safe_to_pay` and
+`earliest_date_for_full_payment` from the unmodified 90-day baseline only.
+The arithmetic slack bound is rounded down to the dataset's cent unit and
+then verified by re-simulating the proposed payment. Payment preferences and
+spending changes are intentionally ignored at this stage. The report is
+written to `code/evaluation/capacity_report.json`.
+
 You may use any language or runtime. Python, JavaScript, and TypeScript are all reasonable choices.
+
+### Phase 6: explanations and independent validation
+
+The final writer uses `code/buy_wait/explanations.py` to build a `DecisionTrace`
+from the selected plan and simulator, then renders a short explanation without
+introducing unsupported facts. `code/buy_wait/validator.py` reads the output
+back as CSV and checks the exact header, request coverage, numeric bounds,
+status/method rules, baseline capacity fields, legal spending changes, exact
+installment schedules, partial-payment arithmetic, and full-horizon simulated
+safety. The temporary file is validated before replacement, so a failed run
+does not overwrite the last good output.
 
 ---
 

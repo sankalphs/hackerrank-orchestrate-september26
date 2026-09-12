@@ -148,7 +148,7 @@ offline run (`--offline`, cache-only) must work without an API key.
    in audit), sign convention (`direction` credit/debit, not signed amounts —
    confirm), recurrence encoding, 90-day endpoint inclusive/exclusive
    (`request_date..+89` vs `..+90` — confirm against samples), same-day
-   ordering (default: required debits → proposed payment → confirmed credits;
+   ordering (calibrated: required debits → confirmed credits → proposed payment;
    validate against samples).
 
 ## 5. Phase 1 — Evidence pipeline (deterministic filter → extract → validate)
@@ -210,7 +210,7 @@ offline run (`--offline`, cache-only) must work without an API key.
 - Two horizons: `baseline_horizon` (capacity fields) vs `candidate_horizon`
   (extends to deadline + last installment leg). Baseline fields never shift
   when the candidate horizon extends.
-- Daily: `bal[d] = bal[d-1] + confirmed_credits[d] − required_debits[d] −
+- Daily: `bal[d] = bal[d-1] − required_debits[d] + confirmed_credits[d] −
   candidate_payments[d]` under one locked same-day order. Safe iff
   `bal[d] >= minimum_balance_to_keep` ∀d **and** last payment ≤ deadline.
 

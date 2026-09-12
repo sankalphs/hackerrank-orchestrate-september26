@@ -1,0 +1,113 @@
+{
+  "check_version": "phase-7.v1",
+  "failed": 0,
+  "gate_count": 21,
+  "gates": [
+    {
+      "detail": "",
+      "name": "output_exists",
+      "passed": true
+    },
+    {
+      "detail": "",
+      "name": "exact_header",
+      "passed": true
+    },
+    {
+      "detail": "250 vs 250",
+      "name": "row_count",
+      "passed": true
+    },
+    {
+      "detail": "",
+      "name": "unique_request_ids",
+      "passed": true
+    },
+    {
+      "detail": "",
+      "name": "request_coverage",
+      "passed": true
+    },
+    {
+      "detail": "",
+      "name": "safe_amount_bounds",
+      "passed": true
+    },
+    {
+      "detail": "",
+      "name": "status_enum",
+      "passed": true
+    },
+    {
+      "detail": "",
+      "name": "method_enum",
+      "passed": true
+    },
+    {
+      "detail": "",
+      "name": "not_recommended_none",
+      "passed": true
+    },
+    {
+      "detail": "",
+      "name": "now_has_request_date",
+      "passed": true
+    },
+    {
+      "detail": "",
+      "name": "plan_syntax",
+      "passed": true
+    },
+    {
+      "detail": "",
+      "name": "explanations_present",
+      "passed": true
+    },
+    {
+      "detail": "",
+      "name": "validator_command",
+      "passed": true
+    },
+    {
+      "detail": "",
+      "name": "audit_strict_command",
+      "passed": true
+    },
+    {
+      "detail": "",
+      "name": "unit_tests",
+      "passed": true
+    },
+    {
+      "detail": "",
+      "name": "sample_score_report",
+      "passed": true
+    },
+    {
+      "detail": "",
+      "name": "sample_score_fields",
+      "passed": true
+    },
+    {
+      "detail": "",
+      "name": "cache_is_json",
+      "passed": true
+    },
+    {
+      "detail": "",
+      "name": "cache_has_content_hashes",
+      "passed": true
+    },
+    {
+      "detail": "",
+      "name": "usage_report_present",
+      "passed": true
+    },
+    {
+      "detail": "",
+      "name": "no_secret_in_usage_report",
+      "passed": true
+    }
+  ],
+  "passed": 21
+}

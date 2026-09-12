@@ -1,9 +1,9 @@
 {
   "cache_path": "D:\\Coding\\Hackthon\\Hackerrank\\hackerrank-orchestrate-september26\\code\\cache\\evidence_cache.json",
   "dataset_dir": "D:\\Coding\\Hackthon\\Hackerrank\\hackerrank-orchestrate-september26\\dataset",
-  "evidence_version": "phase-1.v1",
-  "generated_at_utc": "2026-09-12T16:05:54Z",
-  "mode": "deterministic-offline",
+  "evidence_version": "phase-7.v3",
+  "generated_at_utc": "2026-09-12T18:22:23Z",
+  "mode": "cache-only",
   "records": [
     {
       "image_facts": [],
@@ -40,7 +40,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_26",
@@ -70,7 +70,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_27",
@@ -100,7 +100,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_28",
@@ -141,7 +141,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_29",
@@ -210,7 +210,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_32",
@@ -256,7 +256,8 @@
         ]
       },
       "source_counts": {
-        "cache": 2
+        "deterministic": 1,
+        "unresolved": 1
       },
       "unresolved_image_ids": [
         "image_06"
@@ -310,7 +311,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_34",
@@ -358,7 +359,8 @@
         ]
       },
       "source_counts": {
-        "cache": 2
+        "deterministic": 1,
+        "unresolved": 1
       },
       "unresolved_image_ids": [
         "image_07"
@@ -390,7 +392,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_36",
@@ -420,7 +422,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_37",
@@ -452,7 +454,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_38",
@@ -507,7 +509,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_40",
@@ -562,7 +564,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_42",
@@ -592,7 +594,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_43",
@@ -633,7 +635,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_44",
@@ -663,7 +665,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_45",
@@ -707,7 +709,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_47",
@@ -753,7 +755,8 @@
         ]
       },
       "source_counts": {
-        "cache": 2
+        "deterministic": 1,
+        "unresolved": 1
       },
       "unresolved_image_ids": [
         "image_08"
@@ -796,7 +799,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_49",
@@ -837,7 +840,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_50",
@@ -881,7 +884,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_52",
@@ -914,7 +917,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_53",
@@ -944,7 +947,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_54",
@@ -976,7 +979,7 @@
         "message_ids": []
       },
       "source_counts": {
-        "cache": 1
+        "unresolved": 1
       },
       "unresolved_image_ids": [
         "image_09"
@@ -1022,7 +1025,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_57",
@@ -1074,7 +1077,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_58",
@@ -1104,7 +1107,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_59",
@@ -1134,7 +1137,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_60",
@@ -1175,7 +1178,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_61",
@@ -1227,7 +1230,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_62",
@@ -1287,7 +1290,8 @@
         ]
       },
       "source_counts": {
-        "cache": 2
+        "deterministic": 1,
+        "unresolved": 1
       },
       "unresolved_image_ids": [
         "image_10"
@@ -1330,7 +1334,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_65",
@@ -1382,7 +1386,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_66",
@@ -1448,7 +1452,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_68",
@@ -1478,7 +1482,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_69",
@@ -1511,7 +1515,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_70",
@@ -1541,7 +1545,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_71",
@@ -1582,7 +1586,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_72",
@@ -1628,7 +1632,8 @@
         ]
       },
       "source_counts": {
-        "cache": 2
+        "deterministic": 1,
+        "unresolved": 1
       },
       "unresolved_image_ids": [
         "image_11"
@@ -1682,7 +1687,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_74",
@@ -1723,7 +1728,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_75",
@@ -1764,7 +1769,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_76",
@@ -1797,7 +1802,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_77",
@@ -1829,7 +1834,7 @@
         "message_ids": []
       },
       "source_counts": {
-        "cache": 1
+        "unresolved": 1
       },
       "unresolved_image_ids": [
         "image_12"
@@ -1886,7 +1891,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_80",
@@ -1916,7 +1921,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_81",
@@ -1946,7 +1951,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_82",
@@ -1976,7 +1981,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_83",
@@ -2022,7 +2027,8 @@
         ]
       },
       "source_counts": {
-        "cache": 2
+        "deterministic": 1,
+        "unresolved": 1
       },
       "unresolved_image_ids": [
         "image_13"
@@ -2065,7 +2071,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_85",
@@ -2109,7 +2115,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_87",
@@ -2127,7 +2133,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_88",
@@ -2200,7 +2206,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_90",
@@ -2233,7 +2239,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_91",
@@ -2274,7 +2280,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_92",
@@ -2304,7 +2310,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_93",
@@ -2356,7 +2362,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_94",
@@ -2408,7 +2414,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_95",
@@ -2466,7 +2472,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_98",
@@ -2541,7 +2547,8 @@
         ]
       },
       "source_counts": {
-        "cache": 2
+        "deterministic": 1,
+        "unresolved": 1
       },
       "unresolved_image_ids": [
         "image_14"
@@ -2595,7 +2602,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_102",
@@ -2625,7 +2632,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_103",
@@ -2666,7 +2673,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_104",
@@ -2714,7 +2721,8 @@
         ]
       },
       "source_counts": {
-        "cache": 2
+        "deterministic": 1,
+        "unresolved": 1
       },
       "unresolved_image_ids": [
         "image_15"
@@ -2746,7 +2754,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_106",
@@ -2787,7 +2795,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_107",
@@ -2828,7 +2836,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_108",
@@ -2894,7 +2902,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_110",
@@ -2946,7 +2954,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_111",
@@ -2987,7 +2995,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_112",
@@ -3033,7 +3041,8 @@
         ]
       },
       "source_counts": {
-        "cache": 2
+        "deterministic": 1,
+        "unresolved": 1
       },
       "unresolved_image_ids": [
         "image_16"
@@ -3065,7 +3074,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_114",
@@ -3097,7 +3106,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_115",
@@ -3141,7 +3150,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_117",
@@ -3171,7 +3180,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_118",
@@ -3201,7 +3210,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_119",
@@ -3234,7 +3243,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_120",
@@ -3289,7 +3298,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_122",
@@ -3319,7 +3328,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_123",
@@ -3363,7 +3372,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_125",
@@ -3415,7 +3424,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_126",
@@ -3445,7 +3454,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_127",
@@ -3486,7 +3495,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_128",
@@ -3518,7 +3527,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_129",
@@ -3548,7 +3557,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_130",
@@ -3600,7 +3609,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_131",
@@ -3630,7 +3639,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_132",
@@ -3671,7 +3680,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_133",
@@ -3715,7 +3724,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_135",
@@ -3759,7 +3768,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_137",
@@ -3792,7 +3801,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_138",
@@ -3847,7 +3856,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_140",
@@ -3880,7 +3889,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_141",
@@ -3932,7 +3941,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_142",
@@ -3964,7 +3973,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_143",
@@ -4005,7 +4014,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_144",
@@ -4035,7 +4044,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_145",
@@ -4079,7 +4088,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_147",
@@ -4112,7 +4121,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_148",
@@ -4156,7 +4165,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_150",
@@ -4186,7 +4195,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_151",
@@ -4219,7 +4228,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_152",
@@ -4249,7 +4258,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_153",
@@ -4290,7 +4299,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_154",
@@ -4320,7 +4329,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_155",
@@ -4353,7 +4362,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_156",
@@ -4394,7 +4403,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_157",
@@ -4438,7 +4447,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_159",
@@ -4468,7 +4477,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_160",
@@ -4498,7 +4507,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_161",
@@ -4528,7 +4537,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_162",
@@ -4558,7 +4567,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_163",
@@ -4599,7 +4608,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_164",
@@ -4640,7 +4649,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_165",
@@ -4692,7 +4701,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_166",
@@ -4744,7 +4753,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_167",
@@ -4774,7 +4783,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_168",
@@ -4804,7 +4813,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_169",
@@ -4845,7 +4854,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_170",
@@ -4875,7 +4884,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_171",
@@ -4905,7 +4914,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_172",
@@ -4935,7 +4944,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_173",
@@ -4979,7 +4988,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_175",
@@ -5020,7 +5029,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_176",
@@ -5050,7 +5059,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_177",
@@ -5102,7 +5111,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_178",
@@ -5132,7 +5141,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_179",
@@ -5173,7 +5182,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_180",
@@ -5228,7 +5237,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_182",
@@ -5258,7 +5267,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_183",
@@ -5288,7 +5297,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_184",
@@ -5318,7 +5327,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_185",
@@ -5348,7 +5357,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_186",
@@ -5378,7 +5387,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_187",
@@ -5411,7 +5420,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_188",
@@ -5441,7 +5450,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_189",
@@ -5488,7 +5497,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_191",
@@ -5532,7 +5541,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_193",
@@ -5584,7 +5593,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_194",
@@ -5614,7 +5623,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_195",
@@ -5658,7 +5667,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_197",
@@ -5691,7 +5700,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_198",
@@ -5721,7 +5730,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_199",
@@ -5762,7 +5771,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_200",
@@ -5803,7 +5812,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_201",
@@ -5833,7 +5842,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_202",
@@ -5888,7 +5897,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_204",
@@ -5963,7 +5972,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_208",
@@ -6010,7 +6019,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_210",
@@ -6054,7 +6063,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_212",
@@ -6095,7 +6104,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_213",
@@ -6125,7 +6134,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_214",
@@ -6155,7 +6164,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_215",
@@ -6185,7 +6194,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_216",
@@ -6243,7 +6252,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_219",
@@ -6273,7 +6282,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_220",
@@ -6306,7 +6315,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_221",
@@ -6358,7 +6367,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_222",
@@ -6416,7 +6425,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_224",
@@ -6446,7 +6455,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_225",
@@ -6476,7 +6485,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_226",
@@ -6517,7 +6526,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_227",
@@ -6558,7 +6567,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_228",
@@ -6591,7 +6600,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_229",
@@ -6632,7 +6641,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_230",
@@ -6687,7 +6696,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_232",
@@ -6717,7 +6726,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_233",
@@ -6750,7 +6759,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_234",
@@ -6780,7 +6789,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_235",
@@ -6813,7 +6822,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_236",
@@ -6854,7 +6863,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_237",
@@ -6895,7 +6904,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_238",
@@ -6950,7 +6959,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_240",
@@ -6991,7 +7000,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_241",
@@ -7032,7 +7041,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_242",
@@ -7090,7 +7099,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_245",
@@ -7131,7 +7140,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_246",
@@ -7161,7 +7170,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_247",
@@ -7202,7 +7211,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_248",
@@ -7232,7 +7241,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_249",
@@ -7262,7 +7271,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_250",
@@ -7309,7 +7318,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_252",
@@ -7342,7 +7351,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_253",
@@ -7383,7 +7392,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_254",
@@ -7438,7 +7447,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_256",
@@ -7499,7 +7508,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_259",
@@ -7543,7 +7552,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_261",
@@ -7595,7 +7604,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_262",
@@ -7625,7 +7634,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_263",
@@ -7658,7 +7667,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_264",
@@ -7699,7 +7708,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_265",
@@ -7732,7 +7741,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_266",
@@ -7762,7 +7771,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_267",
@@ -7792,7 +7801,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_268",
@@ -7833,7 +7842,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_269",
@@ -7877,7 +7886,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_271",
@@ -7918,7 +7927,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_272",
@@ -7948,7 +7957,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_273",
@@ -7978,7 +7987,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_274",
@@ -8022,7 +8031,7 @@
         ]
       },
       "source_counts": {
-        "cache": 1
+        "deterministic": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_275",
@@ -8035,5 +8044,10 @@
     "message_fact_count": 294,
     "unresolved_image_count": 11,
     "validation_error_count": 1
+  },
+  "usage": {
+    "cache_hits": 0,
+    "model_calls": 0,
+    "records": []
   }
 }

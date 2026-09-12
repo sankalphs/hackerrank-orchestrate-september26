@@ -8,10 +8,10 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "code"))
 
-from buy_wait.event_resolution import build_ledger, cash_flow_effect
+from buy_wait.event_resolution import _deduplicate_effects, build_ledger, cash_flow_effect
 from buy_wait.fx import MissingExchangeRateError, RateBook
 from buy_wait.loaders import load_dataset
-from buy_wait.models import Event, Profile, ResolvedEvent
+from buy_wait.models import CashEffect, Event, Profile, ResolvedEvent
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -81,6 +81,22 @@ class Phase2LedgerTests(unittest.TestCase):
         )
         self.assertFalse(effect.included)
         self.assertEqual(effect.reason, "pending_credit_excluded")
+
+    def test_later_linked_cancellation_suppresses_prior_cash_effect(self) -> None:
+        old = CashEffect(
+            "event_old", "lifecycle:event_old", "user_01", "debit", Decimal("10"), "ZAR",
+            date(2025, 8, 15), "settled", "rent", "expense", "fixed", None, True, False,
+            "settled_debit_included", ("event_old",),
+        )
+        cancelled = CashEffect(
+            "event_cancel", "lifecycle:event_old", "user_01", "debit", None, "ZAR",
+            date(2025, 8, 16), "cancelled", "rent", "expense", "fixed", None, False, False,
+            "status_cancelled", ("event_cancel",),
+        )
+        effects, diagnostics = _deduplicate_effects([old, cancelled], {})
+        self.assertFalse(effects[0].included)
+        self.assertIn("lifecycle_cancelled:event_cancel", effects[0].reason)
+        self.assertEqual(diagnostics[0]["kept_event_id"], "event_cancel")
 
 
 if __name__ == "__main__":

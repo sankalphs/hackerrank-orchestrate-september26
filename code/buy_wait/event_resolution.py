@@ -64,7 +64,7 @@ def _claim_from_fact(
     )
 
 
-def evidence_claims(report: dict[str, Any] | None) -> list[EvidenceClaim]:
+def evidence_claims(report: dict[str, Any] | None, events: dict[str, Event] | None = None) -> list[EvidenceClaim]:
     """Normalise a Phase 1 report without trusting its free-form text fields."""
     if not report:
         return []
@@ -80,12 +80,23 @@ def evidence_claims(report: dict[str, Any] | None) -> list[EvidenceClaim]:
         for fact in record.get("image_facts", []):
             if not isinstance(fact, dict) or fact.get("status") == "unresolved":
                 continue
+            # The supplied event row owns lifecycle timing and currency. The
+            # image is evidence for a blank amount; model-read dates/currencies
+            # can be receipt metadata or OCR mistakes and must not create a
+            # missing-FX failure or move an existing cash event.
+            related_event = (events or {}).get(str(fact.get("related_event_id", "")))
+            image_date = fact.get("date")
+            image_currency = fact.get("currency")
+            if related_event is not None:
+                image_date = (related_event.settlement_date or related_event.event_date).isoformat()
+                image_currency = related_event.currency
             claim = _claim_from_fact(
                 {
                     **fact,
                     "claim_type": "amend" if fact.get("amount") is not None else "status",
                     "target_event_id": fact.get("related_event_id"),
-                    "effective_date": fact.get("date"),
+                    "effective_date": image_date,
+                    "currency": image_currency,
                 },
                 related_event_id=fact.get("related_event_id"),
             )
@@ -255,11 +266,10 @@ def cash_flow_effect(
 def _deduplicate_effects(
     effects: list[CashEffect], lifecycles: dict[str, Lifecycle]
 ) -> tuple[list[CashEffect], list[dict[str, Any]]]:
-    """Deduplicate same-kind linked cash effects while retaining audit rows."""
+    """Resolve linked same-kind replacements and terminal lifecycle states."""
     by_lifecycle: defaultdict[str, list[CashEffect]] = defaultdict(list)
     for effect in effects:
-        if effect.included:
-            by_lifecycle[effect.lifecycle_id].append(effect)
+        by_lifecycle[effect.lifecycle_id].append(effect)
     duplicates: list[dict[str, Any]] = []
     replacements: dict[str, tuple[str, str]] = {}
     for lifecycle_id, rows in by_lifecycle.items():
@@ -267,13 +277,33 @@ def _deduplicate_effects(
         for effect in rows:
             groups[(effect.direction, effect.event_type, effect.category)].append(effect)
         for key, group in groups.items():
-            if len(group) < 2:
+            active = [effect for effect in group if effect.included]
+            terminal = [effect for effect in group if effect.status in _EXCLUDED_STATUSES]
+            # A later linked cancellation/failure supersedes an earlier
+            # pending or settled cash effect of the same transaction.  An
+            # older failure does not erase a later settled replacement.
+            if active and terminal:
+                terminal_state = max(terminal, key=lambda effect: (effect.effective_date or date.min, effect.event_id))
+                latest_active = max(active, key=lambda effect: (effect.effective_date or date.min, effect.event_id))
+                if (terminal_state.effective_date or date.min, terminal_state.event_id) >= (latest_active.effective_date or date.min, latest_active.event_id):
+                    reason = f"lifecycle_{terminal_state.status}"
+                    for loser in active:
+                        replacements[loser.event_id] = (terminal_state.event_id, reason)
+                        duplicates.append({
+                            "lifecycle_id": lifecycle_id,
+                            "event_id": loser.event_id,
+                            "kept_event_id": terminal_state.event_id,
+                            "group": list(key),
+                            "reason": reason,
+                        })
+                    continue
+            if len(active) < 2:
                 continue
             # A linked same-kind record is one cash effect.  Prefer explicit
             # settled state, then scheduled, then pending, and finally the
             # newer effective date.  Opposing directions/types remain separate.
             winner = max(
-                group,
+                active,
                 key=lambda effect: (
                     _INCLUDED_STATUS_RANK.get(effect.status, 0),
                     effect.effective_date or date.min,
@@ -313,7 +343,7 @@ def build_ledger(dataset: Dataset, report: dict[str, Any] | None = None) -> Cano
     event_to_lifecycle = _lifecycle_index(lifecycles)
     claims_by_event: defaultdict[str, list[EvidenceClaim]] = defaultdict(list)
     unscoped_claims: list[str] = []
-    claims = evidence_claims(report)
+    claims = evidence_claims(report, dataset.events)
     for claim in claims:
         if claim.target_event_id and claim.target_event_id in dataset.events:
             claims_by_event[claim.target_event_id].append(claim)
