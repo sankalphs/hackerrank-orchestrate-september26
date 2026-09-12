@@ -115,6 +115,71 @@ For every row in `dataset/requests.csv`, produce one row in `output.csv` with:
 5. Verify deterministically — bounds, plan feasibility, schedule match, flexible-only spending changes — before writing `output.csv`.
 6. Score yourself on the solved samples, then run the full dataset.
 
+### Phase 0: input audit
+
+Phase 0 is implemented as a deterministic, dependency-free audit. Run it from
+the repository root with:
+
+```bash
+python code/main.py audit --strict
+```
+
+The command writes the machine-readable report to
+`code/evaluation/input_audit.json`. A successful strict run means the CSV
+schemas, dates, numeric fields, enums, foreign keys, image mappings, directed
+FX coverage, payment schedules, and sample conventions are structurally sound.
+Expected unresolved blank event amounts are reported as warnings so they can be
+handled by the later evidence pipeline; they are never coerced to zero.
+
+Use `--dataset PATH` and `--output PATH` to audit another dataset location.
+The locked financial-engine assumptions used by later phases live in
+`code/buy_wait/config.py` and are included in the audit report.
+
+### Phase 1: evidence pipeline
+
+Run the offline evidence pass with:
+
+```bash
+python code/main.py evidence
+```
+
+This scopes messages, images, and linked event lifecycles per evaluation
+request, extracts conservative deterministic facts from templated messages,
+validates every fact against the dataset schema, and writes
+`code/evaluation/evidence_report.json`. Content-hashed entries are cached in
+`code/cache/evidence_cache.json` (ignored by git). Image facts without a
+trusted cached extractor remain unresolved with a null amount; they are never
+treated as zero. Use `--cache-only` for a cache-only run, or filter with
+`--request-id` / `--user-id` while developing.
+
+The JSON-only extraction contracts are documented in
+`code/prompts/message_extraction.txt` and `code/prompts/image_extraction.txt`.
+
+### Phase 2: canonical ledger and FX
+
+Build the typed, lifecycle-aware ledger with:
+
+```bash
+python code/main.py ledger
+```
+
+The command loads profile balances as the request-time opening anchor, follows
+`linked_event_id` chains transitively, applies only validated Phase 1 claims,
+deduplicates replacement cash effects, and writes
+`code/evaluation/ledger_report.json`. The cash-state matrix is centralized in
+`code/buy_wait/event_resolution.py`: settled debits/credits are included,
+pending debits are reserved, pending credits are excluded, scheduled credits
+require confirmation, and failed/cancelled/unrealized/non-cash rows do not
+enter cash flow. Foreign amounts use only an exact directed rate on the
+settlement date; missing rates fail instead of falling back to an inverse or
+nearest rate.
+
+Phase 2 tests can be run with:
+
+```bash
+python -m unittest discover -s tests -p "test_*.py"
+```
+
 You may use any language or runtime. Python, JavaScript, and TypeScript are all reasonable choices.
 
 ---

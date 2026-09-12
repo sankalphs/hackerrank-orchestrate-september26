@@ -1,0 +1,795 @@
+{
+  "assumptions": {
+    "amount_sign": "direction_controls_sign",
+    "balance_anchor": "profile_as_of_request",
+    "cash_flow_date": "settlement_date_when_present_else_event_date",
+    "forecast_days": 90,
+    "forecast_endpoint": "inclusive_request_date_plus_89",
+    "fx_date": "exact_settlement_date",
+    "fx_direction": "from_event_currency_to_home_currency",
+    "recurrence_inference": "explicit_metadata_then_validated_evidence_then_stable_cadence",
+    "same_day_order": "required_debits_then_proposed_payments_then_confirmed_credits",
+    "unresolved_blank_amount": "block_dependent_cash_flow_never_zero"
+  },
+  "audit_version": "phase-0.v1",
+  "dataset_dir": "D:\\Coding\\Hackthon\\Hackerrank\\hackerrank-orchestrate-september26\\dataset",
+  "files": {
+    "exchange_rates.csv": {
+      "exists": true,
+      "headers": [
+        "rate_date",
+        "from_currency",
+        "to_currency",
+        "rate"
+      ],
+      "row_count": 134
+    },
+    "financial_events.csv": {
+      "exists": true,
+      "headers": [
+        "event_id",
+        "user_id",
+        "event_type",
+        "description",
+        "category",
+        "direction",
+        "amount",
+        "currency",
+        "event_date",
+        "settlement_date",
+        "status",
+        "linked_event_id",
+        "flexibility",
+        "minimum_allowed_amount"
+      ],
+      "row_count": 25342
+    },
+    "financial_profiles.csv": {
+      "exists": true,
+      "headers": [
+        "user_id",
+        "home_currency",
+        "current_available_balance",
+        "minimum_balance_to_keep",
+        "financial_priorities",
+        "expense_categories_to_protect",
+        "expense_categories_user_is_willing_to_reduce",
+        "expense_categories_user_is_willing_to_stop",
+        "payment_methods_user_will_consider",
+        "max_installment_months"
+      ],
+      "row_count": 275
+    },
+    "images.csv": {
+      "exists": true,
+      "headers": [
+        "image_id",
+        "user_id",
+        "request_id",
+        "related_event_id"
+      ],
+      "row_count": 16
+    },
+    "messages.csv": {
+      "exists": true,
+      "headers": [
+        "message_id",
+        "user_id",
+        "request_id",
+        "related_event_id",
+        "sent_at",
+        "source_type",
+        "message_text"
+      ],
+      "row_count": 215
+    },
+    "output.csv": {
+      "exists": true,
+      "headers": [
+        "request_id",
+        "amount_safe_to_pay",
+        "affordability_status",
+        "recommended_payment_method",
+        "payment_plan",
+        "earliest_date_for_full_payment",
+        "spending_changes_needed",
+        "decision_explanation"
+      ],
+      "row_count": 250
+    },
+    "request_payment_options.csv": {
+      "exists": true,
+      "headers": [
+        "payment_option_id",
+        "request_id",
+        "payment_method",
+        "payment_amount",
+        "number_of_payments",
+        "first_payment_date",
+        "payment_frequency_days",
+        "financing_fee",
+        "total_payable_amount"
+      ],
+      "row_count": 790
+    },
+    "requests.csv": {
+      "exists": true,
+      "headers": [
+        "request_id",
+        "user_id",
+        "request_date",
+        "request_type",
+        "requested_amount",
+        "desired_completion_date",
+        "allows_partial_payment",
+        "request_text"
+      ],
+      "row_count": 250
+    },
+    "sample_requests.csv": {
+      "exists": true,
+      "headers": [
+        "request_id",
+        "user_id",
+        "request_date",
+        "request_type",
+        "requested_amount",
+        "desired_completion_date",
+        "allows_partial_payment",
+        "request_text",
+        "amount_safe_to_pay",
+        "affordability_status",
+        "recommended_payment_method",
+        "payment_plan",
+        "earliest_date_for_full_payment",
+        "spending_changes_needed",
+        "decision_explanation"
+      ],
+      "row_count": 25
+    }
+  },
+  "generated_at_utc": "2026-09-12T16:15:47Z",
+  "issues": {
+    "blank_amount_events": [
+      {
+        "description": "August 2019 net salary",
+        "event_date": "2019-08-31",
+        "event_id": "event_253",
+        "user_id": "user_03"
+      },
+      {
+        "description": "Outstanding rent balance",
+        "event_date": "2023-08-11",
+        "event_id": "event_1442",
+        "user_id": "user_16"
+      },
+      {
+        "description": "Bulk groceries and pantry purchase",
+        "event_date": "2026-02-27",
+        "event_id": "event_1545",
+        "user_id": "user_17"
+      },
+      {
+        "description": "Delivered grocery order",
+        "event_date": "2024-09-03",
+        "event_id": "event_1700",
+        "user_id": "user_19"
+      },
+      {
+        "description": "Outstanding telecom bill",
+        "event_date": "2026-02-06",
+        "event_id": "event_1786",
+        "user_id": "user_20"
+      },
+      {
+        "description": "Grocery tax invoice",
+        "event_date": "2026-01-06",
+        "event_id": "event_3051",
+        "user_id": "user_33"
+      },
+      {
+        "description": "Restaurant tax invoice",
+        "event_date": "2025-10-29",
+        "event_id": "event_3231",
+        "user_id": "user_35"
+      },
+      {
+        "description": "Property maintenance invoice",
+        "event_date": "2026-07-24",
+        "event_id": "event_4535",
+        "user_id": "user_48"
+      },
+      {
+        "description": "Water bill due",
+        "event_date": "2026-06-07",
+        "event_id": "event_5170",
+        "user_id": "user_55"
+      },
+      {
+        "description": "Large grocery tax invoice",
+        "event_date": "2024-06-03",
+        "event_id": "event_6033",
+        "user_id": "user_64"
+      },
+      {
+        "description": "Hospital bill payable",
+        "event_date": "2023-01-19",
+        "event_id": "event_6859",
+        "user_id": "user_73"
+      },
+      {
+        "description": "Taxi fare",
+        "event_date": "2025-10-01",
+        "event_id": "event_7307",
+        "user_id": "user_78"
+      },
+      {
+        "description": "Tote bag order",
+        "event_date": "2026-04-03",
+        "event_id": "event_7941",
+        "user_id": "user_84"
+      },
+      {
+        "description": "Pharmacy purchase",
+        "event_date": "2025-11-02",
+        "event_id": "event_9421",
+        "user_id": "user_101"
+      },
+      {
+        "description": "Airline ticket purchase",
+        "event_date": "2026-06-07",
+        "event_id": "event_9806",
+        "user_id": "user_105"
+      },
+      {
+        "description": "EV charging wallet payment",
+        "event_date": "2026-09-03",
+        "event_id": "event_10521",
+        "user_id": "user_113"
+      }
+    ]
+  },
+  "observed": {
+    "blank_amount_events": [
+      {
+        "description": "August 2019 net salary",
+        "event_date": "2019-08-31",
+        "event_id": "event_253",
+        "user_id": "user_03"
+      },
+      {
+        "description": "Outstanding rent balance",
+        "event_date": "2023-08-11",
+        "event_id": "event_1442",
+        "user_id": "user_16"
+      },
+      {
+        "description": "Bulk groceries and pantry purchase",
+        "event_date": "2026-02-27",
+        "event_id": "event_1545",
+        "user_id": "user_17"
+      },
+      {
+        "description": "Delivered grocery order",
+        "event_date": "2024-09-03",
+        "event_id": "event_1700",
+        "user_id": "user_19"
+      },
+      {
+        "description": "Outstanding telecom bill",
+        "event_date": "2026-02-06",
+        "event_id": "event_1786",
+        "user_id": "user_20"
+      },
+      {
+        "description": "Grocery tax invoice",
+        "event_date": "2026-01-06",
+        "event_id": "event_3051",
+        "user_id": "user_33"
+      },
+      {
+        "description": "Restaurant tax invoice",
+        "event_date": "2025-10-29",
+        "event_id": "event_3231",
+        "user_id": "user_35"
+      },
+      {
+        "description": "Property maintenance invoice",
+        "event_date": "2026-07-24",
+        "event_id": "event_4535",
+        "user_id": "user_48"
+      },
+      {
+        "description": "Water bill due",
+        "event_date": "2026-06-07",
+        "event_id": "event_5170",
+        "user_id": "user_55"
+      },
+      {
+        "description": "Large grocery tax invoice",
+        "event_date": "2024-06-03",
+        "event_id": "event_6033",
+        "user_id": "user_64"
+      },
+      {
+        "description": "Hospital bill payable",
+        "event_date": "2023-01-19",
+        "event_id": "event_6859",
+        "user_id": "user_73"
+      },
+      {
+        "description": "Taxi fare",
+        "event_date": "2025-10-01",
+        "event_id": "event_7307",
+        "user_id": "user_78"
+      },
+      {
+        "description": "Tote bag order",
+        "event_date": "2026-04-03",
+        "event_id": "event_7941",
+        "user_id": "user_84"
+      },
+      {
+        "description": "Pharmacy purchase",
+        "event_date": "2025-11-02",
+        "event_id": "event_9421",
+        "user_id": "user_101"
+      },
+      {
+        "description": "Airline ticket purchase",
+        "event_date": "2026-06-07",
+        "event_id": "event_9806",
+        "user_id": "user_105"
+      },
+      {
+        "description": "EV charging wallet payment",
+        "event_date": "2026-09-03",
+        "event_id": "event_10521",
+        "user_id": "user_113"
+      }
+    ],
+    "currency_precision": {
+      "EUR": {
+        "0": 1604,
+        "1": 1257,
+        "2": 4036
+      },
+      "IDR": {
+        "0": 2363,
+        "1": 354,
+        "2": 3429
+      },
+      "INR": {
+        "0": 3011,
+        "1": 491,
+        "2": 4455
+      },
+      "USD": {
+        "0": 1232,
+        "1": 768,
+        "2": 2733
+      },
+      "ZAR": {
+        "0": 979,
+        "1": 1462,
+        "2": 3254
+      }
+    },
+    "exchange_rates.csv.from_currency": [
+      "EUR",
+      "USD"
+    ],
+    "exchange_rates.csv.to_currency": [
+      "EUR",
+      "IDR",
+      "INR",
+      "USD",
+      "ZAR"
+    ],
+    "financial_events.csv.currency": [
+      "EUR",
+      "IDR",
+      "INR",
+      "USD",
+      "ZAR"
+    ],
+    "financial_events.csv.direction": [
+      "credit",
+      "debit",
+      "non_cash"
+    ],
+    "financial_events.csv.event_type": [
+      "debt_payment",
+      "expense",
+      "income",
+      "investment_purchase",
+      "investment_sale",
+      "investment_valuation",
+      "refund",
+      "subscription"
+    ],
+    "financial_events.csv.flexibility": [
+      "fixed",
+      "reducible",
+      "reducible_or_stoppable",
+      "stoppable"
+    ],
+    "financial_events.csv.status": [
+      "cancelled",
+      "failed",
+      "pending",
+      "scheduled",
+      "settled",
+      "unrealized"
+    ],
+    "foreign_event_currencies": [
+      "EUR",
+      "USD"
+    ],
+    "fx_coverage": {
+      "directed_rate_keys": 134,
+      "foreign_events_checked": 140,
+      "missing_required_rates": 0
+    },
+    "image_files": {
+      "mapped": 16,
+      "missing": 0
+    },
+    "list_field_delimiters": {
+      "expense_categories_to_protect": [
+        "|"
+      ],
+      "expense_categories_user_is_willing_to_reduce": [
+        "|"
+      ],
+      "expense_categories_user_is_willing_to_stop": [
+        "|"
+      ],
+      "financial_priorities": [
+        "|"
+      ],
+      "payment_methods_user_will_consider": [
+        "|"
+      ]
+    },
+    "messages.csv.source_type": [
+      "bank",
+      "employer",
+      "financial_service",
+      "merchant",
+      "service_provider"
+    ],
+    "payment_options": {
+      "arithmetic_error_count": 0,
+      "fee_error_count": 0,
+      "frequency_days": [
+        "28",
+        "30",
+        "31",
+        "<BLANK>"
+      ],
+      "option_count_by_request": {
+        "request_01": 4,
+        "request_02": 3,
+        "request_03": 3,
+        "request_04": 2,
+        "request_05": 3,
+        "request_06": 3,
+        "request_07": 3,
+        "request_08": 2,
+        "request_09": 3,
+        "request_10": 2,
+        "request_100": 3,
+        "request_101": 3,
+        "request_102": 3,
+        "request_103": 2,
+        "request_104": 3,
+        "request_105": 3,
+        "request_106": 3,
+        "request_107": 3,
+        "request_108": 3,
+        "request_109": 3,
+        "request_11": 4,
+        "request_110": 3,
+        "request_111": 3,
+        "request_112": 4,
+        "request_113": 2,
+        "request_114": 4,
+        "request_115": 2,
+        "request_116": 3,
+        "request_117": 3,
+        "request_118": 3,
+        "request_119": 3,
+        "request_12": 3,
+        "request_120": 4,
+        "request_121": 3,
+        "request_122": 3,
+        "request_123": 2,
+        "request_124": 3,
+        "request_125": 3,
+        "request_126": 3,
+        "request_127": 2,
+        "request_128": 4,
+        "request_129": 2,
+        "request_13": 3,
+        "request_130": 3,
+        "request_131": 3,
+        "request_132": 3,
+        "request_133": 2,
+        "request_134": 3,
+        "request_135": 3,
+        "request_136": 4,
+        "request_137": 2,
+        "request_138": 3,
+        "request_139": 3,
+        "request_14": 2,
+        "request_140": 3,
+        "request_141": 2,
+        "request_142": 4,
+        "request_143": 2,
+        "request_144": 3,
+        "request_145": 3,
+        "request_146": 3,
+        "request_147": 3,
+        "request_148": 3,
+        "request_149": 3,
+        "request_15": 3,
+        "request_150": 3,
+        "request_151": 3,
+        "request_152": 3,
+        "request_153": 2,
+        "request_154": 3,
+        "request_155": 3,
+        "request_156": 3,
+        "request_157": 2,
+        "request_158": 3,
+        "request_159": 2,
+        "request_16": 3,
+        "request_160": 3,
+        "request_161": 2,
+        "request_162": 3,
+        "request_163": 3,
+        "request_164": 3,
+        "request_165": 3,
+        "request_166": 3,
+        "request_167": 3,
+        "request_168": 3,
+        "request_169": 3,
+        "request_17": 3,
+        "request_170": 3,
+        "request_171": 2,
+        "request_172": 3,
+        "request_173": 3,
+        "request_174": 3,
+        "request_175": 3,
+        "request_176": 3,
+        "request_177": 3,
+        "request_178": 3,
+        "request_179": 2,
+        "request_18": 2,
+        "request_180": 4,
+        "request_181": 2,
+        "request_182": 4,
+        "request_183": 3,
+        "request_184": 3,
+        "request_185": 2,
+        "request_186": 3,
+        "request_187": 2,
+        "request_188": 3,
+        "request_189": 3,
+        "request_19": 3,
+        "request_190": 3,
+        "request_191": 3,
+        "request_192": 3,
+        "request_193": 3,
+        "request_194": 3,
+        "request_195": 3,
+        "request_196": 4,
+        "request_197": 3,
+        "request_198": 4,
+        "request_199": 3,
+        "request_20": 2,
+        "request_200": 4,
+        "request_201": 3,
+        "request_202": 4,
+        "request_203": 3,
+        "request_204": 3,
+        "request_205": 3,
+        "request_206": 3,
+        "request_207": 2,
+        "request_208": 3,
+        "request_209": 2,
+        "request_21": 4,
+        "request_210": 3,
+        "request_211": 2,
+        "request_212": 3,
+        "request_213": 3,
+        "request_214": 3,
+        "request_215": 3,
+        "request_216": 3,
+        "request_217": 3,
+        "request_218": 3,
+        "request_219": 3,
+        "request_22": 3,
+        "request_220": 3,
+        "request_221": 3,
+        "request_222": 4,
+        "request_223": 3,
+        "request_224": 3,
+        "request_225": 3,
+        "request_226": 4,
+        "request_227": 2,
+        "request_228": 3,
+        "request_229": 3,
+        "request_23": 3,
+        "request_230": 4,
+        "request_231": 3,
+        "request_232": 3,
+        "request_233": 2,
+        "request_234": 3,
+        "request_235": 3,
+        "request_236": 3,
+        "request_237": 3,
+        "request_238": 3,
+        "request_239": 3,
+        "request_24": 2,
+        "request_240": 3,
+        "request_241": 3,
+        "request_242": 3,
+        "request_243": 3,
+        "request_244": 4,
+        "request_245": 2,
+        "request_246": 3,
+        "request_247": 3,
+        "request_248": 3,
+        "request_249": 2,
+        "request_25": 3,
+        "request_250": 3,
+        "request_251": 2,
+        "request_252": 3,
+        "request_253": 3,
+        "request_254": 3,
+        "request_255": 2,
+        "request_256": 3,
+        "request_257": 2,
+        "request_258": 4,
+        "request_259": 2,
+        "request_26": 4,
+        "request_260": 3,
+        "request_261": 3,
+        "request_262": 3,
+        "request_263": 2,
+        "request_264": 3,
+        "request_265": 2,
+        "request_266": 3,
+        "request_267": 3,
+        "request_268": 3,
+        "request_269": 2,
+        "request_27": 2,
+        "request_270": 3,
+        "request_271": 2,
+        "request_272": 3,
+        "request_273": 2,
+        "request_274": 3,
+        "request_275": 3,
+        "request_28": 3,
+        "request_29": 2,
+        "request_30": 3,
+        "request_31": 2,
+        "request_32": 3,
+        "request_33": 2,
+        "request_34": 4,
+        "request_35": 2,
+        "request_36": 3,
+        "request_37": 2,
+        "request_38": 3,
+        "request_39": 2,
+        "request_40": 3,
+        "request_41": 2,
+        "request_42": 3,
+        "request_43": 2,
+        "request_44": 3,
+        "request_45": 2,
+        "request_46": 3,
+        "request_47": 2,
+        "request_48": 4,
+        "request_49": 3,
+        "request_50": 4,
+        "request_51": 2,
+        "request_52": 3,
+        "request_53": 3,
+        "request_54": 3,
+        "request_55": 3,
+        "request_56": 3,
+        "request_57": 2,
+        "request_58": 4,
+        "request_59": 3,
+        "request_60": 3,
+        "request_61": 3,
+        "request_62": 3,
+        "request_63": 2,
+        "request_64": 3,
+        "request_65": 2,
+        "request_66": 3,
+        "request_67": 2,
+        "request_68": 3,
+        "request_69": 3,
+        "request_70": 3,
+        "request_71": 2,
+        "request_72": 4,
+        "request_73": 3,
+        "request_74": 3,
+        "request_75": 3,
+        "request_76": 3,
+        "request_77": 3,
+        "request_78": 4,
+        "request_79": 2,
+        "request_80": 3,
+        "request_81": 3,
+        "request_82": 3,
+        "request_83": 2,
+        "request_84": 3,
+        "request_85": 2,
+        "request_86": 4,
+        "request_87": 2,
+        "request_88": 3,
+        "request_89": 3,
+        "request_90": 3,
+        "request_91": 2,
+        "request_92": 4,
+        "request_93": 3,
+        "request_94": 4,
+        "request_95": 2,
+        "request_96": 3,
+        "request_97": 3,
+        "request_98": 3,
+        "request_99": 3
+      },
+      "payment_methods": [
+        "full_payment",
+        "installments"
+      ],
+      "requests_with_2_to_4_options": 275,
+      "schedule_error_count": 0
+    },
+    "reference_counts": {
+      "event_ids": 25342,
+      "payment_option_ids": 790,
+      "profile_users": 275,
+      "request_ids_eval": 250,
+      "request_ids_with_samples": 275
+    },
+    "request_payment_options.csv.payment_method": [
+      "full_payment",
+      "installments"
+    ],
+    "requests.csv.allows_partial_payment": [
+      "false",
+      "true"
+    ],
+    "requests.csv.request_type": [
+      "debt_repayment",
+      "education",
+      "emergency_expense",
+      "family_transfer",
+      "housing",
+      "investment",
+      "other",
+      "purchase",
+      "travel"
+    ],
+    "sample_conventions": {
+      "not_recommended_uses_none": true,
+      "wait_uses_future_plan": true
+    }
+  },
+  "summary": {
+    "error_categories": [],
+    "error_count": 0,
+    "ok": true,
+    "warning_categories": [
+      "blank_amount_events"
+    ],
+    "warning_count": 16
+  }
+}
