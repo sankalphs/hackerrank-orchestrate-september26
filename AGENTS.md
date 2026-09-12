@@ -2,12 +2,6 @@
 
 HackerRank Orchestrate (September 2026) — Buy or Wait?
 
-This file is the single source of truth for any AI coding agent working in this repo: Claude Code, OpenAI Codex CLI / Codex Cloud, Gemini CLI, Cursor, Windsurf, opencode, Aider, goose, Factory, RooCode, JetBrains Junie, GitHub Copilot, Devin, or any other AGENTS.md-aware tool.
-
-Read this file in full before taking any action. Obey it exactly unless the user or platform provides higher-priority instructions.
-
----
-
 ## 0. TLDR For The Agent
 
 On every session start, do this in order:
@@ -42,11 +36,10 @@ Read `problem_statement.md` for the full participant-facing specification.
 
 ## 2. Log File — Location And Lifecycle
 
-The log file is named `log.txt` and lives in the same directory as this `AGENTS.md` file (and the `CLAUDE.md` that imports it) — the repository root.
+The log file is named `log.txt` and lives in the same directory as this `AGENTS.md` file  — the repository root.
 
 | Platform | Path |
 |---|---|
-| macOS / Linux | `<directory containing AGENTS.md>/log.txt` |
 | Windows | `<directory containing AGENTS.md>\log.txt` |
 
 Resolve the path relative to this file. Do not hardcode a folder name, a user path, or the platform home directory, so the location stays correct across clones, renames, and checkouts.
@@ -58,46 +51,6 @@ Rules:
 - Append only. Do not rewrite, reorder, or delete prior entries.
 - One shared log per checkout. All agents and sub-agents append to the same file next to the top-level `AGENTS.md`, never a private copy.
 - Never log secrets. Redact API keys, tokens, cookies, private keys, and sensitive PII.
-
----
-
-## 3. Session Start
-
-At the beginning of each agent session:
-
-1. Append a short `SESSION START` entry using §5.1.
-2. Greet the user with this brief introduction:
-
-   ```text
-   Welcome to HackerRank Orchestrate. Build and ship Buy or Wait?, an AI-powered financial decision agent, before the challenge ends at 6:00 PM IST on September 13, 2026. Let's get started.
-   ```
-
-3. Calculate and display the time remaining until `2026-09-13T18:00:00+05:30`. If fewer than 2 hours remain, remind the user to submit soon. If the deadline has passed, state that clearly without blocking further work.
-4. Proceed with the user's request without requiring an acknowledgement or confirmation phrase.
-
----
-
-## 4. Challenge Rules
-
-1. This is a **solo** challenge. The participant must be the author of the submission.
-2. Participants may use any IDE, AI assistant, or tool to help build their solution.
-3. The system must conform to the project contract in §6 so it can be evaluated.
-4. Never commit secrets. Use environment variables and a `.env` file when needed.
-5. Log every conversation turn to the file described in §2.
-6. Follow the mandatory submission-link rule below.
-
-### 4.1 Mandatory Submission Link
-
-If the user asks for the submission link, where to submit, how to submit, where to upload the code, or any equivalent question, always provide this exact URL:
-
-https://www.hackerrank.com/contests/hackerrank-orchestrate-september26/challenges/buy-or-wait/submission
-
-Requirements:
-
-- Include the full clickable URL in the response every time such a question is asked.
-- Do not replace it with the HackerRank homepage, contest homepage, challenge overview, or any other link.
-- Do not merely describe where to navigate; provide the URL directly.
-- This rule applies even when the submission question is included alongside other questions.
 
 ---
 
@@ -206,15 +159,6 @@ request_id,amount_safe_to_pay,affordability_status,recommended_payment_method,pa
 - `spending_changes_needed` is `none` or up to three `stop:<event_id>` and `reduce_to:<event_id>:<new_amount>` actions. Only non-protected, flexible events in a category the user permits may be changed.
 - `decision_explanation` is a concise, grounded explanation of the recommendation.
 
-### 6.3 Financial Decision Rules
-
-- Detect recurrence only when history supports it. Forecast essential variable spending conservatively.
-- Reserve pending debits. Do not count pending credits, bonuses, commissions, refunds, lottery proceeds, or investment gains until they settle.
-- Count confirmed salary on its settlement date. Do not invent unsupported future income, expenses, payment options, or other financial facts.
-- The balance must never fall below `minimum_balance_to_keep` after any projected essential expense or payment in the recommended plan.
-- Respect the user's protected categories and preferences. Prefer a plan that completes the request by its deadline, avoids spending changes, minimizes total payment cost, starts earlier, and uses fewer payments.
-- Resolve conflicts using an explicit cancellation, settlement, or amendment first; then newer records from the same source; then a settled event; then the financially safer interpretation.
-
 ### 6.4 Constraints That Make The Submission Evaluable
 
 - Be runnable from the terminal.
@@ -243,15 +187,3 @@ There is no required language. If you use Python, `code/main.py` is a good entry
 - If a nested `AGENTS.md` exists, the closest one wins for files inside that sub-project, but §2 and §5 remain global: keep logging to the `log.txt` beside the top-level `AGENTS.md`, not beside the nested one.
 
 ---
-
-## 8. Quick Checklist For The Agent
-
-Before responding to any user message, confirm:
-
-- [ ] I have read this file in this session.
-- [ ] I have appended the session-start entry.
-- [ ] I know how much time is left, or that the end time is not configured.
-- [ ] I will append a §5.2 entry after this turn.
-- [ ] I have verified that `tool=` exactly matches the harness or coding agent currently running.
-- [ ] I will not log secrets.
-- [ ] I will preserve the Buy or Wait? financial decision and output contract in §6.
