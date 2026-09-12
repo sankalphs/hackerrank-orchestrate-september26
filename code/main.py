@@ -25,6 +25,13 @@ def _build_parser() -> argparse.ArgumentParser:
     ledger.add_argument("--dataset", type=Path, default=None)
     ledger.add_argument("--evidence", type=Path, default=None)
     ledger.add_argument("--output", type=Path, default=None)
+    forecast = subparsers.add_parser("forecast", help="build the Phase 3 recurrence and forecast report")
+    forecast.add_argument("--dataset", type=Path, default=None)
+    forecast.add_argument("--evidence", type=Path, default=None)
+    forecast.add_argument("--output", type=Path, default=None)
+    forecast.add_argument("--request-id", default=None)
+    forecast.add_argument("--user-id", default=None)
+    forecast.add_argument("--horizon-days", type=int, default=90)
     return parser
 
 
@@ -77,6 +84,19 @@ def main(argv: list[str] | None = None) -> int:
             ledger_args += ["--evidence", str(evidence_path)]
         ledger_args += ["--output", str(args.output or LEDGER_OUTPUT)]
         return ledger_main(ledger_args)
+    if args.command == "forecast":
+        sys.path.insert(0, str(Path(__file__).resolve().parent))
+        from buy_wait.config import DATASET_DIR, EVIDENCE_OUTPUT, FORECAST_OUTPUT
+        from buy_wait.forecast import main as forecast_main
+
+        forecast_args = ["--dataset", str(args.dataset or DATASET_DIR), "--output", str(args.output or FORECAST_OUTPUT), "--horizon-days", str(args.horizon_days)]
+        if args.evidence:
+            forecast_args += ["--evidence", str(args.evidence)]
+        if args.request_id:
+            forecast_args += ["--request-id", args.request_id]
+        if args.user_id:
+            forecast_args += ["--user-id", args.user_id]
+        return forecast_main(forecast_args)
     _build_parser().print_help()
     return 0
 

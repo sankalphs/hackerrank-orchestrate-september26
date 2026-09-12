@@ -147,7 +147,11 @@ def _resolve_event(event: Event, claims: Iterable[EvidenceClaim]) -> ResolvedEve
     currency = event.currency
     effective_date = event.settlement_date or event.event_date
     status = event.status
-    confirmed = False
+    # "Next confirmed salary" is a structured event description, not an
+    # instruction.  Treating that explicit fact as confirmation lets the
+    # cash-state matrix include the supplied future credit while continuing to
+    # exclude generic unconfirmed scheduled credits.
+    confirmed = event.status == "scheduled" and "confirmed" in event.description.casefold()
     evidence_ids: list[str] = []
     applied: list[str] = []
 
@@ -353,6 +357,7 @@ def build_ledger(dataset: Dataset, report: dict[str, Any] | None = None) -> Cano
         lifecycles=lifecycles,
         resolved_events=resolved,
         effects=effects,
+        rates=dataset.rates,
         diagnostics=diagnostics,
     )
 

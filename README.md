@@ -180,6 +180,32 @@ Phase 2 tests can be run with:
 python -m unittest discover -s tests -p "test_*.py"
 ```
 
+### Phase 3: recurrence and 90-day forecast
+
+Build the deterministic recurring-series and forecast report with:
+
+```bash
+python code/main.py forecast
+```
+
+`code/buy_wait/recurrence.py` infers a series only from explicit future
+records, validated recurrence evidence, or stable observed cadence. It keeps
+multiple income streams separate, uses the latest observed amount, preserves
+monthly month-end behavior, and does not invent a daily grocery, transport, or
+dining drain. `code/buy_wait/forecast.py` is the single simulation authority:
+it starts from the profile balance anchor, includes only Phase 2 cash effects,
+projects recurring occurrences, converts generated foreign amounts with the
+exact directed settlement-date FX rate, and applies required debits before
+proposed payments before confirmed credits. Same-day intermediate balances are
+checked against the user's minimum, not just end-of-day balances.
+
+The report is written to `code/evaluation/forecast_report.json` and contains
+all 250 request horizons, inferred series, daily balances, minimum trough, and
+the first violation date. Use `--request-id`, `--user-id`, or
+`--horizon-days` for focused development runs. The reusable API is
+`build_forecast_context(...)` followed by `simulate(...)`; spending changes
+accept `stop:<event_id>` and `reduce_to:<event_id>:<amount>` forms.
+
 You may use any language or runtime. Python, JavaScript, and TypeScript are all reasonable choices.
 
 ---

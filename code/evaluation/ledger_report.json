@@ -65,8 +65,8 @@
       }
     ],
     "effect_counts": {
-      "excluded": 130,
-      "included": 25157,
+      "excluded": 83,
+      "included": 25204,
       "reserved_pending_debits": 55
     },
     "event_count": 25342,
@@ -4300,7 +4300,7 @@
       "user_id": "user_109"
     },
     {
-      "amount": null,
+      "amount": "2395.68",
       "category": "salary",
       "direction": "credit",
       "effective_date": "2024-03-15",
@@ -4309,10 +4309,10 @@
       "evidence_source_ids": [],
       "flexibility": "fixed",
       "home_currency": "EUR",
-      "included": false,
+      "included": true,
       "lifecycle_id": "lifecycle:event_10164",
       "minimum_allowed_amount": null,
-      "reason": "unconfirmed_scheduled_credit",
+      "reason": "scheduled_credit_included",
       "reserve": false,
       "source_row_ids": [
         "event_10164"
@@ -7450,7 +7450,7 @@
       "user_id": "user_111"
     },
     {
-      "amount": null,
+      "amount": "23320",
       "category": "salary",
       "direction": "credit",
       "effective_date": "2024-03-15",
@@ -7459,10 +7459,10 @@
       "evidence_source_ids": [],
       "flexibility": "fixed",
       "home_currency": "ZAR",
-      "included": false,
+      "included": true,
       "lifecycle_id": "lifecycle:event_103",
       "minimum_allowed_amount": null,
-      "reason": "unconfirmed_scheduled_credit",
+      "reason": "scheduled_credit_included",
       "reserve": false,
       "source_row_ids": [
         "event_103"
@@ -19214,7 +19214,7 @@
       "user_id": "user_116"
     },
     {
-      "amount": null,
+      "amount": "124000",
       "category": "salary",
       "direction": "credit",
       "effective_date": "2025-02-15",
@@ -19223,10 +19223,10 @@
       "evidence_source_ids": [],
       "flexibility": "fixed",
       "home_currency": "INR",
-      "included": false,
+      "included": true,
       "lifecycle_id": "lifecycle:event_10803",
       "minimum_allowed_amount": null,
-      "reason": "unconfirmed_scheduled_credit",
+      "reason": "scheduled_credit_included",
       "reserve": false,
       "source_row_ids": [
         "event_10803"
@@ -29275,7 +29275,7 @@
       "user_id": "user_121"
     },
     {
-      "amount": null,
+      "amount": "1056",
       "category": "salary",
       "direction": "credit",
       "effective_date": "2024-03-15",
@@ -29284,10 +29284,10 @@
       "evidence_source_ids": [],
       "flexibility": "fixed",
       "home_currency": "USD",
-      "included": false,
+      "included": true,
       "lifecycle_id": "lifecycle:event_11234",
       "minimum_allowed_amount": null,
-      "reason": "unconfirmed_scheduled_credit",
+      "reason": "scheduled_credit_included",
       "reserve": false,
       "source_row_ids": [
         "event_11234"
@@ -35050,7 +35050,7 @@
       "user_id": "user_124"
     },
     {
-      "amount": null,
+      "amount": "2629",
       "category": "salary",
       "direction": "credit",
       "effective_date": "2024-06-15",
@@ -35059,10 +35059,10 @@
       "evidence_source_ids": [],
       "flexibility": "fixed",
       "home_currency": "EUR",
-      "included": false,
+      "included": true,
       "lifecycle_id": "lifecycle:event_11482",
       "minimum_allowed_amount": null,
-      "reason": "unconfirmed_scheduled_credit",
+      "reason": "scheduled_credit_included",
       "reserve": false,
       "source_row_ids": [
         "event_11482"
@@ -38032,7 +38032,7 @@
       "user_id": "user_126"
     },
     {
-      "amount": null,
+      "amount": "1343.54",
       "category": "salary",
       "direction": "credit",
       "effective_date": "2024-03-15",
@@ -38041,10 +38041,10 @@
       "evidence_source_ids": [],
       "flexibility": "fixed",
       "home_currency": "EUR",
-      "included": false,
+      "included": true,
       "lifecycle_id": "lifecycle:event_1161",
       "minimum_allowed_amount": null,
-      "reason": "unconfirmed_scheduled_credit",
+      "reason": "scheduled_credit_included",
       "reserve": false,
       "source_row_ids": [
         "event_1161"
@@ -56073,7 +56073,7 @@
       "user_id": "user_134"
     },
     {
-      "amount": null,
+      "amount": "24510000",
       "category": "salary",
       "direction": "credit",
       "effective_date": "2025-08-15",
@@ -56082,10 +56082,10 @@
       "evidence_source_ids": [],
       "flexibility": "fixed",
       "home_currency": "IDR",
-      "included": false,
+      "included": true,
       "lifecycle_id": "lifecycle:event_12383",
       "minimum_allowed_amount": null,
-      "reason": "unconfirmed_scheduled_credit",
+      "reason": "scheduled_credit_included",
       "reserve": false,
       "source_row_ids": [
         "event_12383"
@@ -59706,7 +59706,7 @@
       "user_id": "user_136"
     },
     {
-      "amount": null,
+      "amount": "1548",
       "category": "salary",
       "direction": "credit",
       "effective_date": "2024-06-15",
@@ -59715,10 +59715,10 @@
       "evidence_source_ids": [],
       "flexibility": "fixed",
       "home_currency": "USD",
-      "included": false,
+      "included": true,
       "lifecycle_id": "lifecycle:event_12539",
       "minimum_allowed_amount": null,
-      "reason": "unconfirmed_scheduled_credit",
+      "reason": "scheduled_credit_included",
       "reserve": false,
       "source_row_ids": [
         "event_12539"
@@ -66048,7 +66048,7 @@
       "user_id": "user_15"
     },
     {
-      "amount": null,
+      "amount": "1824",
       "category": "salary",
       "direction": "credit",
       "effective_date": "2024-09-15",
@@ -66057,10 +66057,10 @@
       "evidence_source_ids": [],
       "flexibility": "fixed",
       "home_currency": "USD",
-      "included": false,
+      "included": true,
       "lifecycle_id": "lifecycle:event_12810",
       "minimum_allowed_amount": null,
-      "reason": "unconfirmed_scheduled_credit",
+      "reason": "scheduled_credit_included",
       "reserve": false,
       "source_row_ids": [
         "event_12810"
@@ -81989,7 +81989,7 @@
       "user_id": "user_146"
     },
     {
-      "amount": null,
+      "amount": "168000",
       "category": "salary",
       "direction": "credit",
       "effective_date": "2025-08-15",
@@ -81998,10 +81998,10 @@
       "evidence_source_ids": [],
       "flexibility": "fixed",
       "home_currency": "INR",
-      "included": false,
+      "included": true,
       "lifecycle_id": "lifecycle:event_13494",
       "minimum_allowed_amount": null,
-      "reason": "unconfirmed_scheduled_credit",
+      "reason": "scheduled_credit_included",
       "reserve": false,
       "source_row_ids": [
         "event_13494"
@@ -87911,7 +87911,7 @@
       "user_id": "user_149"
     },
     {
-      "amount": null,
+      "amount": "52360",
       "category": "salary",
       "direction": "credit",
       "effective_date": "2025-11-15",
@@ -87920,10 +87920,10 @@
       "evidence_source_ids": [],
       "flexibility": "fixed",
       "home_currency": "ZAR",
-      "included": false,
+      "included": true,
       "lifecycle_id": "lifecycle:event_13748",
       "minimum_allowed_amount": null,
-      "reason": "unconfirmed_scheduled_credit",
+      "reason": "scheduled_credit_included",
       "reserve": false,
       "source_row_ids": [
         "event_13748"
@@ -127855,7 +127855,7 @@
       "user_id": "user_169"
     },
     {
-      "amount": null,
+      "amount": "206000",
       "category": "salary",
       "direction": "credit",
       "effective_date": "2026-03-15",
@@ -127864,10 +127864,10 @@
       "evidence_source_ids": [],
       "flexibility": "fixed",
       "home_currency": "INR",
-      "included": false,
+      "included": true,
       "lifecycle_id": "lifecycle:event_1546",
       "minimum_allowed_amount": null,
-      "reason": "unconfirmed_scheduled_credit",
+      "reason": "scheduled_credit_included",
       "reserve": false,
       "source_row_ids": [
         "event_1546"
@@ -156625,7 +156625,7 @@
       "user_id": "user_181"
     },
     {
-      "amount": null,
+      "amount": "2580",
       "category": "salary",
       "direction": "credit",
       "effective_date": "2024-03-15",
@@ -156634,10 +156634,10 @@
       "evidence_source_ids": [],
       "flexibility": "fixed",
       "home_currency": "USD",
-      "included": false,
+      "included": true,
       "lifecycle_id": "lifecycle:event_16693",
       "minimum_allowed_amount": null,
-      "reason": "unconfirmed_scheduled_credit",
+      "reason": "scheduled_credit_included",
       "reserve": false,
       "source_row_ids": [
         "event_16693"
@@ -177333,7 +177333,7 @@
       "user_id": "user_20"
     },
     {
-      "amount": null,
+      "amount": "2849",
       "category": "salary",
       "direction": "credit",
       "effective_date": "2024-12-15",
@@ -177342,10 +177342,10 @@
       "evidence_source_ids": [],
       "flexibility": "fixed",
       "home_currency": "EUR",
-      "included": false,
+      "included": true,
       "lifecycle_id": "lifecycle:event_17580",
       "minimum_allowed_amount": null,
-      "reason": "unconfirmed_scheduled_credit",
+      "reason": "scheduled_credit_included",
       "reserve": false,
       "source_row_ids": [
         "event_17580"
@@ -180947,7 +180947,7 @@
       "user_id": "user_192"
     },
     {
-      "amount": null,
+      "amount": "813.6",
       "category": "salary",
       "direction": "credit",
       "effective_date": "2026-04-15",
@@ -180956,10 +180956,10 @@
       "evidence_source_ids": [],
       "flexibility": "fixed",
       "home_currency": "USD",
-      "included": false,
+      "included": true,
       "lifecycle_id": "lifecycle:event_17735",
       "minimum_allowed_amount": null,
-      "reason": "unconfirmed_scheduled_credit",
+      "reason": "scheduled_credit_included",
       "reserve": false,
       "source_row_ids": [
         "event_17735"
@@ -189347,7 +189347,7 @@
       "user_id": "user_196"
     },
     {
-      "amount": null,
+      "amount": "814",
       "category": "salary",
       "direction": "credit",
       "effective_date": "2024-06-15",
@@ -189356,10 +189356,10 @@
       "evidence_source_ids": [],
       "flexibility": "fixed",
       "home_currency": "EUR",
-      "included": false,
+      "included": true,
       "lifecycle_id": "lifecycle:event_18095",
       "minimum_allowed_amount": null,
-      "reason": "unconfirmed_scheduled_credit",
+      "reason": "scheduled_credit_included",
       "reserve": false,
       "source_row_ids": [
         "event_18095"
@@ -200645,7 +200645,7 @@
       "user_id": "user_202"
     },
     {
-      "amount": null,
+      "amount": "2256",
       "category": "salary",
       "direction": "credit",
       "effective_date": "2026-04-15",
@@ -200654,10 +200654,10 @@
       "evidence_source_ids": [],
       "flexibility": "fixed",
       "home_currency": "USD",
-      "included": false,
+      "included": true,
       "lifecycle_id": "lifecycle:event_1858",
       "minimum_allowed_amount": null,
-      "reason": "unconfirmed_scheduled_credit",
+      "reason": "scheduled_credit_included",
       "reserve": false,
       "source_row_ids": [
         "event_1858"
@@ -208856,7 +208856,7 @@
       "user_id": "user_205"
     },
     {
-      "amount": null,
+      "amount": "18240000",
       "category": "salary",
       "direction": "credit",
       "effective_date": "2024-03-15",
@@ -208865,10 +208865,10 @@
       "evidence_source_ids": [],
       "flexibility": "fixed",
       "home_currency": "IDR",
-      "included": false,
+      "included": true,
       "lifecycle_id": "lifecycle:event_18931",
       "minimum_allowed_amount": null,
-      "reason": "unconfirmed_scheduled_credit",
+      "reason": "scheduled_credit_included",
       "reserve": false,
       "source_row_ids": [
         "event_18931"
@@ -212279,7 +212279,7 @@
       "user_id": "user_207"
     },
     {
-      "amount": null,
+      "amount": "21120",
       "category": "salary",
       "direction": "credit",
       "effective_date": "2026-07-15",
@@ -212288,10 +212288,10 @@
       "evidence_source_ids": [],
       "flexibility": "fixed",
       "home_currency": "ZAR",
-      "included": false,
+      "included": true,
       "lifecycle_id": "lifecycle:event_19078",
       "minimum_allowed_amount": null,
-      "reason": "unconfirmed_scheduled_credit",
+      "reason": "scheduled_credit_included",
       "reserve": false,
       "source_row_ids": [
         "event_19078"
@@ -216649,7 +216649,7 @@
       "user_id": "user_209"
     },
     {
-      "amount": null,
+      "amount": "21120",
       "category": "salary",
       "direction": "credit",
       "effective_date": "2025-11-15",
@@ -216658,10 +216658,10 @@
       "evidence_source_ids": [],
       "flexibility": "fixed",
       "home_currency": "ZAR",
-      "included": false,
+      "included": true,
       "lifecycle_id": "lifecycle:event_19265",
       "minimum_allowed_amount": null,
-      "reason": "unconfirmed_scheduled_credit",
+      "reason": "scheduled_credit_included",
       "reserve": false,
       "source_row_ids": [
         "event_19265"
@@ -220576,7 +220576,7 @@
       "user_id": "user_211"
     },
     {
-      "amount": null,
+      "amount": "1884.96",
       "category": "salary",
       "direction": "credit",
       "effective_date": "2024-09-15",
@@ -220585,10 +220585,10 @@
       "evidence_source_ids": [],
       "flexibility": "fixed",
       "home_currency": "EUR",
-      "included": false,
+      "included": true,
       "lifecycle_id": "lifecycle:event_19433",
       "minimum_allowed_amount": null,
-      "reason": "unconfirmed_scheduled_credit",
+      "reason": "scheduled_credit_included",
       "reserve": false,
       "source_row_ids": [
         "event_19433"
@@ -234877,7 +234877,7 @@
       "user_id": "user_217"
     },
     {
-      "amount": null,
+      "amount": "35420",
       "category": "salary",
       "direction": "credit",
       "effective_date": "2024-03-15",
@@ -234886,10 +234886,10 @@
       "evidence_source_ids": [],
       "flexibility": "fixed",
       "home_currency": "ZAR",
-      "included": false,
+      "included": true,
       "lifecycle_id": "lifecycle:event_20046",
       "minimum_allowed_amount": null,
-      "reason": "unconfirmed_scheduled_credit",
+      "reason": "scheduled_credit_included",
       "reserve": false,
       "source_row_ids": [
         "event_20046"
@@ -236851,7 +236851,7 @@
       "user_id": "user_23"
     },
     {
-      "amount": null,
+      "amount": "48640000",
       "category": "salary",
       "direction": "credit",
       "effective_date": "2025-08-15",
@@ -236860,10 +236860,10 @@
       "evidence_source_ids": [],
       "flexibility": "fixed",
       "home_currency": "IDR",
-      "included": false,
+      "included": true,
       "lifecycle_id": "lifecycle:event_20130",
       "minimum_allowed_amount": null,
-      "reason": "unconfirmed_scheduled_credit",
+      "reason": "scheduled_credit_included",
       "reserve": false,
       "source_row_ids": [
         "event_20130"
@@ -245757,7 +245757,7 @@
       "user_id": "user_223"
     },
     {
-      "amount": null,
+      "amount": "1309",
       "category": "salary",
       "direction": "credit",
       "effective_date": "2024-09-15",
@@ -245766,10 +245766,10 @@
       "evidence_source_ids": [],
       "flexibility": "fixed",
       "home_currency": "EUR",
-      "included": false,
+      "included": true,
       "lifecycle_id": "lifecycle:event_20512",
       "minimum_allowed_amount": null,
-      "reason": "unconfirmed_scheduled_credit",
+      "reason": "scheduled_credit_included",
       "reserve": false,
       "source_row_ids": [
         "event_20512"
@@ -264388,7 +264388,7 @@
       "user_id": "user_24"
     },
     {
-      "amount": null,
+      "amount": "44000",
       "category": "salary",
       "direction": "credit",
       "effective_date": "2026-01-15",
@@ -264397,10 +264397,10 @@
       "evidence_source_ids": [],
       "flexibility": "fixed",
       "home_currency": "ZAR",
-      "included": false,
+      "included": true,
       "lifecycle_id": "lifecycle:event_21310",
       "minimum_allowed_amount": null,
-      "reason": "unconfirmed_scheduled_credit",
+      "reason": "scheduled_credit_included",
       "reserve": false,
       "source_row_ids": [
         "event_21310"
@@ -281211,7 +281211,7 @@
       "user_id": "user_239"
     },
     {
-      "amount": null,
+      "amount": "1020",
       "category": "salary",
       "direction": "credit",
       "effective_date": "2025-05-15",
@@ -281220,10 +281220,10 @@
       "evidence_source_ids": [],
       "flexibility": "fixed",
       "home_currency": "USD",
-      "included": false,
+      "included": true,
       "lifecycle_id": "lifecycle:event_22031",
       "minimum_allowed_amount": null,
-      "reason": "unconfirmed_scheduled_credit",
+      "reason": "scheduled_credit_included",
       "reserve": false,
       "source_row_ids": [
         "event_22031"
@@ -288939,7 +288939,7 @@
       "user_id": "user_243"
     },
     {
-      "amount": null,
+      "amount": "23980",
       "category": "salary",
       "direction": "credit",
       "effective_date": "2026-07-15",
@@ -288948,10 +288948,10 @@
       "evidence_source_ids": [],
       "flexibility": "fixed",
       "home_currency": "ZAR",
-      "included": false,
+      "included": true,
       "lifecycle_id": "lifecycle:event_22363",
       "minimum_allowed_amount": null,
-      "reason": "unconfirmed_scheduled_credit",
+      "reason": "scheduled_credit_included",
       "reserve": false,
       "source_row_ids": [
         "event_22363"
@@ -291270,7 +291270,7 @@
       "user_id": "user_244"
     },
     {
-      "amount": null,
+      "amount": "56760",
       "category": "salary",
       "direction": "credit",
       "effective_date": "2024-06-15",
@@ -291279,10 +291279,10 @@
       "evidence_source_ids": [],
       "flexibility": "fixed",
       "home_currency": "ZAR",
-      "included": false,
+      "included": true,
       "lifecycle_id": "lifecycle:event_22463",
       "minimum_allowed_amount": null,
-      "reason": "unconfirmed_scheduled_credit",
+      "reason": "scheduled_credit_included",
       "reserve": false,
       "source_row_ids": [
         "event_22463"
@@ -300972,7 +300972,7 @@
       "user_id": "user_249"
     },
     {
-      "amount": null,
+      "amount": "28499994.00",
       "category": "salary",
       "direction": "credit",
       "effective_date": "2024-03-15",
@@ -300981,10 +300981,10 @@
       "evidence_source_ids": [],
       "flexibility": "fixed",
       "home_currency": "IDR",
-      "included": false,
+      "included": true,
       "lifecycle_id": "lifecycle:event_2288",
       "minimum_allowed_amount": null,
-      "reason": "unconfirmed_scheduled_credit",
+      "reason": "scheduled_credit_included",
       "reserve": false,
       "source_row_ids": [
         "event_2288"
@@ -319517,7 +319517,7 @@
       "user_id": "user_257"
     },
     {
-      "amount": null,
+      "amount": "1954.37",
       "category": "salary",
       "direction": "credit",
       "effective_date": "2025-11-15",
@@ -319526,10 +319526,10 @@
       "evidence_source_ids": [],
       "flexibility": "fixed",
       "home_currency": "USD",
-      "included": false,
+      "included": true,
       "lifecycle_id": "lifecycle:event_23674",
       "minimum_allowed_amount": null,
-      "reason": "unconfirmed_scheduled_credit",
+      "reason": "scheduled_credit_included",
       "reserve": false,
       "source_row_ids": [
         "event_23674"
@@ -322394,7 +322394,7 @@
       "user_id": "user_258"
     },
     {
-      "amount": null,
+      "amount": "572.88",
       "category": "salary",
       "direction": "credit",
       "effective_date": "2026-01-15",
@@ -322403,10 +322403,10 @@
       "evidence_source_ids": [],
       "flexibility": "fixed",
       "home_currency": "USD",
-      "included": false,
+      "included": true,
       "lifecycle_id": "lifecycle:event_23798",
       "minimum_allowed_amount": null,
-      "reason": "unconfirmed_scheduled_credit",
+      "reason": "scheduled_credit_included",
       "reserve": false,
       "source_row_ids": [
         "event_23798"
@@ -326659,7 +326659,7 @@
       "user_id": "user_27"
     },
     {
-      "amount": null,
+      "amount": "29259993.84",
       "category": "salary",
       "direction": "credit",
       "effective_date": "2025-02-15",
@@ -326668,10 +326668,10 @@
       "evidence_source_ids": [],
       "flexibility": "fixed",
       "home_currency": "IDR",
-      "included": false,
+      "included": true,
       "lifecycle_id": "lifecycle:event_23980",
       "minimum_allowed_amount": null,
-      "reason": "unconfirmed_scheduled_credit",
+      "reason": "scheduled_credit_included",
       "reserve": false,
       "source_row_ids": [
         "event_23980"
@@ -347913,7 +347913,7 @@
       "user_id": "user_270"
     },
     {
-      "amount": null,
+      "amount": "1071.36",
       "category": "salary",
       "direction": "credit",
       "effective_date": "2026-07-15",
@@ -347922,10 +347922,10 @@
       "evidence_source_ids": [],
       "flexibility": "fixed",
       "home_currency": "USD",
-      "included": false,
+      "included": true,
       "lifecycle_id": "lifecycle:event_24891",
       "minimum_allowed_amount": null,
-      "reason": "unconfirmed_scheduled_credit",
+      "reason": "scheduled_credit_included",
       "reserve": false,
       "source_row_ids": [
         "event_24891"
@@ -365387,7 +365387,7 @@
       "user_id": "user_31"
     },
     {
-      "amount": null,
+      "amount": "19972800",
       "category": "salary",
       "direction": "credit",
       "effective_date": "2024-09-15",
@@ -365396,10 +365396,10 @@
       "evidence_source_ids": [],
       "flexibility": "fixed",
       "home_currency": "IDR",
-      "included": false,
+      "included": true,
       "lifecycle_id": "lifecycle:event_2831",
       "minimum_allowed_amount": null,
-      "reason": "unconfirmed_scheduled_credit",
+      "reason": "scheduled_credit_included",
       "reserve": false,
       "source_row_ids": [
         "event_2831"
@@ -383577,7 +383577,7 @@
       "user_id": "user_39"
     },
     {
-      "amount": null,
+      "amount": "253989.84",
       "category": "salary",
       "direction": "credit",
       "effective_date": "2026-04-15",
@@ -383586,10 +383586,10 @@
       "evidence_source_ids": [],
       "flexibility": "fixed",
       "home_currency": "INR",
-      "included": false,
+      "included": true,
       "lifecycle_id": "lifecycle:event_3611",
       "minimum_allowed_amount": null,
-      "reason": "unconfirmed_scheduled_credit",
+      "reason": "scheduled_credit_included",
       "reserve": false,
       "source_row_ids": [
         "event_3611"
@@ -388743,7 +388743,7 @@
       "user_id": "user_41"
     },
     {
-      "amount": null,
+      "amount": "42559991.04",
       "category": "salary",
       "direction": "credit",
       "effective_date": "2025-11-15",
@@ -388752,10 +388752,10 @@
       "evidence_source_ids": [],
       "flexibility": "fixed",
       "home_currency": "IDR",
-      "included": false,
+      "included": true,
       "lifecycle_id": "lifecycle:event_3833",
       "minimum_allowed_amount": null,
-      "reason": "unconfirmed_scheduled_credit",
+      "reason": "scheduled_credit_included",
       "reserve": false,
       "source_row_ids": [
         "event_3833"
@@ -399432,7 +399432,7 @@
       "user_id": "user_46"
     },
     {
-      "amount": null,
+      "amount": "145000",
       "category": "salary",
       "direction": "credit",
       "effective_date": "2024-12-15",
@@ -399441,10 +399441,10 @@
       "evidence_source_ids": [],
       "flexibility": "fixed",
       "home_currency": "INR",
-      "included": false,
+      "included": true,
       "lifecycle_id": "lifecycle:event_4292",
       "minimum_allowed_amount": null,
-      "reason": "unconfirmed_scheduled_credit",
+      "reason": "scheduled_credit_included",
       "reserve": false,
       "source_row_ids": [
         "event_4292"
@@ -421841,7 +421841,7 @@
       "user_id": "user_56"
     },
     {
-      "amount": null,
+      "amount": "2388",
       "category": "salary",
       "direction": "credit",
       "effective_date": "2025-02-15",
@@ -421850,10 +421850,10 @@
       "evidence_source_ids": [],
       "flexibility": "fixed",
       "home_currency": "USD",
-      "included": false,
+      "included": true,
       "lifecycle_id": "lifecycle:event_5253",
       "minimum_allowed_amount": null,
-      "reason": "unconfirmed_scheduled_credit",
+      "reason": "scheduled_credit_included",
       "reserve": false,
       "source_row_ids": [
         "event_5253"
@@ -437192,7 +437192,7 @@
       "user_id": "user_63"
     },
     {
-      "amount": null,
+      "amount": "189992.40",
       "category": "salary",
       "direction": "credit",
       "effective_date": "2026-07-15",
@@ -437201,10 +437201,10 @@
       "evidence_source_ids": [],
       "flexibility": "fixed",
       "home_currency": "INR",
-      "included": false,
+      "included": true,
       "lifecycle_id": "lifecycle:event_5911",
       "minimum_allowed_amount": null,
-      "reason": "unconfirmed_scheduled_credit",
+      "reason": "scheduled_credit_included",
       "reserve": false,
       "source_row_ids": [
         "event_5911"
@@ -446033,7 +446033,7 @@
       "user_id": "user_67"
     },
     {
-      "amount": null,
+      "amount": "2047.68",
       "category": "salary",
       "direction": "credit",
       "effective_date": "2024-09-15",
@@ -446042,10 +446042,10 @@
       "evidence_source_ids": [],
       "flexibility": "fixed",
       "home_currency": "USD",
-      "included": false,
+      "included": true,
       "lifecycle_id": "lifecycle:event_6291",
       "minimum_allowed_amount": null,
-      "reason": "unconfirmed_scheduled_credit",
+      "reason": "scheduled_credit_included",
       "reserve": false,
       "source_row_ids": [
         "event_6291"
@@ -472518,7 +472518,7 @@
       "user_id": "user_79"
     },
     {
-      "amount": null,
+      "amount": "1313.76",
       "category": "salary",
       "direction": "credit",
       "effective_date": "2024-09-15",
@@ -472527,10 +472527,10 @@
       "evidence_source_ids": [],
       "flexibility": "fixed",
       "home_currency": "EUR",
-      "included": false,
+      "included": true,
       "lifecycle_id": "lifecycle:event_7427",
       "minimum_allowed_amount": null,
-      "reason": "unconfirmed_scheduled_credit",
+      "reason": "scheduled_credit_included",
       "reserve": false,
       "source_row_ids": [
         "event_7427"
@@ -488795,7 +488795,7 @@
       "user_id": "user_86"
     },
     {
-      "amount": null,
+      "amount": "124000",
       "category": "salary",
       "direction": "credit",
       "effective_date": "2025-08-23",
@@ -488804,10 +488804,10 @@
       "evidence_source_ids": [],
       "flexibility": "fixed",
       "home_currency": "INR",
-      "included": false,
+      "included": true,
       "lifecycle_id": "lifecycle:event_8125",
       "minimum_allowed_amount": null,
-      "reason": "unconfirmed_scheduled_credit",
+      "reason": "scheduled_credit_included",
       "reserve": false,
       "source_row_ids": [
         "event_8125"
@@ -495305,7 +495305,7 @@
       "user_id": "user_89"
     },
     {
-      "amount": null,
+      "amount": "15200000",
       "category": "salary",
       "direction": "credit",
       "effective_date": "2025-11-15",
@@ -495314,10 +495314,10 @@
       "evidence_source_ids": [],
       "flexibility": "fixed",
       "home_currency": "IDR",
-      "included": false,
+      "included": true,
       "lifecycle_id": "lifecycle:event_8404",
       "minimum_allowed_amount": null,
-      "reason": "unconfirmed_scheduled_credit",
+      "reason": "scheduled_credit_included",
       "reserve": false,
       "source_row_ids": [
         "event_8404"
@@ -508747,7 +508747,7 @@
       "user_id": "user_96"
     },
     {
-      "amount": null,
+      "amount": "80000",
       "category": "salary",
       "direction": "credit",
       "effective_date": "2026-01-15",
@@ -508756,10 +508756,10 @@
       "evidence_source_ids": [],
       "flexibility": "fixed",
       "home_currency": "INR",
-      "included": false,
+      "included": true,
       "lifecycle_id": "lifecycle:event_8981",
       "minimum_allowed_amount": null,
-      "reason": "unconfirmed_scheduled_credit",
+      "reason": "scheduled_credit_included",
       "reserve": false,
       "source_row_ids": [
         "event_8981"
@@ -510091,7 +510091,7 @@
       "user_id": "user_97"
     },
     {
-      "amount": null,
+      "amount": "35420",
       "category": "salary",
       "direction": "credit",
       "effective_date": "2024-03-15",
@@ -510100,10 +510100,10 @@
       "evidence_source_ids": [],
       "flexibility": "fixed",
       "home_currency": "ZAR",
-      "included": false,
+      "included": true,
       "lifecycle_id": "lifecycle:event_9039",
       "minimum_allowed_amount": null,
-      "reason": "unconfirmed_scheduled_credit",
+      "reason": "scheduled_credit_included",
       "reserve": false,
       "source_row_ids": [
         "event_9039"
@@ -514627,7 +514627,7 @@
       "user_id": "user_99"
     },
     {
-      "amount": null,
+      "amount": "56980",
       "category": "salary",
       "direction": "credit",
       "effective_date": "2026-07-15",
@@ -514636,10 +514636,10 @@
       "evidence_source_ids": [],
       "flexibility": "fixed",
       "home_currency": "ZAR",
-      "included": false,
+      "included": true,
       "lifecycle_id": "lifecycle:event_9233",
       "minimum_allowed_amount": null,
-      "reason": "unconfirmed_scheduled_credit",
+      "reason": "scheduled_credit_included",
       "reserve": false,
       "source_row_ids": [
         "event_9233"
@@ -517063,7 +517063,7 @@
       "user_id": "user_100"
     },
     {
-      "amount": null,
+      "amount": "42680",
       "category": "salary",
       "direction": "credit",
       "effective_date": "2024-06-15",
@@ -517072,10 +517072,10 @@
       "evidence_source_ids": [],
       "flexibility": "fixed",
       "home_currency": "ZAR",
-      "included": false,
+      "included": true,
       "lifecycle_id": "lifecycle:event_9338",
       "minimum_allowed_amount": null,
-      "reason": "unconfirmed_scheduled_credit",
+      "reason": "scheduled_credit_included",
       "reserve": false,
       "source_row_ids": [
         "event_9338"

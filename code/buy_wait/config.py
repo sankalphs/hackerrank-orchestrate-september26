@@ -16,6 +16,7 @@ AUDIT_OUTPUT = PROJECT_ROOT / "code" / "evaluation" / "input_audit.json"
 CACHE_DIR = PROJECT_ROOT / "code" / "cache"
 EVIDENCE_OUTPUT = PROJECT_ROOT / "code" / "evaluation" / "evidence_report.json"
 LEDGER_OUTPUT = PROJECT_ROOT / "code" / "evaluation" / "ledger_report.json"
+FORECAST_OUTPUT = PROJECT_ROOT / "code" / "evaluation" / "forecast_report.json"
 PROMPT_VERSION = "phase-1.v1"
 
 OUTPUT_COLUMNS = (

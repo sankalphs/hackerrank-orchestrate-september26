@@ -120,10 +120,13 @@ class CanonicalLedger:
     resolved_events: dict[str, ResolvedEvent]
     effects: list[CashEffect]
     diagnostics: dict[str, Any] = field(default_factory=dict)
+    # Kept on the ledger so generated future occurrences can use the same
+    # exact directed FX policy as the Phase 2 cash effects.  The default keeps
+    # hand-built ledgers in unit tests backwards compatible.
+    rates: Any = None
 
     def effects_for_user(self, user_id: str, *, included_only: bool = True) -> list[CashEffect]:
         rows = [effect for effect in self.effects if effect.user_id == user_id]
         if included_only:
             rows = [effect for effect in rows if effect.included]
         return sorted(rows, key=lambda effect: (effect.effective_date or date.max, effect.event_id))
-
