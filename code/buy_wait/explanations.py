@@ -84,14 +84,36 @@ def build_decision_trace(
 
 
 def _amount(value: Decimal) -> str:
-    text = format(value, "f")
-    whole, dot, fraction = text.partition(".")
+    # Explanation money shows two decimals when fractional (620.40, 3,246.10)
+    # and stays bare for integers (25,256).
+    whole, dot, fraction = format(value, "f").partition(".")
     whole = f"{int(whole):,}"
-    return whole + (dot + fraction if dot else "")
+    if not dot:
+        return whole
+    return f"{whole}.{fraction.ljust(2, '0')}"
 
 
 def _money(currency: str, value: Decimal) -> str:
     return f"{currency} {_amount(value)}"
+
+
+_MONTHS = (
+    "January", "February", "March", "April", "May", "June",
+    "July", "August", "September", "October", "November", "December",
+)
+
+
+def _long_date(value: date) -> str:
+    return f"{value.day} {_MONTHS[value.month - 1]} {value.year}"
+
+
+def _plan_amount(value: Decimal) -> str:
+    """Payment-plan amounts show two decimals when fractional, bare otherwise."""
+    text = format(value, "f")
+    whole, dot, fraction = text.partition(".")
+    if not dot:
+        return whole
+    return f"{whole}.{fraction.ljust(2, '0')}"
 
 
 def _change_phrase(trace: DecisionTrace, ledger) -> str:
@@ -113,12 +135,14 @@ def _change_phrase(trace: DecisionTrace, ledger) -> str:
 def explain_decision(trace: DecisionTrace, ledger) -> str:
     """Render a concise explanation using only facts present in ``trace``."""
     requested = _money(trace.currency, trace.requested_amount)
-    minimum = _money(trace.currency, trace.minimum_after_plan if trace.method != "not_recommended" else trace.minimum_balance_to_keep)
+    # Explanations quote the user's protected minimum, matching the public
+    # sample wording style.
+    minimum = _money(trace.currency, trace.minimum_balance_to_keep)
     selected = trace.payments
 
     if trace.method == "not_recommended":
         return (
-            f"Do not make this payment by {trace.desired_completion_date.isoformat()}. "
+            f"Do not make this payment by {_long_date(trace.desired_completion_date)}. "
             f"None of the available options keeps the {minimum} minimum protected."
         )
     if trace.method == "full_payment":
@@ -127,13 +151,16 @@ def explain_decision(trace: DecisionTrace, ledger) -> str:
                 f"{_change_phrase(trace, ledger)}, then pay {requested} today. "
                 f"This leaves at least {minimum} available."
             )
-        return f"Pay {requested} today. This leaves at least {minimum} available."
+        return (
+            f"Pay {requested} today. "
+            f"This leaves at least {minimum} available over the next 90 days."
+        )
     if trace.method == "partial_payment":
         first, second = selected
         return (
-            f"Pay {_money(trace.currency, first.amount)} today and "
-            f"{_money(trace.currency, second.amount)} on {second.date.isoformat()}. "
-            f"This completes the {requested} payment by {second.date.isoformat()} and leaves at least {minimum} available."
+            f"Pay {_money(trace.currency, first.amount)} today and the remaining "
+            f"{_money(trace.currency, second.amount)} on {_long_date(second.date)}. "
+            f"This completes the full request and keeps the {minimum} minimum protected."
         )
     if trace.method == "installments":
         amounts = {payment.amount for payment in selected}
@@ -142,14 +169,21 @@ def explain_decision(trace: DecisionTrace, ledger) -> str:
         else:
             detail = "as supplied"
         return (
-            f"Use {len(selected)} installments {detail}, starting {selected[0].date.isoformat()}. "
+            f"Use {len(selected)} installments {detail}, starting {_long_date(selected[0].date)}. "
             f"This leaves at least {minimum} available."
         )
     if trace.method == "wait":
         when = selected[0].date
+        if (when - trace.request_date).days < 14:
+            # A short delay reads as an instruction to hold briefly; a long
+            # one as a later full-payment date.
+            return (
+                f"Wait until {_long_date(when)}, then pay {requested} in full. "
+                f"Paying sooner would put the {minimum} minimum at risk."
+            )
         return (
-            f"Pay {requested} in full on {when.isoformat()}. "
-            f"Paying earlier would risk the {minimum} minimum."
+            f"Pay {requested} in full on {_long_date(when)}. "
+            f"Paying earlier would take the balance below the {minimum} minimum."
         )
     raise ValueError(f"unsupported decision method: {trace.method}")
 

@@ -44,6 +44,9 @@ _MONTHLY_MIN = 27
 _MONTHLY_MAX = 35
 _MAX_CADENCE_DAYS = 35
 _NON_RECURRING_CATEGORIES = frozenset({"investment", "windfall", "work_expense"})
+# Variable spending categories the generator emits as weekday pools with
+# weekly/biweekly/21-day/10-day grids, unlike fixed monthly commitments.
+VARIABLE_POOL_CATEGORIES = frozenset({"groceries", "transport", "dining"})
 
 
 def _description_family(effect: CashEffect, description: str) -> str:
@@ -66,11 +69,21 @@ def _description_family(effect: CashEffect, description: str) -> str:
 def _group_key(ledger: CanonicalLedger, effect: CashEffect) -> tuple[str, ...]:
     event = ledger.events.get(effect.event_id)
     family = _description_family(effect, event.description if event else "")
-    # Variable income often contains two independent monthly streams (for
-    # example payments on the 8th and 22nd) with changing project labels.
-    # Their day-of-month anchor is a deterministic, observable discriminator.
-    if family == "variable_income" and effect.effective_date is not None:
-        family = f"{family}_day_{effect.effective_date.day}"
+    # Salary income streams are grouped by their pay-day-of-month anchor
+    # (the event date) rather than by label text or settlement date:
+    # employers and gig platforms rotate payroll descriptions ("Delivery
+    # platform payout", "Task marketplace payout", ...) while the underlying
+    # cadence is anchored to pay days, and payroll settlement delays must not
+    # split one stream into two.  Two genuine co-streams (e.g. household
+    # salaries on the 15th and 20th) stay apart because their anchors differ.
+    anchor_day = None
+    if family in ("variable_income", "regular_salary"):
+        if event is not None and event.event_date is not None:
+            anchor_day = event.event_date.day
+        elif effect.effective_date is not None:
+            anchor_day = effect.effective_date.day
+        if anchor_day is not None:
+            family = f"{family}_day_{anchor_day}"
     return (
         effect.user_id,
         effect.event_type,
@@ -86,21 +99,40 @@ def _is_monthly_anchor(dates: list[date]) -> bool:
 
     General tolerance for one intra-month correction (e.g. an arrears or net
     salary row days after the regular payroll) or a settlement delay: at
-    least three dates in distinct months fall on the same day (±3 days) or
+    least three dates in DISTINCT months fall on the same day (±3 days) or
     share a month-end anchor. This does not hardcode any sample ID.
     """
-    if len(set((row.year, row.month) for row in dates)) < 3:
+    months = {(row.year, row.month) for row in dates}
+    if len(months) < 3:
+        # Same-month rows (weekly pools) can never prove a monthly cadence.
         return False
     days = [row.day for row in dates]
     for anchor in set(days):
-        if sum(1 for day in days if abs(day - anchor) <= 3) >= 3:
+        # Count only one row per month (a weekly pool would otherwise match
+        # an anchor through sheer density).
+        anchored_months = {
+            (row.year, row.month)
+            for row in dates
+            if abs(row.day - anchor) <= 3
+        }
+        if len(anchored_months) >= 3:
             return True
     # Month-end anchor: last three days of month count as stable.
-    month_ends = 0
-    for row in dates:
-        if row.day >= _month_last_day(row.year, row.month) - 2:
-            month_ends += 1
-    return month_ends >= 3
+    month_ends = {
+        (row.year, row.month)
+        for row in dates
+        if row.day >= _month_last_day(row.year, row.month) - 2
+    }
+    return len(month_ends) >= 3
+
+
+def _dominant_cadence(gaps: list[int]) -> tuple[int, int] | None:
+    """Return (cadence, support) for the most common gap, or None."""
+    if not gaps:
+        return None
+    counts = Counter(gaps)
+    cadence, count = counts.most_common(1)[0]
+    return cadence, count
 
 
 def _infer_frequency(dates: list[date], *, allow_two: bool = False) -> str | None:
@@ -111,9 +143,30 @@ def _infer_frequency(dates: list[date], *, allow_two: bool = False) -> str | Non
     if not gaps or any(gap <= 1 or gap > _MAX_CADENCE_DAYS for gap in gaps):
         return None
 
+    # A stable sub-monthly cadence (weekly, biweekly, 21-day, 10-day, 5-day
+    # grids used by variable spending pools) is the strongest signal and must
+    # be detected before any monthly-anchor tolerance, because a dense weekly
+    # grid also spreads across days-of-month that a naive anchor test matches.
+    dominant = _dominant_cadence(gaps)
+    if dominant is not None:
+        cadence, count = dominant
+        support = max(2, (len(gaps) * 4 + 4) // 5)
+        if cadence in (5, 7, 10, 14, 21) and count >= support:
+            if cadence == 7:
+                return "weekly"
+            if cadence == 14:
+                return "biweekly"
+            if cadence == 21:
+                return "every_21_days"
+            return f"every_{cadence}_days"
+
     # Calendar-month schedules naturally have 28/29/30/31-day gaps.  A stable
     # day-of-month or month-end anchor is safer than forcing a fixed 30 days.
-    if len(unique) >= 3 and all(_MONTHLY_MIN <= gap <= _MONTHLY_MAX for gap in gaps):
+    # A confirmed two-row salary stream (prorated first pay plus an explicit
+    # "next confirmed salary" row) is a complete monthly lifecycle when the
+    # single gap is calendar-month sized.
+    min_rows = 2 if allow_two else 3
+    if len(unique) >= min_rows and all(_MONTHLY_MIN <= gap <= _MONTHLY_MAX for gap in gaps):
         return "monthly"
     # Tolerate one intra-month correction or settlement delay: if the dates
     # share a monthly day anchor across distinct months, treat as monthly
@@ -159,6 +212,7 @@ def _series_from_group(
     *,
     protected_categories: tuple[str, ...],
     allow_two: bool = False,
+    as_of: date | None = None,
 ) -> RecurringSeries | None:
     if not effects:
         return None
@@ -170,13 +224,21 @@ def _series_from_group(
     # Cadence inference uses event dates so a settlement delay (e.g. payroll
     # credited days after its pay date) does not break an otherwise monthly
     # stream. Cash flow still uses effective (settlement) dates elsewhere.
+    # A row whose amount was blank in the ledger and only resolved through
+    # image evidence is a one-off document (a receipt or bill), not an
+    # organically recurring purchase: it must not shift the pool's weekday
+    # grid or anchor a salary stream.
+    organic = [
+        row for row in effects
+        if (ledger.events.get(row.event_id).amount if ledger.events.get(row.event_id) else None) is not None
+    ] or effects
     inference_dates: list[date] = []
-    for row in effects:
+    for row in organic:
         event = ledger.events.get(row.event_id)
         anchor = event.event_date if event and event.event_date else row.effective_date
         if anchor is not None:
             inference_dates.append(anchor)
-    dates = sorted({row.effective_date for row in effects if row.effective_date is not None})
+    dates = sorted({row.effective_date for row in organic if row.effective_date is not None})
     inference_unique = sorted(set(inference_dates))
     future_hint = any(
         (ledger.events.get(row.event_id) and ledger.events[row.event_id].status == "scheduled")
@@ -199,32 +261,77 @@ def _series_from_group(
         key=lambda value: (currencies[value], value == home_currency, value),
     )
     stable_effects = [
-        row for row in effects
+        row for row in organic
         if (ledger.events.get(row.event_id).currency if ledger.events.get(row.event_id) else row.home_currency) == series_currency
-    ] or effects
+    ] or organic
     latest = _latest_effect(stable_effects)
     event = ledger.events.get(latest.event_id)
     flexibility = latest.flexibility
     minimum = latest.minimum_allowed_amount
     source_ids = tuple(sorted({row.event_id for row in effects}))
     series_id = "series:" + ":".join((latest.user_id, latest.category, latest.direction, latest.event_type, latest.event_id))
-    # Salary amount uses the mode of stable-currency occurrences so a single
-    # arrears/bonus row does not reset the projected base pay. Ties break to
-    # the latest occurrence (e.g. a confirmed raise).
+    # Salary and gig income streams project at the latest observed amount:
+    # a confirmed reduction or raise updates the forward-looking cash flow,
+    # and a one-off historical bonus must not inflate it (tie-break to the
+    # latest occurrence keeps determinism when two amounts repeat equally).
     series_amount = latest.amount or Decimal("0")
     if latest.category == "salary" and latest.direction == "credit":
         counted = Counter(row.amount for row in stable_effects if row.amount is not None)
         if counted:
             top_count = max(counted.values())
             top_amounts = [amount for amount, count in counted.items() if count == top_count]
-            if len(top_amounts) == 1:
+            if len(top_amounts) == 1 and top_count >= 2:
+                # A stable repeated amount dominates a single outlier row
+                # (e.g. one prorated first payment among full salaries).
                 series_amount = top_amounts[0]
             else:
                 series_amount = latest.amount or top_amounts[0]
+    elif latest.category in VARIABLE_POOL_CATEGORIES and latest.direction == "debit":
+        # Variable spending pools have noisy per-leg amounts and can contain a
+        # one-off bulk purchase (for example an image-resolved pantry stock-up
+        # or a tiny top-up).  The median of organically observed amounts is
+        # the stable weekly level; a single outlier must not set the
+        # projected leg value.
+        pool_amounts = sorted(
+            row.amount for row in stable_effects
+            if row.amount is not None
+            and (ledger.events.get(row.event_id).amount if ledger.events.get(row.event_id) else None) is not None
+        )
+        if not pool_amounts:
+            pool_amounts = sorted(row.amount for row in stable_effects if row.amount is not None)
+        if pool_amounts:
+            middle = len(pool_amounts) // 2
+            if len(pool_amounts) % 2:
+                series_amount = pool_amounts[middle]
+            else:
+                series_amount = (pool_amounts[middle - 1] + pool_amounts[middle]) / Decimal("2")
+    # A stream whose last observed occurrence is far in the past relative to
+    # its own cadence is a finished stream (secondary household income that
+    # stopped, a completed contract).  Projecting it forward would invent
+    # income the ledger no longer supports.  A cadence plus half a month of
+    # slack tolerates one ordinary late settlement while ending streams that
+    # have clearly gone quiet.
+    end_date = None
+    if dates:
+        cadence_gap = {
+            "weekly": 7, "biweekly": 14, "every_21_days": 21,
+        }.get(frequency, 30)
+        last_observed = max(dates)
+        stale_after = timedelta(days=cadence_gap + 15)
+        # A stream whose last occurrence is already well behind the request
+        # date has gone quiet: secondary income that stopped, or a completed
+        # contract.  Projecting it forward would invent income the ledger no
+        # longer supports.  A scheduled future row or an evidence-confirmed
+        # resupply naturally keeps the stream alive.
+        if (
+            as_of is not None
+            and len(dates) >= 4
+            and (as_of - last_observed) >= stale_after
+        ):
+            end_date = last_observed
     # A terminal description ("final", "last pay", ...) means no future legs
     # should be projected beyond the observed occurrences. This is a general
     # lifecycle rule, not a sample-specific branch.
-    end_date = None
     if event is not None and latest.category == "salary" and latest.direction == "credit":
         description = event.description.casefold()
         if any(term in description for term in ("final", "last pay", "last salary", "terminal", "closing pay")):
@@ -417,6 +524,7 @@ def infer_recurring_series(
             effects,
             protected_categories=profile.expense_categories_to_protect,
             allow_two=allow_two,
+            as_of=as_of,
         )
         if row is not None:
             series.append(row)

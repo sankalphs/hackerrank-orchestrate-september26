@@ -83,7 +83,12 @@ class PaymentCandidate:
 
     @property
     def payment_plan(self) -> str:
-        return "|".join(f"{row.date.isoformat()}:{row.amount}" for row in self.payments)
+        # Payment-plan amounts keep two decimals when fractional, matching
+        # the public sample format (620.40 stays padded, 25256 stays bare).
+        return "|".join(
+            f"{row.date.isoformat()}:{_plan_amount_text(row.amount)}"
+            for row in self.payments
+        )
 
     @property
     def spending_changes_needed(self) -> str:
@@ -129,6 +134,15 @@ def _int(value: Any, field: str) -> int:
 
 def _bool(value: Any) -> bool:
     return str(value).strip().casefold() in {"1", "true", "yes", "y"}
+
+
+def _plan_amount_text(value: Decimal) -> str:
+    """Two decimals when fractional, bare integer otherwise (sample format)."""
+    text = format(value, "f")
+    whole, dot, fraction = text.partition(".")
+    if not dot:
+        return whole
+    return f"{whole}.{fraction.ljust(2, '0')}"
 
 
 def load_payment_options(dataset_dir: Path = DATASET_DIR) -> dict[str, tuple[PaymentOption, ...]]:

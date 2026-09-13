@@ -256,11 +256,31 @@ def simulate(
 
     # Add projected recurrence legs only where an explicit ledger effect did
     # not already provide that occurrence.
+    from .recurrence import VARIABLE_POOL_CATEGORIES
+    active_income = any(
+        row.direction == "credit"
+        and row.category == "salary"
+        and row.end_date is None
+        for row in context.series
+    ) or bool(context.confirmed_credits)
     for row in context.series:
         change = selected_changes.get(row.series_id)
         if change is not None and change.action == "stop":
             continue
-        for when in projected_occurrences(row, start, end):
+        row_end = end
+        # Variable spending pools assume income keeps arriving.  When every
+        # salary stream has ended (seasonal contract finished, final payroll),
+        # discretionary pool spending is only projected through a transition
+        # window of about two months past its last observed occurrence instead
+        # of the full horizon.
+        if (
+            not active_income
+            and row.direction == "debit"
+            and row.category in VARIABLE_POOL_CATEGORIES
+            and row.occurrences
+        ):
+            row_end = min(end, max(row.occurrences) + timedelta(days=60))
+        for when in projected_occurrences(row, start, row_end):
             if when in observed_series_dates[row.series_id]:
                 continue
             # An explicit confirmed credit on the same date overrides a
@@ -300,6 +320,9 @@ def simulate(
         observe(balance, when)
         balance += credits[when]
         observe(balance, when)
+        # Proposed payments apply after required debits and confirmed credits:
+        # a purchase made on payday may use the salary that lands that day.
+        # The end-of-day balance must still hold the protected minimum.
         balance -= payments[when]
         observe(balance, when)
         balances[when] = balance
