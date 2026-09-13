@@ -27,6 +27,7 @@ def candidate_sort_key(candidate: PaymentCandidate) -> tuple[object, ...]:
         not candidate.completes_by_deadline,
         _METHOD_CLASS.get(candidate.method, 3),
         bool(candidate.spending_changes),
+        len(candidate.spending_changes),
         candidate.total_paid,
         candidate.first_payment_date,
         candidate.payment_count,

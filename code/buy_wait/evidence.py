@@ -556,6 +556,13 @@ def run_evidence(
         message_extractor = client.extract_message if use_zenmux_messages else None
         image_extractor = client.extract_image
         extractor_model = client.settings.model
+    elif cache_only:
+        # A cache-only run must read the model-qualified entries written by
+        # the last paid extraction pass; the bare "deterministic" key would
+        # miss every model-extracted image fact and silently drop evidence.
+        from .zenmux import DEFAULT_MODEL
+
+        extractor_model = DEFAULT_MODEL
     report = EvidencePipeline(
         dataset_dir, cache_path, cache_only=cache_only,
         message_extractor=message_extractor, image_extractor=image_extractor,

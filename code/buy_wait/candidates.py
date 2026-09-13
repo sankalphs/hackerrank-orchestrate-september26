@@ -108,6 +108,7 @@ class DecisionPlan:
     selected: PaymentCandidate
     candidates: tuple[PaymentCandidate, ...]
     candidate_horizon_end: date
+    partial_only_path: bool = False
 
     @property
     def payment_plan(self) -> str:
@@ -354,6 +355,13 @@ def plan_request(
     # field.  Samples intentionally retain a date after the deadline (for
     # example request_06), so keep it exactly as computed by Phase 4.
     earliest = capacity.earliest_date_for_full_payment
+    # The explanation distinguishes a user whose only considered method is
+    # partial payment on a request that permits it: their sole path failed.
+    partial_only_path = (
+        selected.method == "not_recommended"
+        and accepted == {"partial_payment"}
+        and _bool(request.get("allows_partial_payment", ""))
+    )
     return DecisionPlan(
         request_id=str(request.get("request_id", "")),
         user_id=context.user_id,
@@ -366,6 +374,7 @@ def plan_request(
         selected=selected,
         candidates=ranked,
         candidate_horizon_end=horizon_end,
+        partial_only_path=partial_only_path,
     )
 
 

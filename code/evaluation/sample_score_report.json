@@ -6,48 +6,28 @@
     "unresolved_image_count": 0,
     "validation_error_count": 0
   },
-  "exact_output_row_match_rate": 0.0,
-  "exact_output_row_matches": 0,
+  "exact_output_row_match_rate": 0.12,
+  "exact_output_row_matches": 3,
   "field_match_rates": {
     "affordability_status": 0.8,
-    "amount_safe_to_pay": 0.04,
+    "amount_safe_to_pay": 0.16,
     "decision_explanation": 0.64,
-    "earliest_date_for_full_payment": 0.76,
+    "earliest_date_for_full_payment": 0.8,
     "payment_plan": 0.84,
     "recommended_payment_method": 0.84,
     "spending_changes_needed": 0.88
   },
   "field_matches": {
     "affordability_status": 20,
-    "amount_safe_to_pay": 1,
+    "amount_safe_to_pay": 4,
     "decision_explanation": 16,
-    "earliest_date_for_full_payment": 19,
+    "earliest_date_for_full_payment": 20,
     "payment_plan": 21,
     "recommended_payment_method": 21,
     "spending_changes_needed": 22
   },
-  "mismatch_count": 25,
+  "mismatch_count": 22,
   "mismatches": [
-    {
-      "debug": {
-        "candidate_count": 2,
-        "candidate_methods": [
-          "full_payment",
-          "wait"
-        ],
-        "request_id": "request_01",
-        "selected_method": "full_payment",
-        "selected_rationale": "safe today",
-        "selected_status": "affordable_now"
-      },
-      "fields": {
-        "amount_safe_to_pay": {
-          "actual": "25256.00",
-          "expected": "25256"
-        }
-      },
-      "request_id": "request_01"
-    },
     {
       "debug": {
         "candidate_count": 1,
@@ -246,23 +226,18 @@
       },
       "fields": {
         "amount_safe_to_pay": {
-          "actual": "266700.00",
+          "actual": "54274.71",
           "expected": "12700"
-        },
-        "earliest_date_for_full_payment": {
-          "actual": "2024-12-06",
-          "expected": ""
         }
       },
       "request_id": "request_10"
     },
     {
       "debug": {
-        "candidate_count": 3,
+        "candidate_count": 2,
         "candidate_methods": [
           "full_payment",
-          "full_payment",
-          "wait"
+          "full_payment"
         ],
         "request_id": "request_11",
         "selected_method": "full_payment",
@@ -275,38 +250,19 @@
           "expected": "12510645"
         },
         "decision_explanation": {
-          "actual": "Reduce the games and recreation to IDR 755,250, Stop the cloud storage plan, and Reduce the weekend food delivery to IDR 665,950, then pay IDR 13,110,000 today. This leaves at least IDR 34,140,600 available.",
+          "actual": "Stop the cloud storage plan and Reduce the weekend food delivery to IDR 665,950, then pay IDR 13,110,000 today. This leaves at least IDR 34,140,600 available.",
           "expected": "Reduce the weekend food delivery to IDR 665,950, then pay IDR 13,110,000 today. This leaves at least IDR 34,140,600 available."
         },
         "earliest_date_for_full_payment": {
-          "actual": "2025-05-15",
+          "actual": "2025-06-15",
           "expected": "2025-07-15"
         },
         "spending_changes_needed": {
-          "actual": "reduce_to:event_948:755250|stop:event_949|reduce_to:event_989:665950",
+          "actual": "stop:event_949|reduce_to:event_989:665950",
           "expected": "reduce_to:event_989:665950"
         }
       },
       "request_id": "request_11"
-    },
-    {
-      "debug": {
-        "candidate_count": 1,
-        "candidate_methods": [
-          "installments"
-        ],
-        "request_id": "request_12",
-        "selected_method": "installments",
-        "selected_rationale": "supplied installment option",
-        "selected_status": "affordable_with_plan"
-      },
-      "fields": {
-        "amount_safe_to_pay": {
-          "actual": "65164.00",
-          "expected": "65164"
-        }
-      },
-      "request_id": "request_12"
     },
     {
       "debug": {
@@ -356,11 +312,11 @@
       },
       "fields": {
         "amount_safe_to_pay": {
-          "actual": "0",
+          "actual": "608.55",
           "expected": "597.74"
         },
         "decision_explanation": {
-          "actual": "Do not make this payment by 4 October 2025. None of the available options keeps the EUR 2,200 minimum protected.",
+          "actual": "Do not proceed with the EUR 5,414.20 request. Although EUR 608.55 is available today, the full amount cannot be completed safely within 90 days.",
           "expected": "Do not proceed with the EUR 5,414.20 request. Although EUR 597.74 is available today, the full amount cannot be completed safely within 90 days."
         }
       },
@@ -382,26 +338,6 @@
         }
       },
       "request_id": "request_15"
-    },
-    {
-      "debug": {
-        "candidate_count": 2,
-        "candidate_methods": [
-          "full_payment",
-          "wait"
-        ],
-        "request_id": "request_16",
-        "selected_method": "full_payment",
-        "selected_rationale": "safe today",
-        "selected_status": "affordable_now"
-      },
-      "fields": {
-        "amount_safe_to_pay": {
-          "actual": "122500.00",
-          "expected": "122500"
-        }
-      },
-      "request_id": "request_16"
     },
     {
       "debug": {
@@ -435,7 +371,7 @@
       },
       "fields": {
         "amount_safe_to_pay": {
-          "actual": "472.80",
+          "actual": "472.8",
           "expected": "462"
         }
       },
@@ -513,7 +449,7 @@
           "expected": "affordable_with_plan"
         },
         "amount_safe_to_pay": {
-          "actual": "1574.40",
+          "actual": "1574.4",
           "expected": "1543.35"
         },
         "decision_explanation": {
@@ -563,7 +499,7 @@
       },
       "fields": {
         "amount_safe_to_pay": {
-          "actual": "4715.40",
+          "actual": "4715.4",
           "expected": "9152"
         }
       },
@@ -584,7 +520,7 @@
           "expected": "13420"
         },
         "decision_explanation": {
-          "actual": "Do not make this payment by 8 February 2026. None of the available options keeps the INR 51,000 minimum protected.",
+          "actual": "Do not proceed with the INR 109,600 request. Although INR 15,897.34 is available today, the full amount cannot be completed safely within 90 days.",
           "expected": "Do not proceed with the INR 109,600 request. Although INR 13,420 is available today, the full amount cannot be completed safely within 90 days."
         }
       },

@@ -336,6 +336,25 @@ def _series_from_group(
         description = event.description.casefold()
         if any(term in description for term in ("final", "last pay", "last salary", "terminal", "closing pay")):
             end_date = max(dates) if dates else None
+    # Variable gig income (freelance milestones, delivery/platform payouts
+    # where every amount differs) is not a committed income stream: no
+    # employer has promised the next payout, so projecting it forward would
+    # invent unconfirmed income.  A stable salaried stream always shows at
+    # least one repeated amount (or an explicit confirmation/scheduled row),
+    # and those keep projecting normally.
+    if latest.category == "salary" and latest.direction == "credit" and end_date is None:
+        counted = Counter(
+            row.amount for row in stable_effects
+            if row.amount is not None and row.effective_date is not None
+        )
+        repeated = any(count >= 2 for count in counted.values())
+        confirmed_future = future_hint or any(
+            ledger.events.get(row.event_id) is not None
+            and ledger.events[row.event_id].status == "scheduled"
+            for row in stable_effects
+        )
+        if not repeated and not confirmed_future and len(stable_effects) >= 2:
+            end_date = max(dates) if dates else None
     return RecurringSeries(
         series_id=series_id,
         output_event_id=latest.event_id,
@@ -375,6 +394,7 @@ def _match_fact_series(
         targeted = [row for row in series if target in row.source_event_ids or target == row.output_event_id]
         if targeted:
             return sorted(targeted, key=lambda row: row.series_id)[0]
+    claim_type = str(fact.get("claim_type") or "")
     amount = fact.get("amount")
     currency = str(fact.get("currency") or "").upper()
     candidates = [row for row in series if row.direction == "credit" and row.category == "salary"]
@@ -387,6 +407,13 @@ def _match_fact_series(
             same_amount = [row for row in candidates if row.amount == numeric]
             if same_amount:
                 candidates = same_amount
+            elif claim_type == "cancel":
+                # A cancel that names an amount refers to the stream AT that
+                # amount.  When no stream matches (for example the message
+                # names the surviving salary while cancelling the other
+                # source), falling back to an arbitrary stream would cancel
+                # the wrong income; the unscoped cancel pass handles it.
+                return None
     if currency:
         same_currency = [row for row in candidates if row.currency == currency]
         if same_currency:
@@ -411,6 +438,17 @@ def _apply_evidence(
         claim_type = fact.get("claim_type")
         matched = _match_fact_series(ledger, result, fact)
         if matched is None:
+            # A confirmed payroll fact with amount and date can seed a
+            # salary stream that cadence inference missed (long leave,
+            # contract gap).  It never applies to users without salary
+            # history and never for non-salary claims.
+            if claim_type in {"recurrence", "confirm", "date"} and fact.get("amount") is not None and fact.get("target_event_id") is None:
+                synthetic = _synthetic_salary_series(ledger, user_id=user_id, as_of=as_of, fact=fact)
+                if synthetic is not None and not any(
+                    row.category == "salary" and row.direction == "credit" and row.end_date is None
+                    for row in result
+                ):
+                    result.append(synthetic)
             continue
         index = result.index(matched)
         changed = matched
@@ -488,13 +526,80 @@ def _apply_evidence(
         result[index] = changed
 
     if cancelled_without_target:
+        # An unscoped "one income source ended" cancel sometimes arrives
+        # together with a confirm/recurrence fact that names the remaining
+        # monthly salary.  In that case only streams that do NOT match the
+        # confirmed amount are cancelled; the survivor keeps projecting at
+        # the amended amount.  A cancel without any survivor amount ends
+        # every salary stream, as before.
+        survivor_amounts = {
+            Decimal(str(fact["amount"]))
+            for fact in facts
+            if fact.get("claim_type") in {"confirm", "recurrence", "amend"}
+            and fact.get("amount") is not None
+            and not fact.get("target_event_id")
+        }
         result = [
             replace(row, end_date=as_of, evidence_source_ids=tuple(sorted(set((*row.evidence_source_ids, "evidence:cancel")))))
             if row.direction == "credit" and row.category == "salary" and row.end_date is None
+            and (not survivor_amounts or row.amount not in survivor_amounts)
             else row
             for row in result
         ]
     return result
+
+
+def _synthetic_salary_series(
+    ledger: CanonicalLedger,
+    *,
+    user_id: str,
+    as_of: date,
+    fact: dict[str, Any],
+) -> RecurringSeries | None:
+    """Create a salary series from a confirmed payroll message when inference failed.
+
+    A confirmed "salary of X resumes on D" message is itself evidence of a
+    recurring monthly stream.  When cadence inference could not build one
+    (for example a multi-month leave gap broke the observed cadence), the
+    validated fact plus the user's salary history anchors a synthetic
+    monthly series at the confirmed amount and date.  Only users with at
+    least one settled salary history row qualify; the claim never invents
+    income for a user who never had payroll.
+    """
+    try:
+        amount = Decimal(str(fact["amount"]))
+        effective_date = date.fromisoformat(str(fact["effective_date"]))
+    except (KeyError, TypeError, ValueError):
+        return None
+    if amount <= 0 or effective_date < as_of:
+        return None
+    history = [
+        effect for effect in ledger.effects_for_user(user_id)
+        if effect.direction == "credit" and effect.category == "salary"
+        and effect.effective_date is not None and effect.amount is not None
+        and effect.effective_date <= as_of
+    ]
+    if not history:
+        return None
+    reference = max(history, key=lambda row: (row.effective_date, row.event_id))
+    return RecurringSeries(
+        series_id=f"series:{user_id}:salary:credit:income:{reference.event_id}",
+        output_event_id=reference.event_id,
+        category="salary",
+        direction="credit",
+        frequency="monthly",
+        amount=amount,
+        currency=(str(fact.get("currency") or reference.home_currency).upper()),
+        flexible="fixed",
+        protected=False,
+        minimum_allowed_amount=None,
+        occurrences=(effective_date,),
+        user_id=user_id,
+        source_event_ids=(reference.event_id,),
+        evidence_source_ids=(str(fact.get("source_id", "")),),
+        start_date=effective_date,
+        end_date=None,
+    )
 
 
 def infer_recurring_series(

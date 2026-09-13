@@ -32,6 +32,7 @@ class DecisionTrace:
     total_paid: Decimal
     spending_changes: tuple[Any, ...]
     selected_forecast: ForecastResult
+    partial_only_path: bool = False
     provenance: tuple[str, ...] = ()
 
     @property
@@ -79,6 +80,7 @@ def build_decision_trace(
         total_paid=selected.total_paid,
         spending_changes=selected.spending_changes,
         selected_forecast=selected_forecast,
+        partial_only_path=plan.partial_only_path,
         provenance=("profile", "canonical_ledger", "forecast", "payment_options"),
     )
 
@@ -141,6 +143,15 @@ def explain_decision(trace: DecisionTrace, ledger) -> str:
     selected = trace.payments
 
     if trace.method == "not_recommended":
+        # When partial payment is the only path the user would consider and
+        # the request permits it, the sample style acknowledges the available
+        # amount explicitly; otherwise it states the deadline failure.
+        if trace.partial_only_path:
+            return (
+                f"Do not proceed with the {requested} request. "
+                f"Although {_money(trace.currency, trace.amount_safe_to_pay)} is available today, "
+                f"the full amount cannot be completed safely within 90 days."
+            )
         return (
             f"Do not make this payment by {_long_date(trace.desired_completion_date)}. "
             f"None of the available options keeps the {minimum} minimum protected."
@@ -150,6 +161,13 @@ def explain_decision(trace: DecisionTrace, ledger) -> str:
             return (
                 f"{_change_phrase(trace, ledger)}, then pay {requested} today. "
                 f"This leaves at least {minimum} available."
+            )
+        if trace.minimum_after_plan == trace.minimum_balance_to_keep:
+            # The payment lands exactly on the protected floor: the sample
+            # style highlights that the minimum itself survives intact.
+            return (
+                f"Pay {requested} today. "
+                f"This keeps the {minimum} minimum available over the next 90 days."
             )
         return (
             f"Pay {requested} today. "
@@ -188,11 +206,19 @@ def explain_decision(trace: DecisionTrace, ledger) -> str:
     raise ValueError(f"unsupported decision method: {trace.method}")
 
 
+def _bare_amount(value: Decimal) -> str:
+    """Minimal decimal text: no trailing zeros, no trailing dot (sample format)."""
+    text = format(value, "f")
+    if "." in text:
+        text = text.rstrip("0").rstrip(".")
+    return text or "0"
+
+
 def output_row(plan: DecisionPlan, trace: DecisionTrace, ledger) -> dict[str, str]:
     """Convert a plan and validated trace into the exact submission schema."""
     return {
         "request_id": plan.request_id,
-        "amount_safe_to_pay": format(plan.amount_safe_to_pay, "f"),
+        "amount_safe_to_pay": _bare_amount(plan.amount_safe_to_pay),
         "affordability_status": plan.selected.status,
         "recommended_payment_method": plan.selected.method,
         "payment_plan": plan.payment_plan,

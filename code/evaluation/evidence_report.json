@@ -2,7 +2,7 @@
   "cache_path": "D:\\Coding\\Hackthon\\Hackerrank\\hackerrank-orchestrate-september26\\code\\cache\\evidence_cache.json",
   "dataset_dir": "D:\\Coding\\Hackthon\\Hackerrank\\hackerrank-orchestrate-september26\\dataset",
   "evidence_version": "phase-7.v3",
-  "generated_at_utc": "2026-09-12T22:31:00Z",
+  "generated_at_utc": "2026-09-13T02:45:05Z",
   "mode": "cache-only",
   "records": [
     {
@@ -40,7 +40,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_26",
@@ -70,7 +70,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_27",
@@ -100,7 +100,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_28",
@@ -141,7 +141,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_29",
@@ -210,7 +210,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_32",
@@ -219,15 +219,14 @@
     {
       "image_facts": [
         {
-          "amount": null,
-          "confidence": 0.0,
-          "currency": null,
+          "amount": "1995.0",
+          "confidence": 0.9,
+          "currency": "INR",
           "date": null,
           "document_type": null,
-          "reason": "no_cached_ocr_or_vision_extractor",
           "related_event_id": "event_3051",
           "source_id": "image_06",
-          "status": "unresolved"
+          "status": "extracted"
         }
       ],
       "message_facts": [
@@ -256,12 +255,9 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1,
-        "unresolved": 1
+        "cache": 2
       },
-      "unresolved_image_ids": [
-        "image_06"
-      ],
+      "unresolved_image_ids": [],
       "user_id": "user_33",
       "validation_errors": []
     },
@@ -311,7 +307,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_34",
@@ -320,15 +316,14 @@
     {
       "image_facts": [
         {
-          "amount": null,
-          "confidence": 0.0,
-          "currency": null,
-          "date": null,
-          "document_type": null,
-          "reason": "no_cached_ocr_or_vision_extractor",
+          "amount": "8528",
+          "confidence": 0.95,
+          "currency": "INR",
+          "date": "2025-10-29",
+          "document_type": "tax_invoice",
           "related_event_id": "event_3231",
           "source_id": "image_07",
-          "status": "unresolved"
+          "status": "paid"
         }
       ],
       "message_facts": [
@@ -359,12 +354,9 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1,
-        "unresolved": 1
+        "cache": 2
       },
-      "unresolved_image_ids": [
-        "image_07"
-      ],
+      "unresolved_image_ids": [],
       "user_id": "user_35",
       "validation_errors": []
     },
@@ -392,7 +384,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_36",
@@ -422,7 +414,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_37",
@@ -454,7 +446,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_38",
@@ -509,7 +501,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_40",
@@ -564,7 +556,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_42",
@@ -594,7 +586,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_43",
@@ -635,7 +627,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_44",
@@ -665,7 +657,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_45",
@@ -709,7 +701,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_47",
@@ -718,15 +710,14 @@
     {
       "image_facts": [
         {
-          "amount": null,
-          "confidence": 0.0,
-          "currency": null,
-          "date": null,
-          "document_type": null,
-          "reason": "no_cached_ocr_or_vision_extractor",
+          "amount": "15339.0",
+          "confidence": 0.95,
+          "currency": "INR",
+          "date": "2026-07-24",
+          "document_type": "receipt",
           "related_event_id": "event_4535",
           "source_id": "image_08",
-          "status": "unresolved"
+          "status": "received"
         }
       ],
       "message_facts": [
@@ -755,12 +746,9 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1,
-        "unresolved": 1
+        "cache": 2
       },
-      "unresolved_image_ids": [
-        "image_08"
-      ],
+      "unresolved_image_ids": [],
       "user_id": "user_48",
       "validation_errors": []
     },
@@ -799,7 +787,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_49",
@@ -840,7 +828,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_50",
@@ -884,7 +872,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_52",
@@ -917,7 +905,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_53",
@@ -947,7 +935,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_54",
@@ -956,15 +944,14 @@
     {
       "image_facts": [
         {
-          "amount": null,
-          "confidence": 0.0,
-          "currency": null,
-          "date": null,
-          "document_type": null,
-          "reason": "no_cached_ocr_or_vision_extractor",
+          "amount": "723.0",
+          "confidence": 0.99,
+          "currency": "INR",
+          "date": "2026-06-07",
+          "document_type": "receipt",
           "related_event_id": "event_5170",
           "source_id": "image_09",
-          "status": "unresolved"
+          "status": "paid"
         }
       ],
       "message_facts": [],
@@ -979,11 +966,9 @@
         "message_ids": []
       },
       "source_counts": {
-        "unresolved": 1
+        "cache": 1
       },
-      "unresolved_image_ids": [
-        "image_09"
-      ],
+      "unresolved_image_ids": [],
       "user_id": "user_55",
       "validation_errors": []
     },
@@ -1025,7 +1010,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_57",
@@ -1077,7 +1062,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_58",
@@ -1107,7 +1092,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_59",
@@ -1137,7 +1122,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_60",
@@ -1178,7 +1163,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_61",
@@ -1230,7 +1215,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_62",
@@ -1253,15 +1238,14 @@
     {
       "image_facts": [
         {
-          "amount": null,
-          "confidence": 0.0,
-          "currency": null,
+          "amount": "79679.26",
+          "confidence": 0.9,
+          "currency": "INR",
           "date": null,
-          "document_type": null,
-          "reason": "no_cached_ocr_or_vision_extractor",
+          "document_type": "invoice",
           "related_event_id": "event_6033",
           "source_id": "image_10",
-          "status": "unresolved"
+          "status": "unpaid"
         }
       ],
       "message_facts": [
@@ -1290,12 +1274,9 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1,
-        "unresolved": 1
+        "cache": 2
       },
-      "unresolved_image_ids": [
-        "image_10"
-      ],
+      "unresolved_image_ids": [],
       "user_id": "user_64",
       "validation_errors": []
     },
@@ -1334,7 +1315,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_65",
@@ -1386,7 +1367,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_66",
@@ -1452,7 +1433,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_68",
@@ -1482,7 +1463,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_69",
@@ -1515,7 +1496,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_70",
@@ -1545,7 +1526,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_71",
@@ -1586,7 +1567,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_72",
@@ -1595,15 +1576,14 @@
     {
       "image_facts": [
         {
-          "amount": null,
-          "confidence": 0.0,
+          "amount": "3650.0",
+          "confidence": 0.95,
           "currency": null,
-          "date": null,
-          "document_type": null,
-          "reason": "no_cached_ocr_or_vision_extractor",
+          "date": "2023-01-19",
+          "document_type": "provisional_bill",
           "related_event_id": "event_6859",
           "source_id": "image_11",
-          "status": "unresolved"
+          "status": "unpaid"
         }
       ],
       "message_facts": [
@@ -1632,12 +1612,9 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1,
-        "unresolved": 1
+        "cache": 2
       },
-      "unresolved_image_ids": [
-        "image_11"
-      ],
+      "unresolved_image_ids": [],
       "user_id": "user_73",
       "validation_errors": []
     },
@@ -1687,7 +1664,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_74",
@@ -1728,7 +1705,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_75",
@@ -1769,7 +1746,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_76",
@@ -1802,7 +1779,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_77",
@@ -1811,15 +1788,14 @@
     {
       "image_facts": [
         {
-          "amount": null,
-          "confidence": 0.0,
-          "currency": null,
-          "date": null,
-          "document_type": null,
-          "reason": "no_cached_ocr_or_vision_extractor",
+          "amount": "33.5",
+          "confidence": 0.95,
+          "currency": "USD",
+          "date": "2025-01-10",
+          "document_type": "receipt",
           "related_event_id": "event_7307",
           "source_id": "image_12",
-          "status": "unresolved"
+          "status": "paid"
         }
       ],
       "message_facts": [],
@@ -1834,11 +1810,9 @@
         "message_ids": []
       },
       "source_counts": {
-        "unresolved": 1
+        "cache": 1
       },
-      "unresolved_image_ids": [
-        "image_12"
-      ],
+      "unresolved_image_ids": [],
       "user_id": "user_78",
       "validation_errors": []
     },
@@ -1891,7 +1865,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_80",
@@ -1921,7 +1895,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_81",
@@ -1951,7 +1925,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_82",
@@ -1981,7 +1955,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_83",
@@ -1990,15 +1964,14 @@
     {
       "image_facts": [
         {
-          "amount": null,
-          "confidence": 0.0,
-          "currency": null,
+          "amount": "2298",
+          "confidence": 0.95,
+          "currency": "INR",
           "date": null,
-          "document_type": null,
-          "reason": "no_cached_ocr_or_vision_extractor",
+          "document_type": "order_summary",
           "related_event_id": "event_7941",
           "source_id": "image_13",
-          "status": "unresolved"
+          "status": "paid"
         }
       ],
       "message_facts": [
@@ -2027,12 +2000,9 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1,
-        "unresolved": 1
+        "cache": 2
       },
-      "unresolved_image_ids": [
-        "image_13"
-      ],
+      "unresolved_image_ids": [],
       "user_id": "user_84",
       "validation_errors": []
     },
@@ -2071,7 +2041,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_85",
@@ -2115,7 +2085,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_87",
@@ -2133,7 +2103,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_88",
@@ -2206,7 +2176,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_90",
@@ -2239,7 +2209,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_91",
@@ -2280,7 +2250,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_92",
@@ -2310,7 +2280,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_93",
@@ -2362,7 +2332,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_94",
@@ -2414,7 +2384,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_95",
@@ -2472,7 +2442,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_98",
@@ -2509,15 +2479,14 @@
     {
       "image_facts": [
         {
-          "amount": null,
-          "confidence": 0.0,
-          "currency": null,
+          "amount": "4543",
+          "confidence": 0.75,
+          "currency": "INR",
           "date": null,
           "document_type": null,
-          "reason": "no_cached_ocr_or_vision_extractor",
           "related_event_id": "event_9421",
           "source_id": "image_14",
-          "status": "unresolved"
+          "status": "extracted"
         }
       ],
       "message_facts": [
@@ -2547,12 +2516,9 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1,
-        "unresolved": 1
+        "cache": 2
       },
-      "unresolved_image_ids": [
-        "image_14"
-      ],
+      "unresolved_image_ids": [],
       "user_id": "user_101",
       "validation_errors": []
     },
@@ -2602,7 +2568,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_102",
@@ -2632,7 +2598,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_103",
@@ -2673,7 +2639,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_104",
@@ -2682,15 +2648,14 @@
     {
       "image_facts": [
         {
-          "amount": null,
-          "confidence": 0.0,
-          "currency": null,
-          "date": null,
-          "document_type": null,
-          "reason": "no_cached_ocr_or_vision_extractor",
+          "amount": "9968.0",
+          "confidence": 0.95,
+          "currency": "INR",
+          "date": "2026-06-07",
+          "document_type": "invoice",
           "related_event_id": "event_9806",
           "source_id": "image_15",
-          "status": "unresolved"
+          "status": "extracted"
         }
       ],
       "message_facts": [
@@ -2721,12 +2686,9 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1,
-        "unresolved": 1
+        "cache": 2
       },
-      "unresolved_image_ids": [
-        "image_15"
-      ],
+      "unresolved_image_ids": [],
       "user_id": "user_105",
       "validation_errors": []
     },
@@ -2754,7 +2716,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_106",
@@ -2795,7 +2757,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_107",
@@ -2836,7 +2798,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_108",
@@ -2902,7 +2864,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_110",
@@ -2954,7 +2916,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_111",
@@ -2995,7 +2957,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_112",
@@ -3004,15 +2966,14 @@
     {
       "image_facts": [
         {
-          "amount": null,
-          "confidence": 0.0,
-          "currency": null,
-          "date": null,
-          "document_type": null,
-          "reason": "no_cached_ocr_or_vision_extractor",
+          "amount": "393.22",
+          "confidence": 0.95,
+          "currency": "INR",
+          "date": "2026-09-03",
+          "document_type": "invoice",
           "related_event_id": "event_10521",
           "source_id": "image_16",
-          "status": "unresolved"
+          "status": "extracted"
         }
       ],
       "message_facts": [
@@ -3041,12 +3002,9 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1,
-        "unresolved": 1
+        "cache": 2
       },
-      "unresolved_image_ids": [
-        "image_16"
-      ],
+      "unresolved_image_ids": [],
       "user_id": "user_113",
       "validation_errors": []
     },
@@ -3074,7 +3032,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_114",
@@ -3106,7 +3064,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_115",
@@ -3150,7 +3108,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_117",
@@ -3180,7 +3138,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_118",
@@ -3210,7 +3168,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_119",
@@ -3243,7 +3201,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_120",
@@ -3298,7 +3256,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_122",
@@ -3328,7 +3286,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_123",
@@ -3372,7 +3330,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_125",
@@ -3424,7 +3382,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_126",
@@ -3454,7 +3412,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_127",
@@ -3495,7 +3453,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_128",
@@ -3527,7 +3485,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_129",
@@ -3557,7 +3515,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_130",
@@ -3609,7 +3567,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_131",
@@ -3639,7 +3597,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_132",
@@ -3680,7 +3638,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_133",
@@ -3724,7 +3682,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_135",
@@ -3768,7 +3726,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_137",
@@ -3801,7 +3759,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_138",
@@ -3856,7 +3814,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_140",
@@ -3889,7 +3847,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_141",
@@ -3941,7 +3899,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_142",
@@ -3973,7 +3931,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_143",
@@ -4014,7 +3972,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_144",
@@ -4044,7 +4002,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_145",
@@ -4088,7 +4046,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_147",
@@ -4121,7 +4079,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_148",
@@ -4165,7 +4123,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_150",
@@ -4195,7 +4153,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_151",
@@ -4228,7 +4186,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_152",
@@ -4258,7 +4216,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_153",
@@ -4299,7 +4257,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_154",
@@ -4329,7 +4287,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_155",
@@ -4362,7 +4320,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_156",
@@ -4403,7 +4361,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_157",
@@ -4447,7 +4405,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_159",
@@ -4477,7 +4435,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_160",
@@ -4507,7 +4465,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_161",
@@ -4537,7 +4495,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_162",
@@ -4567,7 +4525,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_163",
@@ -4608,7 +4566,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_164",
@@ -4649,7 +4607,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_165",
@@ -4701,7 +4659,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_166",
@@ -4753,7 +4711,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_167",
@@ -4783,7 +4741,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_168",
@@ -4813,7 +4771,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_169",
@@ -4854,7 +4812,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_170",
@@ -4884,7 +4842,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_171",
@@ -4914,7 +4872,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_172",
@@ -4944,7 +4902,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_173",
@@ -4988,7 +4946,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_175",
@@ -5029,7 +4987,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_176",
@@ -5059,7 +5017,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_177",
@@ -5111,7 +5069,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_178",
@@ -5141,7 +5099,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_179",
@@ -5182,7 +5140,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_180",
@@ -5237,7 +5195,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_182",
@@ -5267,7 +5225,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_183",
@@ -5297,7 +5255,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_184",
@@ -5327,7 +5285,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_185",
@@ -5357,7 +5315,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_186",
@@ -5387,7 +5345,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_187",
@@ -5420,7 +5378,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_188",
@@ -5450,7 +5408,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_189",
@@ -5497,7 +5455,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_191",
@@ -5541,7 +5499,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_193",
@@ -5593,7 +5551,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_194",
@@ -5623,7 +5581,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_195",
@@ -5667,7 +5625,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_197",
@@ -5700,7 +5658,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_198",
@@ -5730,7 +5688,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_199",
@@ -5771,7 +5729,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_200",
@@ -5812,7 +5770,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_201",
@@ -5842,7 +5800,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_202",
@@ -5897,7 +5855,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_204",
@@ -5972,7 +5930,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_208",
@@ -6019,7 +5977,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_210",
@@ -6063,7 +6021,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_212",
@@ -6104,7 +6062,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_213",
@@ -6134,7 +6092,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_214",
@@ -6164,7 +6122,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_215",
@@ -6194,7 +6152,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_216",
@@ -6252,7 +6210,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_219",
@@ -6282,7 +6240,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_220",
@@ -6315,7 +6273,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_221",
@@ -6367,7 +6325,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_222",
@@ -6425,7 +6383,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_224",
@@ -6455,7 +6413,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_225",
@@ -6485,7 +6443,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_226",
@@ -6526,7 +6484,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_227",
@@ -6567,7 +6525,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_228",
@@ -6600,7 +6558,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_229",
@@ -6641,7 +6599,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_230",
@@ -6696,7 +6654,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_232",
@@ -6726,7 +6684,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_233",
@@ -6759,7 +6717,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_234",
@@ -6789,7 +6747,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_235",
@@ -6822,7 +6780,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_236",
@@ -6863,7 +6821,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_237",
@@ -6904,7 +6862,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_238",
@@ -6959,7 +6917,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_240",
@@ -7000,7 +6958,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_241",
@@ -7041,7 +6999,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_242",
@@ -7099,7 +7057,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_245",
@@ -7140,7 +7098,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_246",
@@ -7170,7 +7128,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_247",
@@ -7211,7 +7169,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_248",
@@ -7241,7 +7199,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_249",
@@ -7271,7 +7229,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_250",
@@ -7318,7 +7276,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_252",
@@ -7351,7 +7309,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_253",
@@ -7392,7 +7350,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_254",
@@ -7447,7 +7405,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_256",
@@ -7508,7 +7466,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_259",
@@ -7552,7 +7510,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_261",
@@ -7604,7 +7562,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_262",
@@ -7634,7 +7592,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_263",
@@ -7667,7 +7625,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_264",
@@ -7708,7 +7666,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_265",
@@ -7741,7 +7699,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_266",
@@ -7771,7 +7729,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_267",
@@ -7801,7 +7759,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_268",
@@ -7842,7 +7800,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_269",
@@ -7886,7 +7844,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_271",
@@ -7927,7 +7885,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_272",
@@ -7957,7 +7915,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_273",
@@ -7987,7 +7945,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_274",
@@ -8031,7 +7989,7 @@
         ]
       },
       "source_counts": {
-        "deterministic": 1
+        "cache": 1
       },
       "unresolved_image_ids": [],
       "user_id": "user_275",
@@ -8042,12 +8000,2103 @@
   "summary": {
     "image_fact_count": 11,
     "message_fact_count": 294,
-    "unresolved_image_count": 11,
+    "unresolved_image_count": 0,
     "validation_error_count": 1
   },
   "usage": {
-    "cache_hits": 0,
+    "cache_hits": 209,
     "model_calls": 0,
-    "records": []
+    "records": [
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_18"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_19"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_20"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_21"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_22"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_23"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "image_evidence",
+        "source_id": "image_06"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_24"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_25"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "image_evidence",
+        "source_id": "image_07"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_26"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_27"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_28"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_29"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_30"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_31"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_32"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_33"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_34"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_35"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "image_evidence",
+        "source_id": "image_08"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_36"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_37"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_38"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_39"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_40"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "image_evidence",
+        "source_id": "image_09"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_41"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_42"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_43"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_44"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_45"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_46"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_47"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "image_evidence",
+        "source_id": "image_10"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_48"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_49"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_50"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_51"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_52"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_53"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_54"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_55"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "image_evidence",
+        "source_id": "image_11"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_56"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_57"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_58"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_59"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "image_evidence",
+        "source_id": "image_12"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_60"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_61"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_62"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_63"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_64"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "image_evidence",
+        "source_id": "image_13"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_65"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_66"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_67"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_68"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_69"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_70"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_71"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_72"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_73"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_74"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_75"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "image_evidence",
+        "source_id": "image_14"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_76"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_77"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_78"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_79"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "image_evidence",
+        "source_id": "image_15"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_80"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_81"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_82"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_83"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_84"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_85"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_86"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "image_evidence",
+        "source_id": "image_16"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_87"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_88"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_89"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_90"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_91"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_92"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_93"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_94"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_95"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_96"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_97"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_98"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_99"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_100"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_101"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_102"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_103"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_104"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_105"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_106"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_107"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_108"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_109"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_110"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_111"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_112"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_113"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_114"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_115"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_116"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_117"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_118"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_119"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_120"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_121"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_122"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_123"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_124"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_125"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_126"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_127"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_128"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_129"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_130"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_131"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_132"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_133"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_134"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_135"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_136"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_137"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_138"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_139"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_140"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_141"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_142"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_143"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_144"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_145"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_146"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_147"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_148"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_149"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_150"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_151"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_152"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_153"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_154"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_155"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_156"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_157"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_158"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_159"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_160"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_161"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_162"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_163"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_164"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_165"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_166"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_167"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_168"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_169"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_170"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_171"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_172"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_173"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_174"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_175"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_176"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_177"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_178"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_179"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_180"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_181"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_182"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_183"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_184"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_185"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_186"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_187"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_188"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_189"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_190"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_191"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_192"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_193"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_194"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_195"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_196"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_197"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_198"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_199"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_200"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_201"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_202"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_203"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_204"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_205"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_206"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_207"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_208"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_209"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_210"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_211"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_212"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_213"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_214"
+      },
+      {
+        "cache_hit": true,
+        "estimated_cost": "0",
+        "input_tokens": 0,
+        "model": "meta/muse-spark-1.3-contributor",
+        "output_tokens": 0,
+        "provider": "zenmux.ai",
+        "purpose": "message_evidence",
+        "source_id": "message_215"
+      }
+    ]
   }
 }
