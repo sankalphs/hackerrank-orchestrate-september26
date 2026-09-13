@@ -69,6 +69,17 @@ class Phase5CandidateTests(unittest.TestCase):
         second = PaymentCandidate("installments", "affordable_with_plan", (Payment(date(2025, 1, 1), Decimal("9")),), Decimal("10"), Decimal("9"), (SpendingChange("stop", "event_x"),))
         self.assertLess(candidate_sort_key(first), candidate_sort_key(second))
 
+    def test_ranking_uses_total_paid_before_method_name(self) -> None:
+        immediate = PaymentCandidate(
+            "full_payment", "affordable_now", (Payment(date(2025, 1, 1), Decimal("100")),),
+            Decimal("100"), Decimal("100"),
+        )
+        cheaper_later = PaymentCandidate(
+            "wait", "affordable_later", (Payment(date(2025, 1, 2), Decimal("90")),),
+            Decimal("100"), Decimal("90"),
+        )
+        self.assertLess(candidate_sort_key(cheaper_later), candidate_sort_key(immediate))
+
     def test_installment_limit_is_elapsed_calendar_months_not_payment_count(self) -> None:
         ledger = _ledger(methods=("installments",), balance="2000", max_months=5)
         option = PaymentOption("option_six", "request_test", "installments", Decimal("10"), 6, date(2025, 1, 3), 30, Decimal("5"), Decimal("65"))

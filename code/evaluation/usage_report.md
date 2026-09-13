@@ -1,6 +1,6 @@
 # Model usage report
 
-Mode: offline
+Mode: zenmux
 Requests: 250
 Model calls: 0
 Cache hits: 209

@@ -117,7 +117,7 @@ request_140,1425.81,not_affordable,not_recommended,none,,none,"Do not make this 
 request_141,18980.82,not_affordable,not_recommended,none,,none,"Do not proceed with the INR 171,600 request. Although INR 18,980.82 is available today, the full amount cannot be completed safely within 90 days."
 request_142,1263.6,affordable_now,full_payment,2024-12-05:1263.60,2024-12-05,none,"Pay USD 1,263.60 today. This leaves at least USD 1,700 available over the next 90 days."
 request_143,1992.53,affordable_later,wait,2025-07-15:12584,2025-07-15,none,"Pay ZAR 12,584 in full on 15 July 2025. Paying earlier would take the balance below the ZAR 11,300 minimum."
-request_144,208.91,affordable_with_plan,full_payment,2026-07-04:233.34,2026-07-15,stop:event_13239|reduce_to:event_13306:17.5,"Stop the audio streaming plan and Reduce the neighbourhood restaurant to USD 17.50, then pay USD 233.34 today. This leaves at least USD 600 available."
+request_144,208.91,affordable_later,wait,2026-07-15:233.34,2026-07-15,none,"Wait until 15 July 2026, then pay USD 233.34 in full. Paying sooner would put the USD 600 minimum at risk."
 request_145,27549.56,not_affordable,not_recommended,none,2024-05-15,none,"Do not make this payment by 26 May 2024. None of the available options keeps the INR 155,400 minimum protected."
 request_146,13318.23,not_affordable,not_recommended,none,,none,"Do not make this payment by 17 October 2025. None of the available options keeps the INR 108,600 minimum protected."
 request_147,478.22,affordable_with_plan,installments,2026-04-08:391.63|2026-05-08:391.63|2026-06-07:391.63,2026-05-15,none,"Use 3 installments of EUR 391.63, starting 8 April 2026. This leaves at least EUR 900 available."
