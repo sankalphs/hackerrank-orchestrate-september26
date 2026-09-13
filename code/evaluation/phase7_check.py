@@ -63,6 +63,7 @@ def run_gates(root: Path = ROOT) -> dict[str, object]:
     )
     gates.append(_gate("plan_syntax", plans_ok))
     gates.append(_gate("explanations_present", all(row.get("decision_explanation", "").strip() for row in rows)))
+    gates.append(_gate("explanations_grounded_length", all(len(row.get("decision_explanation", "").strip()) >= 20 for row in rows), "all explanations >=20 chars"))
     gates.append(_gate("validator_command", _run_command([sys.executable, "code/main.py", "validate", "output.csv"])))
     gates.append(_gate("audit_strict_command", _run_command([sys.executable, "code/main.py", "audit", "--strict"])))
     gates.append(_gate("unit_tests", _run_command([sys.executable, "-m", "unittest", "discover", "-s", "tests", "-p", "test_*.py"])))
@@ -70,6 +71,14 @@ def run_gates(root: Path = ROOT) -> dict[str, object]:
     score = json.loads(score_path.read_text(encoding="utf-8")) if score_path.is_file() else {}
     gates.append(_gate("sample_score_report", bool(score) and score.get("request_count") == 25))
     gates.append(_gate("sample_score_fields", bool(score) and set(score.get("field_matches", {})) >= {"affordability_status", "recommended_payment_method", "payment_plan"}))
+    rates = score.get("field_match_rates", {}) if isinstance(score, dict) else {}
+    tolerant = score.get("tolerant_rates", {}) if isinstance(score, dict) else {}
+    gates.append(_gate("sample_status_accuracy", rates.get("affordability_status", 0) >= 0.70, f"{rates.get('affordability_status', 0):.2f} >= 0.70"))
+    gates.append(_gate("sample_method_accuracy", rates.get("recommended_payment_method", 0) >= 0.70, f"{rates.get('recommended_payment_method', 0):.2f} >= 0.70"))
+    gates.append(_gate("sample_plan_accuracy", rates.get("payment_plan", 0) >= 0.70, f"{rates.get('payment_plan', 0):.2f} >= 0.70"))
+    gates.append(_gate("sample_amount_tolerant", tolerant.get("amount_safe_to_pay_tolerant", 0) >= 0.30, f"{tolerant.get('amount_safe_to_pay_tolerant', 0):.2f} >= 0.30"))
+    gates.append(_gate("sample_explanation_useful", tolerant.get("decision_explanation_useful", 0) >= 0.70, f"{tolerant.get('decision_explanation_useful', 0):.2f} >= 0.70"))
+    gates.append(_gate("sample_calibration_score", float(score.get("calibration_score", 0) or 0) >= 0.60, f"{float(score.get('calibration_score', 0) or 0):.3f} >= 0.60"))
     cache_path = root / "code" / "cache" / "evidence_cache.json"
     gates.append(_gate("cache_is_json", cache_path.is_file() and _valid_json(cache_path)))
     gates.append(_gate("cache_has_content_hashes", cache_path.is_file() and _cache_has_hashes(cache_path)))
@@ -78,7 +87,7 @@ def run_gates(root: Path = ROOT) -> dict[str, object]:
     gates.append(_gate("usage_report_present", "Model calls:" in usage_text and "Average tokens per request:" in usage_text))
     gates.append(_gate("no_secret_in_usage_report", "ZENMUX_API_KEY" not in usage_text and "sk-" not in usage_text))
     passed = sum(1 for gate in gates if gate["passed"])
-    return {"check_version": "phase-7.v1", "gate_count": len(gates), "passed": passed, "failed": len(gates) - passed, "gates": gates}
+    return {"check_version": "phase-7.v2", "gate_count": len(gates), "passed": passed, "failed": len(gates) - passed, "gates": gates}
 
 
 def _run_command(command: list[str]) -> bool:

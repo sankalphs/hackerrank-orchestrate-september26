@@ -111,7 +111,7 @@ def search_safe_changes(
     if max_changes < 0:
         raise SpendingChangeError("max_changes must be non-negative")
     payment_rows = tuple(payments)
-    if simulate(context, extra_payments=payment_rows, horizon_end=horizon_end).safe:
+    if simulate(context, extra_payments=payment_rows, horizon_end=horizon_end, expense_mode="base", income_delay_days=0).safe:
         return ((),)
     actions = eligible_change_actions(context, horizon_end=horizon_end)
     safe_sets: list[tuple[SpendingChange, ...]] = []
@@ -126,6 +126,8 @@ def search_safe_changes(
                 extra_payments=payment_rows,
                 spending_changes=changes,
                 horizon_end=horizon_end,
+                expense_mode="base",
+                income_delay_days=0,
             )
             if result.safe:
                 safe_sets.append(changes)
@@ -137,10 +139,19 @@ def _change_signature(changes: Iterable[SpendingChange]) -> str:
     return "|".join(_format_change(change) for change in ordered)
 
 
+def _amount_text(value: Decimal) -> str:
+    """Two decimals when fractional, bare integer otherwise (sample format)."""
+    text = format(value, "f")
+    whole, dot, fraction = text.partition(".")
+    if not dot:
+        return whole
+    return f"{whole}.{fraction.ljust(2, '0')}"
+
+
 def _format_change(change: SpendingChange) -> str:
     if change.action == "stop":
         return f"stop:{change.event_id}"
-    return f"reduce_to:{change.event_id}:{change.new_amount}"
+    return f"reduce_to:{change.event_id}:{_amount_text(change.new_amount or Decimal('0'))}"
 
 
 def spending_change_text(changes: Iterable[SpendingChange]) -> str:

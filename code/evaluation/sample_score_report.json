@@ -1,4 +1,13 @@
 {
+  "calibration_score": 0.6940000000000001,
+  "core_fields": [
+    "amount_safe_to_pay",
+    "affordability_status",
+    "recommended_payment_method",
+    "payment_plan",
+    "earliest_date_for_full_payment",
+    "spending_changes_needed"
+  ],
   "dataset_dir": "D:\\Coding\\Hackthon\\Hackerrank\\hackerrank-orchestrate-september26\\dataset",
   "evidence_summary": {
     "image_fact_count": 5,
@@ -8,6 +17,7 @@
   },
   "exact_output_row_match_rate": 0.12,
   "exact_output_row_matches": 3,
+  "explanation_useful_matches": 24,
   "field_match_rates": {
     "affordability_status": 0.8,
     "amount_safe_to_pay": 0.16,
@@ -41,7 +51,7 @@
       },
       "fields": {
         "amount_safe_to_pay": {
-          "actual": "16788240.23",
+          "actual": "16878678.12",
           "expected": "17229139.2"
         }
       },
@@ -60,7 +70,7 @@
       },
       "fields": {
         "amount_safe_to_pay": {
-          "actual": "994457.02",
+          "actual": "982082.72",
           "expected": "873000"
         }
       },
@@ -79,7 +89,7 @@
       },
       "fields": {
         "amount_safe_to_pay": {
-          "actual": "9218008.37",
+          "actual": "9262430.57",
           "expected": "8401800"
         }
       },
@@ -117,7 +127,7 @@
           "expected": "affordable_with_plan"
         },
         "amount_safe_to_pay": {
-          "actual": "483.88",
+          "actual": "490.46",
           "expected": "603.3"
         },
         "decision_explanation": {
@@ -152,7 +162,7 @@
       },
       "fields": {
         "amount_safe_to_pay": {
-          "actual": "86341.24",
+          "actual": "86817.08",
           "expected": "87170.56"
         }
       },
@@ -173,7 +183,7 @@
           "expected": "affordable_later"
         },
         "amount_safe_to_pay": {
-          "actual": "291.12",
+          "actual": "285.19",
           "expected": "284.57"
         },
         "decision_explanation": {
@@ -226,7 +236,7 @@
       },
       "fields": {
         "amount_safe_to_pay": {
-          "actual": "54274.71",
+          "actual": "51403.29",
           "expected": "12700"
         }
       },
@@ -246,11 +256,11 @@
       },
       "fields": {
         "amount_safe_to_pay": {
-          "actual": "12268246.15",
+          "actual": "12361008.05",
           "expected": "12510645"
         },
         "decision_explanation": {
-          "actual": "Stop the cloud storage plan and Reduce the weekend food delivery to IDR 665,950, then pay IDR 13,110,000 today. This leaves at least IDR 34,140,600 available.",
+          "actual": "Stop the cloud storage plan and reduce the weekend food delivery to IDR 665,950, then pay IDR 13,110,000 today. This leaves at least IDR 34,140,600 available.",
           "expected": "Reduce the weekend food delivery to IDR 665,950, then pay IDR 13,110,000 today. This leaves at least IDR 34,140,600 available."
         },
         "earliest_date_for_full_payment": {
@@ -279,7 +289,7 @@
           "expected": "affordable_later"
         },
         "amount_safe_to_pay": {
-          "actual": "471.38",
+          "actual": "472.5",
           "expected": "433.4"
         },
         "decision_explanation": {
@@ -312,11 +322,11 @@
       },
       "fields": {
         "amount_safe_to_pay": {
-          "actual": "608.55",
+          "actual": "603.96",
           "expected": "597.74"
         },
         "decision_explanation": {
-          "actual": "Do not proceed with the EUR 5,414.20 request. Although EUR 608.55 is available today, the full amount cannot be completed safely within 90 days.",
+          "actual": "Do not proceed with the EUR 5,414.20 request. Although EUR 603.96 is available today, the full amount cannot be completed safely within 90 days.",
           "expected": "Do not proceed with the EUR 5,414.20 request. Although EUR 597.74 is available today, the full amount cannot be completed safely within 90 days."
         }
       },
@@ -352,7 +362,7 @@
       },
       "fields": {
         "amount_safe_to_pay": {
-          "actual": "244798.43",
+          "actual": "244075.27",
           "expected": "243849.58"
         }
       },
@@ -371,7 +381,7 @@
       },
       "fields": {
         "amount_safe_to_pay": {
-          "actual": "472.8",
+          "actual": "471.7",
           "expected": "462"
         }
       },
@@ -392,7 +402,7 @@
           "expected": "affordable_with_plan"
         },
         "amount_safe_to_pay": {
-          "actual": "13001.83",
+          "actual": "12918.55",
           "expected": "28820"
         },
         "decision_explanation": {
@@ -425,7 +435,7 @@
       },
       "fields": {
         "amount_safe_to_pay": {
-          "actual": "8733.19",
+          "actual": "8703.31",
           "expected": "5400"
         }
       },
@@ -480,7 +490,7 @@
       },
       "fields": {
         "amount_safe_to_pay": {
-          "actual": "449.02",
+          "actual": "447.39",
           "expected": "475.46"
         }
       },
@@ -499,7 +509,7 @@
       },
       "fields": {
         "amount_safe_to_pay": {
-          "actual": "4715.4",
+          "actual": "4671.73",
           "expected": "9152"
         }
       },
@@ -516,11 +526,11 @@
       },
       "fields": {
         "amount_safe_to_pay": {
-          "actual": "15897.34",
+          "actual": "15846.79",
           "expected": "13420"
         },
         "decision_explanation": {
-          "actual": "Do not proceed with the INR 109,600 request. Although INR 15,897.34 is available today, the full amount cannot be completed safely within 90 days.",
+          "actual": "Do not proceed with the INR 109,600 request. Although INR 15,846.79 is available today, the full amount cannot be completed safely within 90 days.",
           "expected": "Do not proceed with the INR 109,600 request. Although INR 13,420 is available today, the full amount cannot be completed safely within 90 days."
         }
       },
@@ -546,5 +556,10 @@
   ],
   "request_count": 25,
   "sample_path": "D:\\Coding\\Hackthon\\Hackerrank\\hackerrank-orchestrate-september26\\dataset\\sample_requests.csv",
-  "score_version": "phase-7.v1"
+  "score_version": "phase-7.v2",
+  "tolerant_amount_matches": 10,
+  "tolerant_rates": {
+    "amount_safe_to_pay_tolerant": 0.4,
+    "decision_explanation_useful": 0.96
+  }
 }

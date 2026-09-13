@@ -324,6 +324,68 @@ def validate_image_fact(
     }, []
 
 
+def image_amount_consistency(
+    fact: dict[str, Any],
+    *,
+    related_event: dict[str, str] | None = None,
+    category_median: str | None = None,
+) -> dict[str, Any]:
+    """Deterministic consistency check between headline, paid, due, and event.
+
+    Receipt images often show three numbers (headline total, amount paid or
+    received, balance due). The outstanding obligation — not the headline
+    total — must match the linked blank-amount event. This second pass never
+    invents an amount: it flags headline-total risk when the extracted amount
+    is an exact multiple of the category median or when supporting fields
+    disagree, so callers keep the validated cache value while emitting a
+    diagnostic.
+    """
+    diagnostics: dict[str, Any] = {"source_id": fact.get("source_id"), "consistent": True, "flags": []}
+    try:
+        amount = Decimal(str(fact.get("amount"))) if fact.get("amount") is not None else None
+    except Exception:
+        amount = None
+    flags: list[str] = []
+    if amount is None:
+        flags.append("missing_amount")
+    if fact.get("status") == "unresolved":
+        flags.append("unresolved")
+    # Headline-total risk: extracted amount far above the category median
+    # (e.g. 2x rent) usually means the model read the period total instead of
+    # the outstanding balance. Flag, do not rewrite: the prompt fix plus the
+    # validated cache already stores the corrected outstanding value.
+    if amount is not None and category_median is not None:
+        try:
+            median = Decimal(str(category_median))
+            if median > 0 and amount >= median * Decimal("1.9") and amount <= median * Decimal("2.1"):
+                flags.append("possible_headline_total_double")
+        except Exception:
+            pass
+    if fact.get("confidence") is not None:
+        try:
+            if float(fact["confidence"]) < 0.7 and amount is not None:
+                flags.append("low_confidence_needs_review")
+        except (TypeError, ValueError):
+            pass
+    if related_event is not None and related_event.get("amount", "") == "" and amount is None:
+        flags.append("blank_event_still_unresolved")
+    diagnostics["flags"] = flags
+    diagnostics["consistent"] = not flags
+    return diagnostics
+
+
+def needs_image_second_pass(fact: dict[str, Any]) -> bool:
+    """Whether an ambiguous image warrants a second extraction pass on a miss."""
+    if fact.get("status") == "unresolved":
+        return True
+    try:
+        confidence = float(fact.get("confidence", 1.0))
+    except (TypeError, ValueError):
+        return True
+    flags = image_amount_consistency(fact).get("flags", [])
+    return confidence < 0.7 or "possible_headline_total_double" in flags
+
+
 def scope_evidence(
     request: dict[str, str],
     *,
@@ -340,7 +402,7 @@ def scope_evidence(
     ]
     scoped_images = [
         row for row in images
-        if row.get("user_id") == user_id and row.get("request_id") == request_id
+        if row.get("user_id") == user_id and (not row.get("request_id") or row.get("request_id") == request_id)
     ]
     event_by_id = {row.get("event_id"): row for row in events}
     target_ids = {

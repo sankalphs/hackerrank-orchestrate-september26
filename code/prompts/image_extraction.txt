@@ -12,3 +12,7 @@ Status may be confirmed, pending, paid, unpaid, received, overdue, due, or
 unknown when visible. Amount must be non-negative. Date must use YYYY-MM-DD. Confidence is a
 diagnostic value only. An unresolved image must remain unresolved; never use
 zero as a substitute for a missing amount.
+When several amounts are visible (for example a headline total alongside
+Amount Received and Balance Due), extract the amount for the outstanding
+cash obligation described by the linked event (usually Amount Received or
+Balance Due for a balance receipt), not the headline period total.

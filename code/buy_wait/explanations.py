@@ -120,13 +120,15 @@ def _plan_amount(value: Decimal) -> str:
 
 def _change_phrase(trace: DecisionTrace, ledger) -> str:
     phrases: list[str] = []
-    for change in trace.spending_changes:
+    for index, change in enumerate(trace.spending_changes):
         event = ledger.events.get(change.event_id)
         name = event.description if event is not None else change.event_id
         if change.action == "stop":
-            phrases.append(f"Stop the {name.lower()}")
+            verb = "Stop" if index == 0 else "stop"
+            phrases.append(f"{verb} the {name.lower()}")
         else:
-            phrases.append(f"Reduce the {name.lower()} to {_money(trace.currency, change.new_amount or Decimal('0'))}")
+            verb = "Reduce" if index == 0 else "reduce"
+            phrases.append(f"{verb} the {name.lower()} to {_money(trace.currency, change.new_amount or Decimal('0'))}")
     if len(phrases) == 1:
         return phrases[0]
     if len(phrases) == 2:

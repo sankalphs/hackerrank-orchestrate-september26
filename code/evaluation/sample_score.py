@@ -41,6 +41,49 @@ def _normal(value: Any, field: str = "") -> str:
     return str(value).strip()
 
 
+def _amount_close(expected: Any, actual: Any, *, rel_tol: float = 0.02, abs_tol: float = 1.0) -> bool:
+    """Tolerant numeric match for amounts across currencies (exact match is too brittle)."""
+    try:
+        exp = Decimal(str(expected).strip())
+        act = Decimal(str(actual).strip())
+    except Exception:
+        return False
+    if exp == act:
+        return True
+    diff = abs(exp - act)
+    if diff <= Decimal(str(abs_tol)):
+        return True
+    scale = max(abs(exp), abs(act))
+    if scale == 0:
+        return diff == 0
+    return diff <= scale * Decimal(str(rel_tol))
+
+
+def _explanation_useful(expected: Any, actual: Any) -> bool:
+    """Usefulness proxy: non-blank, sufficient length, token overlap with reference."""
+    exp = str(expected or "").strip()
+    act = str(actual or "").strip()
+    if len(act) < 20:
+        return False
+    if exp == act:
+        return True
+    import re
+
+    def _tokens(text: str) -> set[str]:
+        return set(re.findall(r"[a-z0-9]+", text.lower()))
+
+    exp_tokens, act_tokens = _tokens(exp), _tokens(act)
+    if not exp_tokens or not act_tokens:
+        return False
+    overlap = len(exp_tokens & act_tokens)
+    # F1-style overlap; 0.3 threshold rewards same facts without exact wording.
+    precision = overlap / len(act_tokens)
+    recall = overlap / len(exp_tokens)
+    if precision + recall == 0:
+        return False
+    return 2 * precision * recall / (precision + recall) >= 0.3
+
+
 def score_samples(
     dataset_dir: Path = DATASET_DIR,
     samples_path: Path | None = None,
@@ -74,6 +117,8 @@ def score_samples(
             "selected_rationale": plan.selected.rationale,
         })
     field_matches = {field: 0 for field in FIELDS}
+    tolerant_amount_matches = 0
+    explanation_useful_matches = 0
     diffs: list[dict[str, Any]] = []
     for expected, actual, details in zip(requests, predicted, debug):
         expected_fields = {field: expected.get(field, "") for field in FIELDS}
@@ -85,11 +130,27 @@ def score_samples(
         for field in FIELDS:
             if field not in row_diffs:
                 field_matches[field] += 1
+        if _amount_close(expected_fields["amount_safe_to_pay"], actual.get("amount_safe_to_pay", "")):
+            tolerant_amount_matches += 1
+        if _explanation_useful(expected_fields["decision_explanation"], actual.get("decision_explanation", "")):
+            explanation_useful_matches += 1
         if row_diffs:
             diffs.append({"request_id": expected.get("request_id", ""), "fields": row_diffs, "debug": details})
     count = len(requests)
+    core_fields = ("amount_safe_to_pay", "affordability_status", "recommended_payment_method", "payment_plan", "earliest_date_for_full_payment", "spending_changes_needed")
+    tolerant_rates = {
+        "amount_safe_to_pay_tolerant": (tolerant_amount_matches / count if count else 1.0),
+        "decision_explanation_useful": (explanation_useful_matches / count if count else 1.0),
+    }
+    calibration_score = (
+        tolerant_rates["amount_safe_to_pay_tolerant"] * 0.30
+        + (field_matches["affordability_status"] / count if count else 1.0) * 0.20
+        + (field_matches["recommended_payment_method"] / count if count else 1.0) * 0.20
+        + (field_matches["payment_plan"] / count if count else 1.0) * 0.15
+        + (field_matches["earliest_date_for_full_payment"] / count if count else 1.0) * 0.15
+    )
     report = {
-        "score_version": "phase-7.v1",
+        "score_version": "phase-7.v2",
         "dataset_dir": str(root),
         "sample_path": str(samples.resolve()),
         "request_count": count,
@@ -97,6 +158,11 @@ def score_samples(
         "exact_output_row_match_rate": (count - len(diffs)) / count if count else 1.0,
         "field_matches": field_matches,
         "field_match_rates": {field: (value / count if count else 1.0) for field, value in field_matches.items()},
+        "tolerant_amount_matches": tolerant_amount_matches,
+        "explanation_useful_matches": explanation_useful_matches,
+        "tolerant_rates": tolerant_rates,
+        "calibration_score": calibration_score,
+        "core_fields": list(core_fields),
         "mismatch_count": len(diffs),
         "mismatches": diffs,
         "evidence_summary": evidence.get("summary", {}),
@@ -120,6 +186,8 @@ def main(argv: list[str] | None = None) -> int:
         "request_count": report["request_count"],
         "exact_output_row_matches": report["exact_output_row_matches"],
         "field_match_rates": report["field_match_rates"],
+        "tolerant_rates": report["tolerant_rates"],
+        "calibration_score": report["calibration_score"],
     }, sort_keys=True))
     return 0
 

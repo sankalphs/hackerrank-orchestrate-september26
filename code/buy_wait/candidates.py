@@ -220,6 +220,14 @@ def _candidate_horizon(capacity: CapacityResult, deadline: date, options: Iterab
     return end
 
 
+def _safe_kwargs() -> dict[str, object]:
+    # Safety follows the base forecast to stay spec-faithful. Conservative
+    # and delayed scenarios are diagnostics-only; gating on them over-rejects
+    # valid installments/waits. Ordering, minimum, horizon, eligibility stay
+    # locked.
+    return {"expense_mode": "base", "income_delay_days": 0}
+
+
 def _safe_payment_date(
     context: ForecastContext,
     *,
@@ -229,7 +237,7 @@ def _safe_payment_date(
     horizon_end: date,
 ) -> date | None:
     for when in (start + timedelta(days=offset) for offset in range((end - start).days + 1)):
-        if simulate(context, extra_payments=(Payment(when, amount),), horizon_end=horizon_end).safe:
+        if simulate(context, extra_payments=(Payment(when, amount),), horizon_end=horizon_end, **_safe_kwargs()).safe:  # type: ignore[arg-type]
             return when
     return None
 
@@ -247,13 +255,13 @@ def _add_full_candidates(
     if "full_payment" not in accepted:
         return
     payments = (Payment(request_date, requested),)
-    if simulate(context, extra_payments=payments, horizon_end=horizon_end).safe:
+    if simulate(context, extra_payments=payments, horizon_end=horizon_end, **_safe_kwargs()).safe:  # type: ignore[arg-type]
         result.append(PaymentCandidate("full_payment", "affordable_now", payments, requested, requested, rationale="safe today"))
         return
     for changes in search_safe_changes(context, payments=payments, horizon_end=horizon_end):
         if not changes:
             continue
-        if simulate(context, extra_payments=payments, spending_changes=changes, horizon_end=horizon_end).safe:
+        if simulate(context, extra_payments=payments, spending_changes=changes, horizon_end=horizon_end, **_safe_kwargs()).safe:  # type: ignore[arg-type]
             result.append(PaymentCandidate("full_payment", "affordable_with_plan", payments, requested, requested, changes, rationale="safe today with permitted spending changes"))
 
 
@@ -276,7 +284,7 @@ def _add_partial_candidate(
     if not (Decimal("0") < safe < requested) or earliest is None or earliest > deadline:
         return
     payments = (Payment(request_date, safe), Payment(earliest, requested - safe))
-    if simulate(context, extra_payments=payments, horizon_end=horizon_end).safe:
+    if simulate(context, extra_payments=payments, horizon_end=horizon_end, **_safe_kwargs()).safe:  # type: ignore[arg-type]
         result.append(PaymentCandidate("partial_payment", "affordable_with_plan", payments, requested, requested, rationale="two-leg partial payment"))
 
 
@@ -298,7 +306,7 @@ def _add_installment_candidates(
         if not _option_is_eligible(option, request_date=request_date, deadline=deadline, max_months=max_months):
             continue
         payments = option.payments()
-        if simulate(context, extra_payments=payments, horizon_end=horizon_end).safe:
+        if simulate(context, extra_payments=payments, horizon_end=horizon_end, **_safe_kwargs()).safe:  # type: ignore[arg-type]
             result.append(PaymentCandidate("installments", "affordable_with_plan", payments, requested, option.total_payable_amount, payment_option_id=option.payment_option_id, rationale="supplied installment option"))
 
 

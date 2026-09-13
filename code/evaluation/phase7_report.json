@@ -1,7 +1,7 @@
 {
-  "check_version": "phase-7.v1",
+  "check_version": "phase-7.v2",
   "failed": 0,
-  "gate_count": 21,
+  "gate_count": 28,
   "gates": [
     {
       "detail": "",
@@ -64,6 +64,11 @@
       "passed": true
     },
     {
+      "detail": "all explanations >=20 chars",
+      "name": "explanations_grounded_length",
+      "passed": true
+    },
+    {
       "detail": "",
       "name": "validator_command",
       "passed": true
@@ -89,6 +94,36 @@
       "passed": true
     },
     {
+      "detail": "0.80 >= 0.70",
+      "name": "sample_status_accuracy",
+      "passed": true
+    },
+    {
+      "detail": "0.84 >= 0.70",
+      "name": "sample_method_accuracy",
+      "passed": true
+    },
+    {
+      "detail": "0.84 >= 0.70",
+      "name": "sample_plan_accuracy",
+      "passed": true
+    },
+    {
+      "detail": "0.40 >= 0.30",
+      "name": "sample_amount_tolerant",
+      "passed": true
+    },
+    {
+      "detail": "0.96 >= 0.70",
+      "name": "sample_explanation_useful",
+      "passed": true
+    },
+    {
+      "detail": "0.694 >= 0.60",
+      "name": "sample_calibration_score",
+      "passed": true
+    },
+    {
       "detail": "",
       "name": "cache_is_json",
       "passed": true
@@ -109,5 +144,5 @@
       "passed": true
     }
   ],
-  "passed": 21
+  "passed": 28
 }

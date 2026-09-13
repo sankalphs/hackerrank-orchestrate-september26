@@ -178,12 +178,33 @@ def _converted_series_amount(context: ForecastContext, series: RecurringSeries, 
         return series.amount
     if rates is None:
         raise ForecastError(f"no rate book available for generated {series.currency} occurrence")
+    native = series.native_amount if series.native_amount is not None else None
+    if native is None:
+        # Legacy series without a native level: amount is already home, so do
+        # not convert twice. This preserves old unit-test ledgers.
+        return series.amount
     return rates.convert_to_home_currency(
-        series.amount,
+        native,
         series.currency,
         context.ledger.profiles[context.user_id].home_currency,
         when,
     )
+
+
+def _converted_native_amount(
+    context: ForecastContext,
+    series: RecurringSeries,
+    native: Decimal,
+    when: date,
+) -> Decimal:
+    """Convert an alternate native-level scenario amount exactly once."""
+    home = context.ledger.profiles[context.user_id].home_currency
+    if series.currency == home:
+        return native
+    rates = context.ledger.rates
+    if rates is None:
+        raise ForecastError(f"no rate book available for generated {series.currency} occurrence")
+    return rates.convert_to_home_currency(native, series.currency, home, when)
 
 
 def _effect_series(effect: CashEffect, series_by_event: dict[str, RecurringSeries]) -> RecurringSeries | None:
@@ -195,6 +216,9 @@ def simulate(
     extra_payments: Iterable[Any] = (),
     spending_changes: Iterable[Any] = (),
     horizon_end: date | None = None,
+    *,
+    expense_mode: str = "base",
+    income_delay_days: int = 0,
 ) -> ForecastResult:
     """Simulate opening balance through an inclusive horizon.
 
@@ -202,7 +226,20 @@ def simulate(
     assumption: required debits, proposed payments, then confirmed credits.
     ``balances`` are end-of-day values; ``minimum_seen`` also observes the
     intermediate stages so a same-day credit cannot mask an earlier violation.
+
+    Scenario knobs (both default to the base forecast so every existing caller
+    keeps baseline semantics):
+
+    - ``expense_mode="conservative"`` projects uncertain variable-pool debits
+      at their 75th-percentile high-water level instead of the median.
+    - ``income_delay_days>0`` shifts projected (not ledger-observed, not
+      evidence-confirmed) salary legs later, modelling late payroll without
+      inventing or removing income.
     """
+    if expense_mode not in {"base", "conservative"}:
+        raise ForecastError(f"unknown expense_mode: {expense_mode!r}")
+    if income_delay_days < 0:
+        raise ForecastError("income_delay_days must be non-negative")
     start = context.request_date
     end = horizon_end or (start + timedelta(days=89))
     if end < start:
@@ -256,13 +293,19 @@ def simulate(
 
     # Add projected recurrence legs only where an explicit ledger effect did
     # not already provide that occurrence.
-    from .recurrence import VARIABLE_POOL_CATEGORIES
+    from .recurrence import VARIABLE_POOL_CATEGORIES, classify_series_confidence, conservative_native_amount
     active_income = any(
         row.direction == "credit"
         and row.category == "salary"
         and row.end_date is None
         for row in context.series
     ) or bool(context.confirmed_credits)
+    effects_by_series: dict[str, list[Any]] = {}
+    if expense_mode == "conservative":
+        for effect in context.ledger.effects_for_user(context.user_id):
+            row = _effect_series(effect, series_by_event)
+            if row is not None and effect.amount is not None and effect.effective_date is not None:
+                effects_by_series.setdefault(row.series_id, []).append(effect)
     for row in context.series:
         change = selected_changes.get(row.series_id)
         if change is not None and change.action == "stop":
@@ -280,6 +323,26 @@ def simulate(
             and row.occurrences
         ):
             row_end = min(end, max(row.occurrences) + timedelta(days=60))
+        # Conservative scenario: uncertain variable pools project at the
+        # high-water native level (converted once per occurrence date).
+        scenario_native: Any = None
+        if expense_mode == "conservative" and row.direction == "debit":
+            scenario_native = conservative_native_amount(
+                context.ledger, row, effects_by_series.get(row.series_id, [])
+            )
+            base_native = row.native_amount if row.native_amount is not None else row.amount
+            if scenario_native == base_native:
+                scenario_native = None
+        # Delayed-income scenario: only unconfirmed projected salary legs move.
+        # Confirmed streams (evidence/scheduled), observed ledger dates, and
+        # explicit confirmed credits never shift.
+        is_confirmed_income = (
+            row.direction == "credit"
+            and row.category == "salary"
+            and classify_series_confidence(
+                context.ledger, row, effects_by_series.get(row.series_id, [])
+            ) == "confirmed"
+        )
         for when in projected_occurrences(row, start, row_end):
             if when in observed_series_dates[row.series_id]:
                 continue
@@ -288,13 +351,28 @@ def simulate(
             # being counted alongside the amended/approved amount.
             if when in evidence_credit_dates and row.direction == "credit":
                 continue
-            amount = _converted_series_amount(context, row, when)
+            if scenario_native is not None:
+                amount = _converted_native_amount(context, row, scenario_native, when)
+            else:
+                amount = _converted_series_amount(context, row, when)
             if change is not None and change.action == "reduce_to" and change.new_amount is not None:
                 amount = min(amount, change.new_amount)
+            target_date = when
+            if (
+                income_delay_days
+                and row.direction == "credit"
+                and row.category == "salary"
+                and not is_confirmed_income
+            ):
+                target_date = min(end, when + timedelta(days=income_delay_days))
+                # A delayed leg landing on an observed or evidence date would
+                # double-count that day's income; keep the original date then.
+                if target_date in observed_series_dates[row.series_id] or target_date in evidence_credit_dates:
+                    target_date = when
             if row.direction == "credit":
-                credits[when] += amount
+                credits[target_date] += amount
             elif row.direction == "debit":
-                debits[when] += amount
+                debits[target_date] += amount
 
     payments: defaultdict[date, Decimal] = defaultdict(Decimal)
     for payment in payment_rows:
@@ -353,6 +431,130 @@ def forecast(
     return simulate(context, extra_payments, spending_changes, horizon_end)
 
 
+def simulate_scenarios(
+    context: ForecastContext,
+    extra_payments: Iterable[Any] = (),
+    spending_changes: Iterable[Any] = (),
+    horizon_end: date | None = None,
+) -> dict[str, ForecastResult]:
+    """Run base, conservative-expense, and delayed-income scenarios.
+
+    The base scenario preserves existing safety semantics. The conservative
+    scenario uplifts uncertain variable spending; the delayed-income scenario
+    shifts unconfirmed salary by three days. Callers use the conservative
+    minimum for safety while exposing the base path for diagnostics.
+    """
+    payments = tuple(extra_payments)
+    changes = tuple(spending_changes)
+    return {
+        "base": simulate(context, payments, changes, horizon_end),
+        "conservative_expense": simulate(
+            context, payments, changes, horizon_end, expense_mode="conservative"
+        ),
+        "delayed_income": simulate(
+            context, payments, changes, horizon_end, income_delay_days=3
+        ),
+        "conservative_combined": simulate(
+            context, payments, changes, horizon_end,
+            expense_mode="conservative", income_delay_days=3,
+        ),
+    }
+
+
+def forecast_diagnostics(
+    context: ForecastContext,
+    result: ForecastResult | None = None,
+    horizon_end: date | None = None,
+) -> dict[str, Any]:
+    """Emit the dates and categories that determine the minimum balance.
+
+    Makes it obvious whether rent, salary timing, recurring spending, FX, or
+    same-day ordering drives the binding constraint. Purely diagnostic: it
+    never changes safety decisions.
+    """
+    end = horizon_end or (context.request_date + timedelta(days=89))
+    base = result if result is not None else simulate(context, horizon_end=end)
+    profile = context.ledger.profiles[context.user_id]
+    headrooms = sorted(
+        ((balance - profile.minimum_balance_to_keep, when) for when, balance in base.balances.items()),
+        key=lambda item: (item[0], item[1]),
+    )
+    binding_dates = [
+        {"date": when.isoformat(), "headroom": format(headroom, "f")}
+        for headroom, when in headrooms[:5]
+    ]
+    # Attribute debits near the minimum date back to categories (ledger
+    # effects plus projected series legs), so rent vs pools vs salary timing
+    # is explicit per request.
+    window_start = base.min_date - timedelta(days=7)
+    category_totals: dict[str, Decimal] = defaultdict(Decimal)
+    series_by_event = {
+        event_id: row for row in context.series
+        for event_id in (*row.source_event_ids, row.output_event_id)
+    }
+    for effect in context.ledger.effects_for_user(context.user_id):
+        when = effect.effective_date
+        if when is None or when < window_start or when > base.min_date:
+            continue
+        if effect.amount is None:
+            continue
+        row = series_by_event.get(effect.event_id)
+        if row is not None and row.end_date is not None and when > row.end_date:
+            continue
+        if effect.direction == "debit":
+            category_totals[effect.category or "uncategorized"] += effect.amount
+    for row in context.series:
+        if row.direction != "debit":
+            continue
+        for when in projected_occurrences(row, max(context.request_date, window_start), base.min_date):
+            category_totals[row.category] += _converted_series_amount(context, row, when)
+    binding_categories = sorted(
+        ({"category": category, "amount": format(total, "f")} for category, total in category_totals.items()),
+        key=lambda item: Decimal(item["amount"]),
+        reverse=True,
+    )[:5]
+    scenarios = simulate_scenarios(context, horizon_end=end)
+    return {
+        "minimum_seen": format(base.minimum_seen, "f"),
+        "min_date": base.min_date.isoformat(),
+        "first_violation": base.first_violation.isoformat() if base.first_violation else None,
+        "safe": base.safe,
+        "binding_dates": binding_dates,
+        "binding_categories_7d_window": binding_categories,
+        "same_day_order": "required_debits_then_confirmed_credits_then_proposed_payments",
+        "scenarios": {
+            name: {
+                "minimum_seen": format(scenario.minimum_seen, "f"),
+                "min_date": scenario.min_date.isoformat(),
+                "safe": scenario.safe,
+                "first_violation": scenario.first_violation.isoformat() if scenario.first_violation else None,
+            }
+            for name, scenario in scenarios.items()
+        },
+        "series_confidence": [
+            {
+                "series_id": row.series_id,
+                "category": row.category,
+                "direction": row.direction,
+                "frequency": row.frequency,
+                "confidence": _series_confidence(context, row),
+            }
+            for row in context.series
+        ],
+    }
+
+
+def _series_confidence(context: ForecastContext, row: Any) -> str:
+    from .recurrence import classify_series_confidence
+
+    effects = [
+        effect for effect in context.ledger.effects_for_user(context.user_id)
+        if effect.event_id in set((*row.source_event_ids, row.output_event_id))
+        and effect.amount is not None and effect.effective_date is not None
+    ]
+    return classify_series_confidence(context.ledger, row, effects)
+
+
 def _json_value(value: Any) -> Any:
     if isinstance(value, Decimal):
         return format(value, "f")
@@ -405,9 +607,12 @@ def forecast_report(
             "horizon_end": request_date + timedelta(days=horizon_days - 1),
             "series": [asdict(item) for item in context.series],
             "forecast": asdict(result),
+            "diagnostics": forecast_diagnostics(
+                context, result, request_date + timedelta(days=horizon_days - 1)
+            ),
         })
     return {
-        "forecast_version": "phase-3.v1",
+        "forecast_version": "phase-3.v2",
         "forecast_days": horizon_days,
         "endpoint": "inclusive_request_date_plus_n_minus_1",
         "same_day_order": "required_debits_then_confirmed_credits_then_proposed_payments",
@@ -457,9 +662,11 @@ __all__ = [
     "SpendingChange",
     "build_forecast_context",
     "forecast",
+    "forecast_diagnostics",
     "forecast_report",
     "main",
     "simulate",
+    "simulate_scenarios",
     "write_forecast_report",
 ]
 

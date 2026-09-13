@@ -2,8 +2,8 @@
   "cache_path": "D:\\Coding\\Hackthon\\Hackerrank\\hackerrank-orchestrate-september26\\code\\cache\\evidence_cache.json",
   "dataset_dir": "D:\\Coding\\Hackthon\\Hackerrank\\hackerrank-orchestrate-september26\\dataset",
   "evidence_version": "phase-7.v3",
-  "generated_at_utc": "2026-09-13T03:33:33Z",
-  "mode": "zenmux",
+  "generated_at_utc": "2026-09-13T09:52:23Z",
+  "mode": "cache-only",
   "records": [
     {
       "image_facts": [],

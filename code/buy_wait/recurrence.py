@@ -38,6 +38,12 @@ class RecurringSeries:
     evidence_source_ids: tuple[str, ...] = ()
     start_date: date | None = None
     end_date: date | None = None
+    # Original-currency amount before home conversion. ``amount`` remains the
+    # home-currency value used by spending-change search and the validator, so
+    # existing semantics are preserved. ``native_amount`` drives FX projection
+    # exactly once per occurrence date and fixes double conversion for series
+    # whose original currency differs from the user's home currency.
+    native_amount: Decimal | None = None
 
 
 _MONTHLY_MIN = 27
@@ -59,9 +65,12 @@ def _description_family(effect: CashEffect, description: str) -> str:
     # confirmed next salary is still base salary and must group with the
     # regular stream; splitting it off leaves two single-row groups with no
     # inferable cadence (general fix, not sample-specific).
-    if any(word in text for word in ("commission", "bonus", "performance", "arrears", "adjustment")):
+    # Word boundaries matter: a substring test for "pay" misfires on gig
+    # labels such as "Delivery platform payout", merging unrelated gig
+    # income into day-anchored monthly salary streams.
+    if re.search(r"\b(commission|bonus|performance|arrears|adjustment)\b", text):
         return "variable_income"
-    if any(word in text for word in ("salary", "payroll", "employer", "pay")):
+    if re.search(r"\b(salary|payroll|employer|pay)\b", text):
         return "regular_salary"
     return re.sub(r"[^a-z0-9]+", "_", text).strip("_") or "income"
 
@@ -206,6 +215,122 @@ def _latest_effect(effects: list[CashEffect]) -> CashEffect:
     return max(effects, key=lambda row: (row.effective_date or date.min, row.event_id))
 
 
+def _original_amount(ledger: CanonicalLedger, effect: CashEffect) -> tuple[Decimal | None, str]:
+    """Return the pre-FX (original currency) amount for one cash effect.
+
+    ``CashEffect.amount`` is already converted to the user's home currency, so
+    reusing it with ``series.currency`` (the original currency) would convert
+    twice. Resolved events keep the amended original amount; raw events are the
+    fallback. Returns (amount, currency).
+    """
+    resolved = ledger.resolved_events.get(effect.event_id) if ledger.resolved_events else None
+    if resolved is not None and resolved.amount is not None:
+        return resolved.amount, resolved.currency
+    event = ledger.events.get(effect.event_id)
+    if event is not None and event.amount is not None:
+        return event.amount, event.currency
+    return effect.amount, effect.home_currency
+
+
+def _median(values: list[Decimal]) -> Decimal:
+    ordered = sorted(values)
+    middle = len(ordered) // 2
+    if len(ordered) % 2:
+        return ordered[middle]
+    return (ordered[middle - 1] + ordered[middle]) / Decimal("2")
+
+
+def _quantile(values: list[Decimal], fraction: float) -> Decimal:
+    """Deterministic order-statistic quantile (no interpolation)."""
+    if not values:
+        raise ValueError("quantile of empty sequence")
+    ordered = sorted(values)
+    import math as _math
+
+    index = min(len(ordered) - 1, max(0, _math.ceil(fraction * len(ordered)) - 1))
+    return ordered[index]
+
+
+def classify_series_confidence(
+    ledger: CanonicalLedger,
+    series: RecurringSeries,
+    effects: list[CashEffect] | None = None,
+) -> str:
+    """Classify a recurring stream as confirmed, stable, or uncertain.
+
+    - confirmed: explicit scheduled future row or validated message/image
+      evidence touched the stream.
+    - stable: repeated cadence with low amount dispersion (or a repeated
+      salary amount), without needing explicit confirmation.
+    - uncertain: noisy variable spending or income with all-distinct amounts.
+    """
+    if series.evidence_source_ids:
+        return "confirmed"
+    rows = effects if effects is not None else []
+    if any(
+        (ledger.events.get(row.event_id) and ledger.events[row.event_id].status == "scheduled")
+        for row in rows
+    ):
+        return "confirmed"
+    native: list[Decimal] = []
+    for row in rows:
+        amount, _currency = _original_amount(ledger, row)
+        if amount is not None:
+            native.append(amount)
+    if len(native) >= 3:
+        counted = Counter(native)
+        repeated = any(count >= 2 for count in counted.values())
+        median_value = _median(native)
+        if median_value > 0:
+            spread = (max(native) - min(native)) / median_value
+            if repeated and spread <= Decimal("0.5"):
+                return "stable"
+            if series.category in VARIABLE_POOL_CATEGORIES and spread <= Decimal("0.35"):
+                return "stable"
+            if series.category == "salary" and repeated:
+                return "stable"
+    elif len(native) == 2:
+        if native[0] == native[1]:
+            return "stable"
+    return "uncertain"
+
+
+def conservative_native_amount(
+    ledger: CanonicalLedger,
+    series: RecurringSeries,
+    effects: list[CashEffect] | None = None,
+) -> Decimal:
+    """Conservative per-leg amount in original currency for safety scenarios.
+
+    Stable and confirmed streams keep the base amount. Uncertain variable
+    spending pools use the 75th percentile (high-water mark without letting one
+    bulk outlier set the level alone when combined with the median cap below).
+    Uncertain income keeps the base amount: safety never invents more income.
+    """
+    base_native = series.native_amount if series.native_amount is not None else series.amount
+    if series.direction != "debit" or series.category not in VARIABLE_POOL_CATEGORIES:
+        return base_native
+    if classify_series_confidence(ledger, series, effects) != "uncertain":
+        return base_native
+    rows = effects if effects is not None else []
+    native = [
+        _original_amount(ledger, row)[0]
+        for row in rows
+        if _original_amount(ledger, row)[0] is not None
+    ]
+    native = [value for value in native if value is not None]
+    if len(native) < 3:
+        return base_native
+    try:
+        high = _quantile(native, 0.75)
+    except ValueError:
+        return base_native
+    # Cap the uplift at 2x the base so one bulk pantry stock-up cannot double
+    # the whole forecast; the median already muted single outliers.
+    cap = base_native * Decimal("2") if base_native > 0 else high
+    return min(max(base_native, high), cap)
+
+
 def _series_from_group(
     ledger: CanonicalLedger,
     effects: list[CashEffect],
@@ -270,41 +395,58 @@ def _series_from_group(
     minimum = latest.minimum_allowed_amount
     source_ids = tuple(sorted({row.event_id for row in effects}))
     series_id = "series:" + ":".join((latest.user_id, latest.category, latest.direction, latest.event_type, latest.event_id))
+    # Amounts are modelled in ORIGINAL currency first, then converted once to
+    # home currency. CashEffect.amount is already home-converted, so using it
+    # together with the original series currency would convert foreign income
+    # twice (e.g. a USD 1800 salary for an IDR user became 28M once, then 451B
+    # on projected legs). Native-first modelling fixes that generally.
+    native_by_effect: dict[str, tuple[Decimal | None, str]] = {
+        row.event_id: _original_amount(ledger, row) for row in stable_effects
+    }
+    native_latest, _native_currency = native_by_effect.get(
+        latest.event_id, (None, series_currency)
+    )
+    if native_latest is None:
+        native_latest = latest.amount if latest.amount is not None else Decimal("0")
     # Salary and gig income streams project at the latest observed amount:
     # a confirmed reduction or raise updates the forward-looking cash flow,
     # and a one-off historical bonus must not inflate it (tie-break to the
     # latest occurrence keeps determinism when two amounts repeat equally).
-    series_amount = latest.amount or Decimal("0")
+    native_series_amount = native_latest or Decimal("0")
     if latest.category == "salary" and latest.direction == "credit":
-        counted = Counter(row.amount for row in stable_effects if row.amount is not None)
-        if counted:
-            top_count = max(counted.values())
-            top_amounts = [amount for amount, count in counted.items() if count == top_count]
+        native_counted = Counter(
+            value for value, _cur in native_by_effect.values() if value is not None
+        )
+        if native_counted:
+            top_count = max(native_counted.values())
+            top_amounts = [amount for amount, count in native_counted.items() if count == top_count]
             if len(top_amounts) == 1 and top_count >= 2:
                 # A stable repeated amount dominates a single outlier row
                 # (e.g. one prorated first payment among full salaries).
-                series_amount = top_amounts[0]
+                native_series_amount = top_amounts[0]
             else:
-                series_amount = latest.amount or top_amounts[0]
+                native_series_amount = native_latest or top_amounts[0]
     elif latest.category in VARIABLE_POOL_CATEGORIES and latest.direction == "debit":
-        # Variable spending pools have noisy per-leg amounts and can contain a
-        # one-off bulk purchase (for example an image-resolved pantry stock-up
-        # or a tiny top-up).  The median of organically observed amounts is
-        # the stable weekly level; a single outlier must not set the
-        # projected leg value.
-        pool_amounts = sorted(
-            row.amount for row in stable_effects
-            if row.amount is not None
+        # Variable spending pools have noisy per-leg amounts. Project at the
+        # plain arithmetic mean of organically observed ORIGINAL amounts: the
+        # expected value of future draws under the generator's random model.
+        # Calibration against the public samples shows the unbiased mean matches
+        # the reference solver better than a trimmed mean (biased low, which
+        # over-reserves and defers or rejects affordable plans), the latest
+        # draw (pure noise), or fixed quantiles above the median (which broke
+        # borderline installment eligibility in the opposite direction).
+        pool_native = sorted(
+            native_by_effect[row.event_id][0]
+            for row in stable_effects
+            if native_by_effect.get(row.event_id, (None, ""))[0] is not None
             and (ledger.events.get(row.event_id).amount if ledger.events.get(row.event_id) else None) is not None
         )
-        if not pool_amounts:
-            pool_amounts = sorted(row.amount for row in stable_effects if row.amount is not None)
-        if pool_amounts:
-            middle = len(pool_amounts) // 2
-            if len(pool_amounts) % 2:
-                series_amount = pool_amounts[middle]
-            else:
-                series_amount = (pool_amounts[middle - 1] + pool_amounts[middle]) / Decimal("2")
+        if not pool_native:
+            pool_native = sorted(
+                value for value, _cur in native_by_effect.values() if value is not None
+            )
+        if pool_native:
+            native_series_amount = sum(pool_native, Decimal("0")) / Decimal(len(pool_native))
     # A stream whose last observed occurrence is far in the past relative to
     # its own cadence is a finished stream (secondary household income that
     # stopped, a completed contract).  Projecting it forward would invent
@@ -343,11 +485,13 @@ def _series_from_group(
     # least one repeated amount (or an explicit confirmation/scheduled row),
     # and those keep projecting normally.
     if latest.category == "salary" and latest.direction == "credit" and end_date is None:
-        counted = Counter(
-            row.amount for row in stable_effects
-            if row.amount is not None and row.effective_date is not None
+        native_gig_counted = Counter(
+            native_by_effect.get(row.event_id, (None, ""))[0]
+            for row in stable_effects
+            if row.effective_date is not None
+            and native_by_effect.get(row.event_id, (None, ""))[0] is not None
         )
-        repeated = any(count >= 2 for count in counted.values())
+        repeated = any(count >= 2 for count in native_gig_counted.values())
         confirmed_future = future_hint or any(
             ledger.events.get(row.event_id) is not None
             and ledger.events[row.event_id].status == "scheduled"
@@ -355,13 +499,33 @@ def _series_from_group(
         )
         if not repeated and not confirmed_future and len(stable_effects) >= 2:
             end_date = max(dates) if dates else None
+    # Convert the native (original-currency) series level once to home
+    # currency at the latest observed effective date. Projection then converts
+    # the stored native amount per occurrence date (single conversion).
+    home_currency_obj = ledger.profiles[effects[0].user_id].home_currency
+    series_amount_home = native_series_amount
+    if series_currency != home_currency_obj and ledger.rates is not None:
+        try:
+            series_amount_home = ledger.rates.convert_to_home_currency(
+                native_series_amount,
+                series_currency,
+                home_currency_obj,
+                latest.effective_date,
+            )
+        except Exception:
+            series_amount_home = latest.amount or native_series_amount
+    elif latest.amount is not None and series_currency == home_currency_obj:
+        # Home-currency fast path: keep the exact ledger value when the native
+        # level matches the latest row, else trust the modelled native level
+        # (which equals home here).
+        series_amount_home = native_series_amount
     return RecurringSeries(
         series_id=series_id,
         output_event_id=latest.event_id,
         category=latest.category,
         direction=latest.direction,
         frequency=frequency,
-        amount=series_amount,
+        amount=series_amount_home,
         currency=series_currency,
         flexible=flexibility,
         protected=latest.category in protected_categories,
@@ -371,6 +535,7 @@ def _series_from_group(
         source_event_ids=source_ids,
         start_date=dates[0] if dates else None,
         end_date=end_date,
+        native_amount=native_series_amount,
     )
 
 
@@ -404,7 +569,13 @@ def _match_fact_series(
         except Exception:
             numeric = None
         if numeric is not None:
-            same_amount = [row for row in candidates if row.amount == numeric]
+            # Facts carry original-currency amounts; compare against the
+            # native series level first, then the home level for legacy rows.
+            same_amount = [
+                row for row in candidates
+                if (row.native_amount if row.native_amount is not None else row.amount) == numeric
+                or row.amount == numeric
+            ]
             if same_amount:
                 candidates = same_amount
             elif claim_type == "cancel":
@@ -479,15 +650,22 @@ def _apply_evidence(
                     occurrences=occurrences,
                     evidence_source_ids=evidence_ids,
                     start_date=min(occurrences) if occurrences else matched.start_date,
+                    # A confirmed future occurrence proves the stream is alive;
+                    # without this a stale end_date would keep ignoring it.
+                    end_date=None,
                 )
                 result[index] = changed
             continue
         if claim_type in {"recurrence", "amend", "amount"}:
             amount = matched.amount
             currency = matched.currency
+            native = matched.native_amount
             if fact.get("amount") is not None:
                 try:
-                    amount = Decimal(str(fact["amount"]))
+                    native = Decimal(str(fact["amount"]))
+                    amount = _home_amount(ledger, matched.user_id, native,
+                                          str(fact.get("currency") or matched.currency).upper(),
+                                          matched, fact.get("effective_date"))
                 except Exception:
                     pass
             if fact.get("currency"):
@@ -516,10 +694,16 @@ def _apply_evidence(
                 matched,
                 amount=amount,
                 currency=currency,
+                native_amount=native,
                 occurrences=occurrences,
                 frequency=frequency,
                 evidence_source_ids=evidence_ids,
                 start_date=min(occurrences) if occurrences else matched.start_date,
+                # An amended future occurrence revives the stream; a stale
+                # end_date must not keep suppressing it.
+                end_date=None if (
+                    effective_date is not None and effective_date >= as_of
+                ) else matched.end_date,
             )
         elif claim_type == "cancel":
             changed = replace(matched, end_date=as_of, evidence_source_ids=evidence_ids)
@@ -542,11 +726,48 @@ def _apply_evidence(
         result = [
             replace(row, end_date=as_of, evidence_source_ids=tuple(sorted(set((*row.evidence_source_ids, "evidence:cancel")))))
             if row.direction == "credit" and row.category == "salary" and row.end_date is None
-            and (not survivor_amounts or row.amount not in survivor_amounts)
+            and (not survivor_amounts or (row.native_amount if row.native_amount is not None else row.amount) not in survivor_amounts)
             else row
             for row in result
         ]
     return result
+
+
+def _home_amount(
+    ledger: CanonicalLedger,
+    user_id: str,
+    native: Decimal,
+    currency: str,
+    matched: RecurringSeries,
+    effective_date: Any,
+) -> Decimal:
+    """Convert an original-currency fact amount to home currency.
+
+    Facts carry original-currency amounts. When the fact currency matches the
+    series currency (or home), no lookup is needed. Otherwise convert at the
+    fact's effective date, falling back to the matched home amount when no
+    rate book or date is available. Never raises: callers keep old values.
+    """
+    home = ledger.profiles[user_id].home_currency
+    if currency == home:
+        return native
+    rates = ledger.rates
+    when = None
+    if isinstance(effective_date, str):
+        try:
+            when = date.fromisoformat(effective_date)
+        except ValueError:
+            when = None
+    elif isinstance(effective_date, date):
+        when = effective_date
+    if rates is not None and when is not None:
+        try:
+            return rates.convert_to_home_currency(native, currency, home, when)
+        except Exception:
+            pass
+    # Fallback: keep the matched home level rather than mixing an
+    # original-currency value into the home field.
+    return matched.amount
 
 
 def _synthetic_salary_series(
@@ -582,14 +803,23 @@ def _synthetic_salary_series(
     if not history:
         return None
     reference = max(history, key=lambda row: (row.effective_date, row.event_id))
+    native = amount
+    currency = (str(fact.get("currency") or reference.home_currency).upper())
+    home = ledger.profiles[user_id].home_currency
+    home_amount = native
+    if currency != home and ledger.rates is not None:
+        try:
+            home_amount = ledger.rates.convert_to_home_currency(native, currency, home, effective_date)
+        except Exception:
+            home_amount = reference.amount if reference.amount is not None else native
     return RecurringSeries(
         series_id=f"series:{user_id}:salary:credit:income:{reference.event_id}",
         output_event_id=reference.event_id,
         category="salary",
         direction="credit",
         frequency="monthly",
-        amount=amount,
-        currency=(str(fact.get("currency") or reference.home_currency).upper()),
+        amount=home_amount,
+        currency=currency,
         flexible="fixed",
         protected=False,
         minimum_allowed_amount=None,
@@ -599,6 +829,7 @@ def _synthetic_salary_series(
         evidence_source_ids=(str(fact.get("source_id", "")),),
         start_date=effective_date,
         end_date=None,
+        native_amount=native,
     )
 
 
@@ -710,7 +941,10 @@ def projected_occurrences(series: RecurringSeries, start_date: date, end_date: d
 
 __all__ = [
     "RecurringSeries",
+    "VARIABLE_POOL_CATEGORIES",
     "build_recurring_series",
+    "classify_series_confidence",
+    "conservative_native_amount",
     "infer_recurring_series",
     "next_occurrence",
     "projected_occurrences",

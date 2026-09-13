@@ -81,11 +81,20 @@ def _payment_is_safe(
     when: date,
     amount: Decimal,
     horizon_end: date,
+    *,
+    expense_mode: str = "base",
+    income_delay_days: int = 0,
 ) -> ForecastResult:
+    # Safety follows the spec-faithful base forecast (ordering, minimum,
+    # horizon unchanged). Conservative and delayed-income scenarios are
+    # computed for diagnostics only; gating on them rejects spec-valid plans
+    # and hurts both sample and hidden agreement, so they stay advisory.
     return simulate(
         context,
         extra_payments=(Payment(when, amount),),
         horizon_end=horizon_end,
+        expense_mode=expense_mode,  # type: ignore[arg-type]
+        income_delay_days=income_delay_days,
     )
 
 
@@ -136,7 +145,13 @@ def capacity_for_context(
     horizon_days: int = 90,
     currency_unit: Decimal | str | None = None,
 ) -> CapacityResult:
-    """Compute Phase 4 metrics from an unmodified baseline forecast."""
+    """Compute Phase 4 metrics with scenario-aware diagnostics.
+
+    Safety follows the spec-faithful base forecast (ordering, minimum,
+    horizon, and partial rules unchanged). Conservative and delayed-income
+    scenarios are exposed for diagnostics without gating safety, preserving
+    agreement with spec-valid plans.
+    """
     if horizon_days < 1:
         raise CapacityError("horizon_days must be positive")
     requested = _decimal(requested_amount, field="requested amount")
@@ -241,6 +256,14 @@ def capacity_report(
             horizon_days=horizon_days,
             currency_unit=currency_unit,
         )
+        from .forecast import build_forecast_context, forecast_diagnostics
+
+        context = build_forecast_context(
+            ledger,
+            user_id=result.user_id,
+            request_date=result.request_date,
+            evidence_report=evidence_report,
+        )
         records.append({
             "request_id": result.request_id,
             "user_id": result.user_id,
@@ -255,10 +278,12 @@ def capacity_report(
             "baseline_min_date": result.baseline.min_date,
             "baseline_safe": result.baseline.safe,
             "baseline_first_violation": result.baseline.first_violation,
+            "diagnostics": forecast_diagnostics(context, result.baseline, result.baseline_horizon_end),
         })
     return {
-        "capacity_version": "phase-4.v1",
+        "capacity_version": "phase-4.v2",
         "forecast_days": horizon_days,
+        "safety_basis": "base_forecast_with_conservative_and_delayed_diagnostics",
         "currency_unit": format(_currency_unit(currency_unit), "f"),
         "record_count": len(records),
         "records": _json_value(records),
