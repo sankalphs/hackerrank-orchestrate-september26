@@ -65,13 +65,13 @@
       }
     ],
     "effect_counts": {
-      "excluded": 83,
-      "included": 25204,
-      "reserved_pending_debits": 55
+      "excluded": 73,
+      "included": 25213,
+      "reserved_pending_debits": 56
     },
     "event_count": 25342,
-    "evidence_claim_count": 272,
-    "evidence_claims_applied": 25,
+    "evidence_claim_count": 283,
+    "evidence_claims_applied": 34,
     "lifecycle_count": 25284,
     "link_diagnostics": [],
     "unresolved_amount_event_ids": [
@@ -79,17 +79,7 @@
       "event_1545",
       "event_1700",
       "event_1786",
-      "event_253",
-      "event_3051",
-      "event_3231",
-      "event_4535",
-      "event_5170",
-      "event_6033",
-      "event_6859",
-      "event_7307",
-      "event_7941",
-      "event_9421",
-      "event_9806"
+      "event_253"
     ],
     "unscoped_evidence_claim_count": 245,
     "unscoped_evidence_sources": [
@@ -12637,13 +12627,14 @@
       "user_id": "user_113"
     },
     {
-      "amount": "1296",
+      "amount": "393.22",
       "category": "transport",
       "direction": "debit",
       "effective_date": "2026-09-03",
       "event_id": "event_10521",
       "event_type": "expense",
       "evidence_source_ids": [
+        "image_16",
         "message_86"
       ],
       "flexibility": "fixed",
@@ -370511,19 +370502,21 @@
       "user_id": "user_33"
     },
     {
-      "amount": null,
+      "amount": "1995.0",
       "category": "groceries",
       "direction": "debit",
       "effective_date": "2026-01-06",
       "event_id": "event_3051",
       "event_type": "expense",
-      "evidence_source_ids": [],
+      "evidence_source_ids": [
+        "image_06"
+      ],
       "flexibility": "fixed",
       "home_currency": "INR",
-      "included": false,
+      "included": true,
       "lifecycle_id": "lifecycle:event_3051",
       "minimum_allowed_amount": null,
-      "reason": "unresolved_amount",
+      "reason": "settled_debit_included",
       "reserve": false,
       "source_row_ids": [
         "event_3051"
@@ -374713,19 +374706,21 @@
       "user_id": "user_35"
     },
     {
-      "amount": null,
+      "amount": "8528",
       "category": "dining",
       "direction": "debit",
       "effective_date": "2025-10-29",
       "event_id": "event_3231",
       "event_type": "expense",
-      "evidence_source_ids": [],
+      "evidence_source_ids": [
+        "image_07"
+      ],
       "flexibility": "fixed",
       "home_currency": "INR",
-      "included": false,
+      "included": true,
       "lifecycle_id": "lifecycle:event_3231",
       "minimum_allowed_amount": null,
-      "reason": "unresolved_amount",
+      "reason": "settled_debit_included",
       "reserve": false,
       "source_row_ids": [
         "event_3231"
@@ -405102,19 +405097,21 @@
       "user_id": "user_48"
     },
     {
-      "amount": null,
+      "amount": "15339.0",
       "category": "housing",
       "direction": "debit",
       "effective_date": "2026-07-24",
       "event_id": "event_4535",
       "event_type": "expense",
-      "evidence_source_ids": [],
+      "evidence_source_ids": [
+        "image_08"
+      ],
       "flexibility": "fixed",
       "home_currency": "INR",
-      "included": false,
+      "included": true,
       "lifecycle_id": "lifecycle:event_4535",
       "minimum_allowed_amount": null,
-      "reason": "unresolved_amount",
+      "reason": "settled_debit_included",
       "reserve": false,
       "source_row_ids": [
         "event_4535"
@@ -419909,19 +419906,21 @@
       "user_id": "user_06"
     },
     {
-      "amount": null,
+      "amount": "723.0",
       "category": "utilities",
       "direction": "debit",
       "effective_date": "2026-06-07",
       "event_id": "event_5170",
       "event_type": "expense",
-      "evidence_source_ids": [],
+      "evidence_source_ids": [
+        "image_09"
+      ],
       "flexibility": "fixed",
       "home_currency": "INR",
-      "included": false,
+      "included": true,
       "lifecycle_id": "lifecycle:event_5170",
       "minimum_allowed_amount": null,
-      "reason": "unresolved_amount",
+      "reason": "settled_debit_included",
       "reserve": false,
       "source_row_ids": [
         "event_5170"
@@ -440027,20 +440026,22 @@
       "user_id": "user_64"
     },
     {
-      "amount": null,
+      "amount": "79679.26",
       "category": "groceries",
       "direction": "debit",
       "effective_date": "2024-06-10",
       "event_id": "event_6033",
       "event_type": "expense",
-      "evidence_source_ids": [],
+      "evidence_source_ids": [
+        "image_10"
+      ],
       "flexibility": "fixed",
       "home_currency": "INR",
-      "included": false,
+      "included": true,
       "lifecycle_id": "lifecycle:event_6033",
       "minimum_allowed_amount": null,
-      "reason": "unresolved_amount",
-      "reserve": false,
+      "reason": "pending_debit_reserved",
+      "reserve": true,
       "source_row_ids": [
         "event_6033"
       ],
@@ -459265,19 +459266,21 @@
       "user_id": "user_73"
     },
     {
-      "amount": null,
+      "amount": "3650.0",
       "category": "healthcare",
       "direction": "debit",
       "effective_date": "2023-01-23",
       "event_id": "event_6859",
       "event_type": "expense",
-      "evidence_source_ids": [],
+      "evidence_source_ids": [
+        "image_11"
+      ],
       "flexibility": "fixed",
       "home_currency": "INR",
-      "included": false,
+      "included": true,
       "lifecycle_id": "lifecycle:event_6859",
       "minimum_allowed_amount": null,
-      "reason": "unresolved_amount",
+      "reason": "scheduled_debit_included",
       "reserve": false,
       "source_row_ids": [
         "event_6859"
@@ -469725,19 +469728,21 @@
       "user_id": "user_78"
     },
     {
-      "amount": null,
+      "amount": "2791.555",
       "category": "transport",
       "direction": "debit",
       "effective_date": "2025-10-01",
       "event_id": "event_7307",
       "event_type": "expense",
-      "evidence_source_ids": [],
+      "evidence_source_ids": [
+        "image_12"
+      ],
       "flexibility": "fixed",
       "home_currency": "INR",
-      "included": false,
+      "included": true,
       "lifecycle_id": "lifecycle:event_7307",
       "minimum_allowed_amount": null,
-      "reason": "unresolved_amount",
+      "reason": "settled_debit_included",
       "reserve": false,
       "source_row_ids": [
         "event_7307"
@@ -484509,21 +484514,22 @@
       "user_id": "user_84"
     },
     {
-      "amount": null,
+      "amount": "2298",
       "category": "shopping",
       "direction": "debit",
       "effective_date": "2026-04-03",
       "event_id": "event_7941",
       "event_type": "expense",
       "evidence_source_ids": [
+        "image_13",
         "message_64"
       ],
       "flexibility": "fixed",
       "home_currency": "INR",
-      "included": false,
+      "included": true,
       "lifecycle_id": "lifecycle:event_7941",
       "minimum_allowed_amount": null,
-      "reason": "unresolved_amount",
+      "reason": "settled_debit_included",
       "reserve": false,
       "source_row_ids": [
         "event_7941"
@@ -519018,19 +519024,21 @@
       "user_id": "user_101"
     },
     {
-      "amount": null,
+      "amount": "4543",
       "category": "healthcare",
       "direction": "debit",
       "effective_date": "2025-11-02",
       "event_id": "event_9421",
       "event_type": "expense",
-      "evidence_source_ids": [],
+      "evidence_source_ids": [
+        "image_14"
+      ],
       "flexibility": "fixed",
       "home_currency": "INR",
-      "included": false,
+      "included": true,
       "lifecycle_id": "lifecycle:event_9421",
       "minimum_allowed_amount": null,
-      "reason": "unresolved_amount",
+      "reason": "settled_debit_included",
       "reserve": false,
       "source_row_ids": [
         "event_9421"
@@ -527985,19 +527993,21 @@
       "user_id": "user_105"
     },
     {
-      "amount": null,
+      "amount": "9968.0",
       "category": "transport",
       "direction": "debit",
       "effective_date": "2026-06-07",
       "event_id": "event_9806",
       "event_type": "expense",
-      "evidence_source_ids": [],
+      "evidence_source_ids": [
+        "image_15"
+      ],
       "flexibility": "fixed",
       "home_currency": "INR",
-      "included": false,
+      "included": true,
       "lifecycle_id": "lifecycle:event_9806",
       "minimum_allowed_amount": null,
-      "reason": "unresolved_amount",
+      "reason": "settled_debit_included",
       "reserve": false,
       "source_row_ids": [
         "event_9806"

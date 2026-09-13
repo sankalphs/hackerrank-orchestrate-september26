@@ -14,15 +14,17 @@ def candidate_sort_key(candidate: PaymentCandidate) -> tuple[object, ...]:
     eligible plans by completion, changes, total paid, start date, payment
     count, and only then the supplied option/signature. A method shortcut
     could prefer a more expensive installment plan over a cheaper payment
-    whenever both are safe.
+    whenever both are safe. Change-count is a tiebreak AFTER total paid so
+    a cheaper multi-change plan still beats a pricier fewer-change plan;
+    it only decides ties with identical totals (spec-faithful extension).
     """
     return (
         not candidate.completes_by_deadline,
         bool(candidate.spending_changes),
-        len(candidate.spending_changes),
         candidate.total_paid,
         candidate.first_payment_date,
         candidate.payment_count,
+        len(candidate.spending_changes),
         candidate.payment_option_id or "",
         candidate.canonical_signature,
     )

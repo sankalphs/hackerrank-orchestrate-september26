@@ -426,6 +426,23 @@ def _series_from_group(
                 native_series_amount = top_amounts[0]
             else:
                 native_series_amount = native_latest or top_amounts[0]
+        # Recency with confirmation: when the two most recent occurrences
+        # agree on a new level (e.g. two reduced payrolls in a row), the
+        # forward projection follows the recent stable level, not the old
+        # mode. A single trailing outlier still falls back to the mode above,
+        # so one bonus cannot inflate the forecast. General lifecycle rule.
+        try:
+            by_time = sorted(
+                (row for row in stable_effects if row.effective_date is not None),
+                key=lambda row: (row.effective_date, row.event_id),
+            )
+            if len(by_time) >= 2:
+                last_native = native_by_effect.get(by_time[-1].event_id, (None, ""))[0]
+                prev_native = native_by_effect.get(by_time[-2].event_id, (None, ""))[0]
+                if last_native is not None and last_native == prev_native:
+                    native_series_amount = last_native
+        except Exception:
+            pass
     elif latest.category in VARIABLE_POOL_CATEGORIES and latest.direction == "debit":
         # Variable spending pools have noisy per-leg amounts. Project at the
         # plain arithmetic mean of organically observed ORIGINAL amounts: the
@@ -653,6 +670,45 @@ def _apply_evidence(
                     # A confirmed future occurrence proves the stream is alive;
                     # without this a stale end_date would keep ignoring it.
                     end_date=None,
+                )
+                result[index] = changed
+            continue
+        if claim_type in {"confirm", "date", "delay"} and fact.get("amount") is not None and fact.get("effective_date") is None:
+            # Unscoped payroll-level update without a dated one-off (e.g.
+            # "temporary monthly pay is X, continues for the next payroll").
+            # Forecast one-offs require an explicit date, so without one this
+            # fact would be silently dropped. Apply it as a series level ONLY
+            # in the financially safer direction: lower income for credits,
+            # higher expense for debits. Never invent higher income from an
+            # ambiguous undated message (spec: safer interpretation wins).
+            try:
+                native_new = Decimal(str(fact["amount"]))
+            except Exception:
+                continue
+            fact_currency = str(fact.get("currency") or matched.currency).upper()
+            if fact_currency != matched.currency:
+                continue
+            current_native = matched.native_amount if matched.native_amount is not None else matched.amount
+            apply_level = (
+                (matched.direction == "credit" and native_new < current_native and native_new >= 0)
+                or (matched.direction == "debit" and native_new > current_native)
+            )
+            if apply_level:
+                try:
+                    home_new = _home_amount(
+                        ledger, matched.user_id, native_new, fact_currency, matched, None,
+                    )
+                except Exception:
+                    continue
+                # _home_amount falls back to the old home level when FX needs
+                # a date; only accept a genuine same-currency level change.
+                if fact_currency == ledger.profiles[matched.user_id].home_currency and home_new != native_new:
+                    continue
+                changed = replace(
+                    matched,
+                    amount=home_new,
+                    native_amount=native_new,
+                    evidence_source_ids=evidence_ids,
                 )
                 result[index] = changed
             continue

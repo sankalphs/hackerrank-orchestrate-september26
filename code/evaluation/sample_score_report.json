@@ -1,5 +1,5 @@
 {
-  "calibration_score": 0.6940000000000001,
+  "calibration_score": 0.6880000000000001,
   "core_fields": [
     "amount_safe_to_pay",
     "affordability_status",
@@ -22,7 +22,7 @@
     "affordability_status": 0.8,
     "amount_safe_to_pay": 0.16,
     "decision_explanation": 0.64,
-    "earliest_date_for_full_payment": 0.8,
+    "earliest_date_for_full_payment": 0.76,
     "payment_plan": 0.84,
     "recommended_payment_method": 0.84,
     "spending_changes_needed": 0.88
@@ -31,7 +31,7 @@
     "affordability_status": 20,
     "amount_safe_to_pay": 4,
     "decision_explanation": 16,
-    "earliest_date_for_full_payment": 20,
+    "earliest_date_for_full_payment": 19,
     "payment_plan": 21,
     "recommended_payment_method": 21,
     "spending_changes_needed": 22
@@ -133,6 +133,10 @@
         "decision_explanation": {
           "actual": "Do not make this payment by 14 January 2026. None of the available options keeps the EUR 800 minimum protected.",
           "expected": "Stop the family streaming plan, then pay EUR 620.40 today. This leaves at least EUR 800 available."
+        },
+        "earliest_date_for_full_payment": {
+          "actual": "2026-02-15",
+          "expected": "2026-01-15"
         },
         "payment_plan": {
           "actual": "none",

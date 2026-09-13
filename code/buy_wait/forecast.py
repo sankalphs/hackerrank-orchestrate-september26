@@ -223,7 +223,8 @@ def simulate(
     """Simulate opening balance through an inclusive horizon.
 
     Same-day ordering is deliberately visible here and locked to the project
-    assumption: required debits, proposed payments, then confirmed credits.
+    assumption: required debits, then confirmed credits, then proposed
+    payments.
     ``balances`` are end-of-day values; ``minimum_seen`` also observes the
     intermediate stages so a same-day credit cannot mask an earlier violation.
 
